@@ -38,6 +38,8 @@ import butterknife.BindView;
 
 public class ImageDisplayActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
 
+    private ArrayList<SearchResultItem> searchResultItems;
+
     @BindView(R.id.slider_images)
     SliderLayout imageSlider;
 
@@ -47,8 +49,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         setContentView(R.layout.activity_imagedisplay);
         initToolbar("Image Display");
         getGoogleSearchImages();
-
-//        initSliderView();
     }
 
     @Override
@@ -67,17 +67,13 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         long displayTime = TimePreferencesManager.with(this).getImageDisplayTime();
         imageSlider.setDuration(displayTime);
         imageSlider.addOnPageChangeListener(this);
-
         HashMap<String,String> url_maps = new HashMap<String, String>();
-        url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
-        url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
-        url_maps.put("House of Cards", "http://cdn3.nflximg.net/images/3093/2043093.jpg");
-        url_maps.put("Game of Thrones", "http://images.boomsbeat.com/data/images/full/19640/game-of-thrones-season-4-jpg.jpg");
-
-
+        for(int i = 0;i<searchResultItems.size();i++){
+            SearchResultItem searchResultItem = searchResultItems.get(i);
+            url_maps.put(searchResultItem.getTitle(), searchResultItem.getLink());
+        }
         for(String name : url_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(this);
-            // initialize a SliderLayout
             textSliderView
                     .description(name)
                     .image(url_maps.get(name))
@@ -90,15 +86,18 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     }
 
     private void getGoogleSearchImages(){
+        showLoading();
         GoogleImageSearchManager.with(this).startSearchAsync("apple", 0, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        dismissLoading();
                         try {
                             if (response != null) {
                                 Gson gson = new Gson();
                                 Type listType = new TypeToken<List<SearchResultItem>>() {
                                 }.getType();
-                                ArrayList<SearchResultItem> searchResultImages = gson.fromJson(response.getJSONArray("items").toString(), listType);
+                                searchResultItems = gson.fromJson(response.getJSONArray("items").toString(), listType);
+                                initSliderView();
                             }
                         } catch (JSONException ex) {
                             ex.printStackTrace();
@@ -108,6 +107,8 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                         super.onFailure(statusCode, headers, responseString, throwable);
+                        dismissLoading();
+                        Toast.makeText(ImageDisplayActivity.this,responseString, Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -116,7 +117,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
-        Toast.makeText(this,slider.getBundle().get("extra") + "", Toast.LENGTH_SHORT).show();
     }
 
 

@@ -1,12 +1,17 @@
 package com.mudib.ghostwriter.activity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Explode;
 import android.view.Window;
+
+import com.mudib.ghostwriter.R;
 
 import butterknife.ButterKnife;
 
@@ -15,6 +20,8 @@ import butterknife.ButterKnife;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
+    private Dialog mProgressDialog ;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,5 +45,32 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
+    public void showLoading(){
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(getLayoutInflater().inflate(R.layout.dialog_progress, null));
+        dialog.setCancelable(false);
+        mProgressDialog = dialog;
+        mProgressDialog.show();
+    }
+
+
+    public void dismissLoading(){
+        if(mProgressDialog != null)
+            mProgressDialog.dismiss();
+    }
+
+    public void showAlertDialog(String title,String msg){
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(msg)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 
 }

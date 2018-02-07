@@ -16,7 +16,7 @@ public class GoogleImageSearchManager {
 
     private static final String BASE_URL = "https://www.googleapis.com/customsearch/v1?";
     private static final String API_KEY = "AIzaSyCqRZgz6YJJwCclmfNX__L74mpLf_LFiOQ";
-    private static final String SE_ID = "009423356643998779857:dn_ippdxhnw";
+    private static final String SE_ID = "013079244253699854793:seggni-nrhs";
 
     static volatile GoogleImageSearchManager singleton = null;
 
