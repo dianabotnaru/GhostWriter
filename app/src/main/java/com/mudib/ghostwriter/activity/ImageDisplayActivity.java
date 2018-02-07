@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.mudib.ghostwriter.R;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -12,9 +13,22 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.mudib.ghostwriter.manager.GoogleImageSearchManager;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
 
+import cz.msebera.android.httpclient.Header;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.mudib.ghostwriter.models.SearchResultImage;
+import com.mudib.ghostwriter.models.SearchResultItem;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.lang.reflect.Type;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 
@@ -32,7 +46,9 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagedisplay);
         initToolbar("Image Display");
-        initSliderView();
+        getGoogleSearchImages();
+
+//        initSliderView();
     }
 
     @Override
@@ -70,6 +86,31 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
             imageSlider.addSlider(textSliderView);
         }
+
+    }
+
+    private void getGoogleSearchImages(){
+        GoogleImageSearchManager.with(this).startSearchAsync("apple", 0, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            if (response != null) {
+                                Gson gson = new Gson();
+                                Type listType = new TypeToken<List<SearchResultItem>>() {
+                                }.getType();
+                                ArrayList<SearchResultItem> searchResultImages = gson.fromJson(response.getJSONArray("items").toString(), listType);
+                            }
+                        } catch (JSONException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        super.onFailure(statusCode, headers, responseString, throwable);
+                    }
+                }
+        );
 
     }
 
