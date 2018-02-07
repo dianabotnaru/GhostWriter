@@ -1,12 +1,11 @@
 package com.mudib.ghostwriter.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.mudib.ghostwriter.R;
 
-import butterknife.ButterKnife;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
