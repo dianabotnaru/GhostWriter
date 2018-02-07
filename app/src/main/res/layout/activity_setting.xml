@@ -6,11 +6,54 @@
     android:layout_height="match_parent"
     tools:context="com.mudib.ghostwriter.activity.SettingActivity">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Setting Screen" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Image Display Time"
+            android:textColor="#212121"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <SeekBar
+                style="@style/Widget.AppCompat.SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/seekbar_displaytime"
+                android:max="10"
+                android:progress="3" />
+
+            <TextView
+                android:id="@+id/textView_displaytime"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="10s" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/apply_btn"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:text="Apply"
+            tools:layout_editor_absoluteX="299dp" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

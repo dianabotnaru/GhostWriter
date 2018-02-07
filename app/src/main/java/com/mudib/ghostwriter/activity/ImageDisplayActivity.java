@@ -44,6 +44,14 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     }
 
     private void initSliderView(){
+
+        imageSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        imageSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        imageSlider.setCustomAnimation(new DescriptionAnimation());
+        long displayTime = TimePreferencesManager.with(this).getImageDisplayTime();
+        imageSlider.setDuration(displayTime);
+        imageSlider.addOnPageChangeListener(this);
+
         HashMap<String,String> url_maps = new HashMap<String, String>();
         url_maps.put("Hannibal", "http://static2.hypable.com/wp-content/uploads/2013/12/hannibal-season-2-release-date.jpg");
         url_maps.put("Big Bang Theory", "http://tvfiles.alphacoders.com/100/hdclearart-10.png");
@@ -63,12 +71,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             imageSlider.addSlider(textSliderView);
         }
 
-        imageSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        imageSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        imageSlider.setCustomAnimation(new DescriptionAnimation());
-        long displayTime = TimePreferencesManager.with(this).getImageDisplayTime();
-        imageSlider.setDuration(displayTime);
-        imageSlider.addOnPageChangeListener(this);
     }
 
     @Override
