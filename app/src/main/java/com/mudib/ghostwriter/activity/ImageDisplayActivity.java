@@ -19,7 +19,6 @@ import com.mudib.ghostwriter.manager.TimePreferencesManager;
 import cz.msebera.android.httpclient.Header;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mudib.ghostwriter.models.SearchResultImage;
 import com.mudib.ghostwriter.models.SearchResultItem;
 
 import org.json.JSONException;
@@ -38,17 +37,22 @@ import butterknife.BindView;
 
 public class ImageDisplayActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
 
-    private ArrayList<SearchResultItem> searchResultItems;
-
     @BindView(R.id.slider_images)
     SliderLayout imageSlider;
+
+    private String[] searchTextArray = {"Apple", "Orange", "Coffee", "Laptop","Tree","River","Building","Sky","Mouse","Desk"};
+    private ArrayList<SearchResultItem> allsearchResultItems;
+    private int currentSearchIndex;
+    private int oldSelectIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagedisplay);
+        initDatas();
         initToolbar("Image Display");
-        getGoogleSearchImages();
+        initSliderView();
+        getGoogleSearchImages(currentSearchIndex);
     }
 
     @Override
@@ -59,48 +63,73 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         return super.onOptionsItemSelected(item);
     }
 
-    private void initSliderView(){
+    private void initDatas(){
+        currentSearchIndex = 0;
+        allsearchResultItems = new ArrayList<SearchResultItem>();
+    }
 
+    private void initSliderView(){
         imageSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         imageSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         imageSlider.setCustomAnimation(new DescriptionAnimation());
         long displayTime = TimePreferencesManager.with(this).getImageDisplayTime();
         imageSlider.setDuration(displayTime);
         imageSlider.addOnPageChangeListener(this);
-        HashMap<String,String> url_maps = new HashMap<String, String>();
-        for(int i = 0;i<searchResultItems.size();i++){
-            SearchResultItem searchResultItem = searchResultItems.get(i);
-            url_maps.put(searchResultItem.getTitle(), searchResultItem.getLink());
+        imageSlider.stopAutoCycle();
+    }
+
+    private void addSearchResults(ArrayList<SearchResultItem> searchResultItems,int index) {
+        int searchitemCount = 10;
+        if(searchResultItems.size()<10){
+            searchitemCount = searchResultItems.size();
         }
-        for(String name : url_maps.keySet()){
+        for(int i = 0; i<searchitemCount;i++){
+            SearchResultItem searchResultItem = searchResultItems.get(i);
+            allsearchResultItems.add(allsearchResultItems.size(),searchResultItem);
+        }
+    }
+
+    private void setSliderViewImages(){
+        for(int i = 0;i<allsearchResultItems.size();i++){
+            SearchResultItem searchResultItem = allsearchResultItems.get(i);
             TextSliderView textSliderView = new TextSliderView(this);
             textSliderView
-                    .description(name)
-                    .image(url_maps.get(name))
+                    .description(searchResultItem.getTitle())
+                    .image(searchResultItem.getImage().getThumbnailLink())
                     .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .setOnSliderClickListener(this);
 
             imageSlider.addSlider(textSliderView);
         }
-
+//        imageSlider.setCurrentPosition(0);
+        imageSlider.startAutoCycle();
     }
 
-    private void getGoogleSearchImages(){
-        showLoading();
-        GoogleImageSearchManager.with(this).startSearchAsync("apple", 0, new JsonHttpResponseHandler() {
+    private void getGoogleSearchImages(final int index){
+        if (index == 0)
+            showLoading();
+        GoogleImageSearchManager.with(this).startSearchAsync(searchTextArray[index], 0, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        dismissLoading();
                         try {
                             if (response != null) {
                                 Gson gson = new Gson();
                                 Type listType = new TypeToken<List<SearchResultItem>>() {
                                 }.getType();
-                                searchResultItems = gson.fromJson(response.getJSONArray("items").toString(), listType);
-                                initSliderView();
+                                ArrayList<SearchResultItem> searchResultItems = gson.fromJson(response.getJSONArray("items").toString(), listType);
+                                addSearchResults(searchResultItems,index);
+//                                setSliderViewImages(searchResultItems);
                             }
                         } catch (JSONException ex) {
                             ex.printStackTrace();
+                        }
+
+                        if (index<searchTextArray.length-1) {
+                            getGoogleSearchImages(index + 1);
+                        }
+                        else{
+                            dismissLoading();
+                            setSliderViewImages();
                         }
                     }
 
@@ -116,16 +145,34 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     }
 
     @Override
+    protected void onStop() {
+        imageSlider.stopAutoCycle();
+        super.onStop();
+    }
+
+    @Override
     public void onSliderClick(BaseSliderView slider) {
     }
 
-
     @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
 
     @Override
     public void onPageSelected(int position) {
-        Log.d("Slider Demo", "Page Changed: " + position);
+//        if (position == (allsearchResultItems.size() - 1)) {
+//            if(oldSelectIndex == 0){
+////                imageSlider.setCurrentPosition(0);
+//            }else {
+//                if (currentSearchIndex < searchTextArray.length - 1) {
+//                    currentSearchIndex++;
+//                    imageSlider.stopAutoCycle();
+//                    getGoogleSearchImages(currentSearchIndex);
+//                }
+//            }
+//        }
+//        oldSelectIndex = position;
     }
 
     @Override

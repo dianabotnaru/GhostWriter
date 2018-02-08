@@ -3,7 +3,7 @@ package com.mudib.ghostwriter.models;
 import java.io.Serializable;
 
 /**
- * Created by jordi on 07/02/2018.
+ * Created by diana on 07/02/2018.
  */
 
 public class SearchResultItem implements Serializable {

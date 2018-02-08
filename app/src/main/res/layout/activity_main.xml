@@ -27,7 +27,7 @@
                 android:text="GhostWriter"
                 android:textAlignment="center"
                 android:textColor="#212121"
-                android:textSize="20sp"
+                android:textSize="28sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

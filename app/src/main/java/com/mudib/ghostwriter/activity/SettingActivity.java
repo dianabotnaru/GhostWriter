@@ -33,6 +33,7 @@ public class SettingActivity extends BaseActivity {
     }
 
     private void initUi(){
+        seekbar_displaytime.setProgress((int)TimePreferencesManager.with(this).getImageDisplayTime()/1000);
         textView_displaytime.setText(String.valueOf(seekbar_displaytime.getProgress())+"s");
         seekbar_displaytime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 

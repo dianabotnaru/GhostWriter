@@ -17,9 +17,14 @@
             android:id="@+id/slider_images"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            custom:pager_animation="Accordion"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="60dp"
+            android:background="@android:color/darker_gray"
             custom:auto_cycle="true"
             custom:indicator_visibility="visible"
+            custom:pager_animation="Accordion"
             custom:pager_animation_span="1100">
 
         </com.daimajia.slider.library.SliderLayout>
