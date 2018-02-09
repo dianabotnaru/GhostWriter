@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class SynonymWord implements Serializable {
 
+
     private String word;
     private int score;
 
@@ -17,5 +18,13 @@ public class SynonymWord implements Serializable {
 
     public int getScore() {
         return score;
+    }
+
+    public void setWord(String word) {
+        this.word = word;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

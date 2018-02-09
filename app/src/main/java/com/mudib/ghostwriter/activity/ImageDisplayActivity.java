@@ -47,6 +47,9 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @BindView(R.id.textView_keys)
     TextView keysTextView;
 
+    @BindView(R.id.textView_synonym)
+    TextView synonymTextView;
+
     public static String[] allSearchkeys = {"Apple", "Orange", "Coffee", "Laptop","Tree","River","Building","Sky","Mouse","Desk"};
 
     private ArrayList<String> searchKeyList;
@@ -54,8 +57,12 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     private ArrayList<SearchResultItem> allsearchResultItems;
     private ArrayList<SearchResultItem> searchResultItems;
 
+
+    private ArrayList<SynonymWord> selectedSynonymList;
+    private String selectedKey;
+
     private int currentSearchIndex;
-    private int oldSelectIndex;
+    private int sliderCount;
 
     private static final String TAG = StringPickerDialog.class.getSimpleName();
 
@@ -67,7 +74,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         initToolbar("Image Display");
         initSliderView();
 
-        getSynonyms("orange");
 //        getGoogleSearchImages(currentSearchIndex);
     }
 
@@ -81,8 +87,10 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     private void initDatas(){
         currentSearchIndex = 0;
+        sliderCount = 0;
         allsearchResultItems = new ArrayList<SearchResultItem>();
         searchKeyList = Util.initListFromStrings(allSearchkeys);
+        selectedSynonymList = new ArrayList<SynonymWord>();
     }
 
     private void initSliderView(){
@@ -117,14 +125,13 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                     .setOnSliderClickListener(this);
 
             imageSlider.addSlider(textSliderView);
+            sliderCount++;
         }
         imageSlider.startAutoCycle();
     }
 
     private void getGoogleSearchImages(final int index){
-        if (index == 0)
-            showLoading();
-        ApiClient.with(this).startGoogleSearchAsync(Util.initStringsFromList(searchKeyList)[index], 0, new JsonHttpResponseHandler() {
+        ApiClient.with(this).startGoogleSearchAsync(selectedSynonymList.get(index).getWord(), 0, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
@@ -139,12 +146,16 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                             ex.printStackTrace();
                         }
 
-                        if (index<searchKeyList.size()-1) {
+                        if (index<selectedSynonymList.size()-1) {
                             getGoogleSearchImages(index + 1);
                         }
                         else{
                             dismissLoading();
                             setSliderViewImages();
+                            setTextViewsText();
+                            allsearchResultItems.clear();
+                            selectedSynonymList.clear();
+                            currentSearchIndex = 0;
                         }
                     }
 
@@ -158,17 +169,27 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         );
     }
 
-    private void getSynonyms(String word){
+    private void getSynonyms(){
         showLoading();
-        ApiClient.with(this).startGetSynonymsAsync(word, new JsonHttpResponseHandler() {
+        ApiClient.with(this).startGetSynonymsAsync(selectedKey, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        dismissLoading();
                         if (response != null) {
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<SynonymWord>>() {
                             }.getType();
-                            ArrayList<SynonymWord> synonymWords = gson.fromJson(response.toString(), listType);
+                            selectedSynonymList = gson.fromJson(response.toString(), listType);
+//                            SynonymWord synonymWord = new SynonymWord();
+//                            synonymWord.setScore(0);
+//                            synonymWord.setWord(selectedKey);
+//                            selectedSynonymList.add(0,synonymWord);
+                            if(selectedSynonymList.size()!=0)
+                                getGoogleSearchImages(0);
+                            else
+                                dismissLoading();
+                        }else{
+                            dismissLoading();
+                            Toast.makeText(ImageDisplayActivity.this,"can't get synonyms. please try again.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -202,6 +223,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @Override
     protected void onStop() {
         imageSlider.stopAutoCycle();
+        imageSlider = null;
         super.onStop();
     }
 
@@ -216,6 +238,9 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     @Override
     public void onPageSelected(int position) {
+        if(position == sliderCount-1){
+            imageSlider.stopAutoCycle();
+        }
     }
 
     @Override
@@ -224,10 +249,25 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @Override
     public void onClick(String value) {
         searchKeyList.remove(value);
+        imageSlider.stopAutoCycle();
+        selectedKey = value;
+        getSynonyms();
+   }
+
+    private void setTextViewsText(){
         if(keysTextView.getText().toString() == ""){
-            keysTextView.setText(value);
+            keysTextView.setText(selectedKey);
         }else{
-            keysTextView.setText(keysTextView.getText().toString()+" ,"+value);
+            keysTextView.setText(keysTextView.getText().toString()+" ,"+selectedKey);
+        }
+        for(int i=0;i<selectedSynonymList.size();i++){
+            SynonymWord synonymWord = selectedSynonymList.get(i);
+            if(synonymTextView.getText().toString() == ""){
+                synonymTextView.setText(synonymWord.getWord());
+            }else{
+                synonymTextView.setText(synonymTextView.getText().toString()+" ,"+synonymWord.getWord());
+            }
         }
     }
+
 }

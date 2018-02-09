@@ -18,18 +18,30 @@
         <TextView
             android:id="@+id/textView_keys"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="30dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:background="@android:color/background_light"
             android:hint="Choose keys" />
 
+        <TextView
+            android:id="@+id/textView_synonym"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/background_light"
+            android:hint="SynonymWord" />
+
+
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/slider_images"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="16dp"
             android:background="@android:color/background_light"
             custom:auto_cycle="true"
             custom:indicator_visibility="visible"
