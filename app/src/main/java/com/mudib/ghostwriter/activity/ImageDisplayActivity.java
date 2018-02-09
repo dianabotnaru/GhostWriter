@@ -1,9 +1,7 @@
 package com.mudib.ghostwriter.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,7 +13,7 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
-import com.mudib.ghostwriter.manager.GoogleImageSearchManager;
+import com.mudib.ghostwriter.manager.ApiClient;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
 
 import butterknife.OnClick;
@@ -123,7 +121,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     private void getGoogleSearchImages(final int index){
         if (index == 0)
             showLoading();
-        GoogleImageSearchManager.with(this).startSearchAsync(Util.initStringsFromList(searchKeyList)[index], 0, new JsonHttpResponseHandler() {
+        ApiClient.with(this).startGoogleSearchAsync(Util.initStringsFromList(searchKeyList)[index], 0, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
