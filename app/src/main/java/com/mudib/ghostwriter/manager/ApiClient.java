@@ -15,7 +15,7 @@ public class ApiClient {
     private static final String GOOGLE_API_KEY = "AIzaSyCqRZgz6YJJwCclmfNX__L74mpLf_LFiOQ";
     private static final String GOOGLE_SE_ID = "013079244253699854793:seggni-nrhs";
 
-    private static final String SYNONMS_SEARCH_BASE_URL = "ttps://api.datamuse.com/words?rel_syn=";
+    private static final String SYNONMS_SEARCH_BASE_URL = "https://api.datamuse.com/words?rel_syn=";
 
 
     static volatile ApiClient singleton = null;
@@ -44,6 +44,7 @@ public class ApiClient {
     }
 
     public void startGetSynonymsAsync(String word, JsonHttpResponseHandler handler) {
+//        String url = GOOGLE_SEARCH_BASE_URL +"key="+GOOGLE_API_KEY+"&cx="+GOOGLE_SE_ID+"&searchType=image"+"&q="+word;
         String url = SYNONMS_SEARCH_BASE_URL +word;
         client.get(url, handler);
     }

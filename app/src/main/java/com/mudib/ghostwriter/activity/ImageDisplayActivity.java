@@ -21,8 +21,10 @@ import cz.msebera.android.httpclient.Header;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mudib.ghostwriter.models.SearchResultItem;
+import com.mudib.ghostwriter.models.SynonymWord;
 import com.mudib.ghostwriter.utils.Util;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.lang.reflect.Type;
@@ -65,6 +67,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         initToolbar("Image Display");
         initSliderView();
 
+        getSynonyms("orange");
 //        getGoogleSearchImages(currentSearchIndex);
     }
 
@@ -153,6 +156,31 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                     }
                 }
         );
+    }
+
+    private void getSynonyms(String word){
+        showLoading();
+        ApiClient.with(this).startGetSynonymsAsync(word, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        dismissLoading();
+                        if (response != null) {
+                            Gson gson = new Gson();
+                            Type listType = new TypeToken<List<SynonymWord>>() {
+                            }.getType();
+                            ArrayList<SynonymWord> synonymWords = gson.fromJson(response.toString(), listType);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        super.onFailure(statusCode, headers, responseString, throwable);
+                        dismissLoading();
+                        Toast.makeText(ImageDisplayActivity.this,responseString, Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+
     }
 
     private void showSearchTextPickerDialog(String[] searchTextArray){
