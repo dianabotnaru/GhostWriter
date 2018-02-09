@@ -3,6 +3,8 @@ package com.mudib.ghostwriter.activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -16,34 +18,46 @@ import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.mudib.ghostwriter.manager.GoogleImageSearchManager;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
 
+import butterknife.OnClick;
 import cz.msebera.android.httpclient.Header;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mudib.ghostwriter.models.SearchResultItem;
+import com.mudib.ghostwriter.utils.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.lang.reflect.Type;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
+import hotchemi.stringpicker.StringPickerDialog;
 
 /**
  * Created by diana on 06/02/2018.
  */
 
-public class ImageDisplayActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
+public class ImageDisplayActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener,StringPickerDialog.OnClickListener{
 
     @BindView(R.id.slider_images)
     SliderLayout imageSlider;
 
-    private String[] searchTextArray = {"Apple", "Orange", "Coffee", "Laptop","Tree","River","Building","Sky","Mouse","Desk"};
+    @BindView(R.id.textView_keys)
+    TextView keysTextView;
+
+    public static String[] allSearchkeys = {"Apple", "Orange", "Coffee", "Laptop","Tree","River","Building","Sky","Mouse","Desk"};
+
+    private ArrayList<String> searchKeyList;
+
     private ArrayList<SearchResultItem> allsearchResultItems;
+    private ArrayList<SearchResultItem> searchResultItems;
+
     private int currentSearchIndex;
     private int oldSelectIndex;
+
+    private static final String TAG = StringPickerDialog.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +66,8 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         initDatas();
         initToolbar("Image Display");
         initSliderView();
-        getGoogleSearchImages(currentSearchIndex);
+
+//        getGoogleSearchImages(currentSearchIndex);
     }
 
     @Override
@@ -66,6 +81,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     private void initDatas(){
         currentSearchIndex = 0;
         allsearchResultItems = new ArrayList<SearchResultItem>();
+        searchKeyList = Util.initListFromStrings(allSearchkeys);
     }
 
     private void initSliderView(){
@@ -101,14 +117,13 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
             imageSlider.addSlider(textSliderView);
         }
-//        imageSlider.setCurrentPosition(0);
         imageSlider.startAutoCycle();
     }
 
     private void getGoogleSearchImages(final int index){
         if (index == 0)
             showLoading();
-        GoogleImageSearchManager.with(this).startSearchAsync(searchTextArray[index], 0, new JsonHttpResponseHandler() {
+        GoogleImageSearchManager.with(this).startSearchAsync(Util.initStringsFromList(searchKeyList)[index], 0, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
@@ -118,13 +133,12 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                                 }.getType();
                                 ArrayList<SearchResultItem> searchResultItems = gson.fromJson(response.getJSONArray("items").toString(), listType);
                                 addSearchResults(searchResultItems,index);
-//                                setSliderViewImages(searchResultItems);
                             }
                         } catch (JSONException ex) {
                             ex.printStackTrace();
                         }
 
-                        if (index<searchTextArray.length-1) {
+                        if (index<searchKeyList.size()-1) {
                             getGoogleSearchImages(index + 1);
                         }
                         else{
@@ -141,7 +155,22 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                     }
                 }
         );
+    }
 
+    private void showSearchTextPickerDialog(String[] searchTextArray){
+        Bundle bundle = new Bundle();
+        bundle.putStringArray(getString(R.string.string_picker_dialog_values), searchTextArray);
+        StringPickerDialog dialog = new StringPickerDialog();
+        dialog.setArguments(bundle);
+        dialog.show(getSupportFragmentManager(), TAG);
+    }
+
+    @OnClick(R.id.textView_keys)
+    public void onkeysTextClick() {
+        if(searchKeyList.size() == 0)
+            Toast.makeText(ImageDisplayActivity.this,"All of keys was chosen.", Toast.LENGTH_SHORT).show();
+        else
+            showSearchTextPickerDialog(Util.initStringsFromList(searchKeyList));
     }
 
     @Override
@@ -161,20 +190,18 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     @Override
     public void onPageSelected(int position) {
-//        if (position == (allsearchResultItems.size() - 1)) {
-//            if(oldSelectIndex == 0){
-////                imageSlider.setCurrentPosition(0);
-//            }else {
-//                if (currentSearchIndex < searchTextArray.length - 1) {
-//                    currentSearchIndex++;
-//                    imageSlider.stopAutoCycle();
-//                    getGoogleSearchImages(currentSearchIndex);
-//                }
-//            }
-//        }
-//        oldSelectIndex = position;
     }
 
     @Override
     public void onPageScrollStateChanged(int state) {}
+
+    @Override
+    public void onClick(String value) {
+        searchKeyList.remove(value);
+        if(keysTextView.getText().toString() == ""){
+            keysTextView.setText(value);
+        }else{
+            keysTextView.setText(keysTextView.getText().toString()+" ,"+value);
+        }
+    }
 }
