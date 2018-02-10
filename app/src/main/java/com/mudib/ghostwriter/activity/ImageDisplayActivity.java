@@ -64,6 +64,8 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     private int currentSearchIndex;
     private int sliderCount;
 
+    private boolean isFirstSelect;
+
     private static final String TAG = StringPickerDialog.class.getSimpleName();
 
     @Override
@@ -73,8 +75,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         initDatas();
         initToolbar("Image Display");
         initSliderView();
-
-//        getGoogleSearchImages(currentSearchIndex);
     }
 
     @Override
@@ -103,59 +103,39 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         imageSlider.stopAutoCycle();
     }
 
-    private void addSearchResults(ArrayList<SearchResultItem> searchResultItems,int index) {
-        int searchitemCount = 10;
-        if(searchResultItems.size()<10){
-            searchitemCount = searchResultItems.size();
-        }
-        for(int i = 0; i<searchitemCount;i++){
+    private void setSliderViewImages(ArrayList<SearchResultItem> searchResultItems){
+        sliderCount+=searchResultItems.size();
+        for(int i = 0;i<searchResultItems.size();i++){
             SearchResultItem searchResultItem = searchResultItems.get(i);
-            allsearchResultItems.add(allsearchResultItems.size(),searchResultItem);
-        }
-    }
-
-    private void setSliderViewImages(){
-        for(int i = 0;i<allsearchResultItems.size();i++){
-            SearchResultItem searchResultItem = allsearchResultItems.get(i);
             TextSliderView textSliderView = new TextSliderView(this);
             textSliderView
                     .description(searchResultItem.getTitle())
                     .image(searchResultItem.getImage().getThumbnailLink())
-                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
+                    .setScaleType(BaseSliderView.ScaleType.FitCenterCrop)
                     .setOnSliderClickListener(this);
 
             imageSlider.addSlider(textSliderView);
-            sliderCount++;
         }
         imageSlider.startAutoCycle();
     }
 
-    private void getGoogleSearchImages(final int index){
-        ApiClient.with(this).startGoogleSearchAsync(selectedSynonymList.get(index).getWord(), 0, new JsonHttpResponseHandler() {
+    private void getGoogleSearchImages(String key){
+        imageSlider.stopAutoCycle();
+        showLoading();
+        ApiClient.with(this).startGoogleSearchAsync(key, 0, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        dismissLoading();
                         try {
                             if (response != null) {
                                 Gson gson = new Gson();
                                 Type listType = new TypeToken<List<SearchResultItem>>() {
                                 }.getType();
                                 ArrayList<SearchResultItem> searchResultItems = gson.fromJson(response.getJSONArray("items").toString(), listType);
-                                addSearchResults(searchResultItems,index);
+                                setSliderViewImages(searchResultItems);
                             }
                         } catch (JSONException ex) {
                             ex.printStackTrace();
-                        }
-
-                        if (index<selectedSynonymList.size()-1) {
-                            getGoogleSearchImages(index + 1);
-                        }
-                        else{
-                            dismissLoading();
-                            setSliderViewImages();
-                            setTextViewsText();
-                            allsearchResultItems.clear();
-                            selectedSynonymList.clear();
-                            currentSearchIndex = 0;
                         }
                     }
 
@@ -174,21 +154,22 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         ApiClient.with(this).startGetSynonymsAsync(selectedKey, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
+                        dismissLoading();
                         if (response != null) {
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<SynonymWord>>() {
                             }.getType();
-                            selectedSynonymList = gson.fromJson(response.toString(), listType);
-//                            SynonymWord synonymWord = new SynonymWord();
-//                            synonymWord.setScore(0);
-//                            synonymWord.setWord(selectedKey);
-//                            selectedSynonymList.add(0,synonymWord);
-                            if(selectedSynonymList.size()!=0)
-                                getGoogleSearchImages(0);
-                            else
-                                dismissLoading();
+                            ArrayList<SynonymWord> synonymWords = gson.fromJson(response.toString(), listType);
+                            SynonymWord synonymWord = new SynonymWord();
+                            synonymWord.setScore(0);
+                            synonymWord.setWord(selectedKey);
+                            synonymWords.add(0,synonymWord);
+                            selectedSynonymList.addAll(synonymWords);
+                            setTextViewsText();
+                            if(currentSearchIndex == 0){
+                                getGoogleSearchImages(selectedSynonymList.get(currentSearchIndex).getWord());
+                            }
                         }else{
-                            dismissLoading();
                             Toast.makeText(ImageDisplayActivity.this,"can't get synonyms. please try again.", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -223,6 +204,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @Override
     protected void onStop() {
         imageSlider.stopAutoCycle();
+        imageSlider.removeAllSliders();
         imageSlider = null;
         super.onStop();
     }
@@ -238,8 +220,11 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     @Override
     public void onPageSelected(int position) {
-        if(position == sliderCount-1){
-            imageSlider.stopAutoCycle();
+        if((position == sliderCount-1)&&(isLoading==false)){
+            currentSearchIndex++;
+            if(currentSearchIndex<selectedSynonymList.size()){
+                getGoogleSearchImages(selectedSynonymList.get(currentSearchIndex).getWord());
+            }
         }
     }
 
@@ -249,7 +234,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @Override
     public void onClick(String value) {
         searchKeyList.remove(value);
-        imageSlider.stopAutoCycle();
         selectedKey = value;
         getSynonyms();
    }
@@ -260,6 +244,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         }else{
             keysTextView.setText(keysTextView.getText().toString()+" ,"+selectedKey);
         }
+        synonymTextView.setText("");
         for(int i=0;i<selectedSynonymList.size();i++){
             SynonymWord synonymWord = selectedSynonymList.get(i);
             if(synonymTextView.getText().toString() == ""){

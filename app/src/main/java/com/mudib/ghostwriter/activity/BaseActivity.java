@@ -22,6 +22,7 @@ import butterknife.ButterKnife;
 public class BaseActivity extends AppCompatActivity {
 
     private Dialog mProgressDialog ;
+    public boolean isLoading;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void showLoading(){
+        isLoading = true;
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(getLayoutInflater().inflate(R.layout.dialog_progress, null));
@@ -56,8 +58,10 @@ public class BaseActivity extends AppCompatActivity {
 
 
     public void dismissLoading(){
-        if(mProgressDialog != null)
+        if(mProgressDialog != null) {
+            isLoading = false;
             mProgressDialog.dismiss();
+        }
     }
 
     public void showAlertDialog(String title,String msg){
