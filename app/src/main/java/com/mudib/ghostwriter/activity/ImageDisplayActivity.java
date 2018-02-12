@@ -120,7 +120,9 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     }
 
     private void getGoogleSearchImages(String key){
-        imageSlider.stopAutoCycle();
+        if(imageSlider != null){
+            imageSlider.stopAutoCycle();
+        }
         showLoading();
         ApiClient.with(this).startGoogleSearchAsync(key, 0, new JsonHttpResponseHandler() {
                     @Override
@@ -140,10 +142,10 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        super.onFailure(statusCode, headers, responseString, throwable);
+                    public void onFailure(int statusCode, Header[] headers,Throwable throwable, JSONObject jsonObject ) {
+                        super.onFailure(statusCode, headers, throwable, jsonObject);
                         dismissLoading();
-                        Toast.makeText(ImageDisplayActivity.this,responseString, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ImageDisplayActivity.this,throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -176,10 +178,10 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                     }
 
                     @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        super.onFailure(statusCode, headers, responseString, throwable);
+                    public void onFailure(int statusCode, Header[] headers,Throwable throwable, JSONObject jsonObject ) {
+                        super.onFailure(statusCode, headers, throwable, jsonObject);
                         dismissLoading();
-                        Toast.makeText(ImageDisplayActivity.this,responseString, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ImageDisplayActivity.this,throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -206,7 +208,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     protected void onStop() {
         imageSlider.stopAutoCycle();
         imageSlider.removeAllSliders();
-        imageSlider = null;
         super.onStop();
     }
 
