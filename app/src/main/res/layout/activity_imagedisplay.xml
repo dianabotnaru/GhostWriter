@@ -11,9 +11,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/darker_gray"
+        android:background="#dcdcdc"
         android:orientation="vertical"
-        android:padding="30dp">
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/textView_keys"
@@ -22,8 +22,11 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_marginTop="16dp"
             android:background="@android:color/background_light"
-            android:hint="Choose keys" />
+            android:hint="Choose keys"
+            android:paddingLeft="5dp"
+            android:paddingTop="3dp" />
 
         <TextView
             android:id="@+id/textView_synonym"
@@ -32,9 +35,11 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="3dp"
             android:background="@android:color/background_light"
-            android:hint="SynonymWord" />
+            android:hint="SynonymWord"
+            android:paddingLeft="5dp"
+            android:paddingTop="3dp" />
 
 
         <com.daimajia.slider.library.SliderLayout
@@ -42,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="16dp"
-            android:background="@android:color/background_light"
+            android:background="#000000"
             custom:auto_cycle="true"
             custom:indicator_visibility="visible"
             custom:pager_animation="Accordion"

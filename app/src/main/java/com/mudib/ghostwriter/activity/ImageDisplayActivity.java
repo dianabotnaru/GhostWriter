@@ -154,7 +154,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         ApiClient.with(this).startGetSynonymsAsync(selectedKey, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
-                        dismissLoading();
                         if (response != null) {
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<SynonymWord>>() {
@@ -166,11 +165,13 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                             synonymWords.add(0,synonymWord);
                             selectedSynonymList.addAll(synonymWords);
                             setTextViewsText();
+                            dismissLoading();
                             if(currentSearchIndex == 0){
                                 getGoogleSearchImages(selectedSynonymList.get(currentSearchIndex).getWord());
                             }
                         }else{
                             Toast.makeText(ImageDisplayActivity.this,"can't get synonyms. please try again.", Toast.LENGTH_SHORT).show();
+                            dismissLoading();
                         }
                     }
 
@@ -221,9 +222,9 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @Override
     public void onPageSelected(int position) {
         if((position == sliderCount-1)&&(isLoading==false)){
-            currentSearchIndex++;
-            if(currentSearchIndex<selectedSynonymList.size()){
-                getGoogleSearchImages(selectedSynonymList.get(currentSearchIndex).getWord());
+            if(currentSearchIndex<selectedSynonymList.size()-1){
+                    currentSearchIndex++;
+                    getGoogleSearchImages(selectedSynonymList.get(currentSearchIndex).getWord());
             }
         }
     }
