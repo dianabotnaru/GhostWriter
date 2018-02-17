@@ -1,7 +1,11 @@
 package com.mudib.ghostwriter.activity;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,6 +17,8 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.mudib.ghostwriter.adapter.KeywordListAdapter;
+import com.mudib.ghostwriter.dialog.KeywordPickerDialog;
 import com.mudib.ghostwriter.manager.ApiClient;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
 
@@ -49,6 +55,8 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     @BindView(R.id.textView_synonym)
     TextView synonymTextView;
+
+    private KeywordListAdapter keywordListAdapter;
 
     public static String[] allSearchkeys = {"Apple", "Orange", "Coffee", "Laptop","Tree","River","Building","Sky","Mouse","Desk"};
 
@@ -198,10 +206,14 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     @OnClick(R.id.textView_keys)
     public void onkeysTextClick() {
-        if(searchKeyList.size() == 0)
-            Toast.makeText(ImageDisplayActivity.this,"All of keys was chosen.", Toast.LENGTH_SHORT).show();
-        else
-            showSearchTextPickerDialog(Util.initStringsFromList(searchKeyList));
+        KeywordPickerDialog keywordPickerDialog = KeywordPickerDialog.newInstance();
+        keywordPickerDialog.show(getSupportFragmentManager(), KeywordPickerDialog.TAG);
+
+
+//        if(searchKeyList.size() == 0)
+//            Toast.makeText(ImageDisplayActivity.this,"All of keys was chosen.", Toast.LENGTH_SHORT).show();
+//        else
+//            showSearchTextPickerDialog(Util.initStringsFromList(searchKeyList));
     }
 
     @Override
