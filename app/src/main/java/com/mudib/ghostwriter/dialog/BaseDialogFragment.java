@@ -5,7 +5,7 @@ import android.support.v4.app.DialogFragment;
 import butterknife.Unbinder;
 
 /**
- * Created by jordi on 17/02/2018.
+ * Created by diana on 17/02/2018.
  */
 
 public abstract class BaseDialogFragment extends DialogFragment {

@@ -5,26 +5,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.mudib.ghostwriter.R;
+import com.mudib.ghostwriter.models.Keyword;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by jordi on 17/02/2018.
+ * Created by diana on 17/02/2018.
  */
 
 public class KeywordListAdapter extends BaseAdapter {
 
-    public static String[] allSearchkeys = {"Alpha", "Omega", "Anchor", "Angel","Ant","Apple","Baby","Beehive","Bird","Bread","Bull", "Camel", "Candle", "Cauldron","Chameleon","Compass","Cornucopia","Crocodile","Dolphin","Elephant"
-    ,"Globe", "Griffin", "Helmet", "Horse","Hourglass","Lute","Madonna","Marionette","Moon", "Owl", "Serpent", "Sun","Sword","Thunderbolt","Tree","Walled Garden","Wild Man"};
-
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
+    private List<Keyword> keywords = new ArrayList<>();
 
     public KeywordListAdapter(Context context) {
         mContext = context;
@@ -33,12 +35,12 @@ public class KeywordListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return allSearchkeys.length;
+        return keywords.size();
     }
 
     @Override
-    public String getItem(int position) {
-        return allSearchkeys[position];
+    public Keyword getItem(int position) {
+        return keywords.get(position);
     }
 
     @Override
@@ -47,7 +49,7 @@ public class KeywordListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         DeviceHolder holder;
         if (convertView == null) {
             int layoutId = R.layout.item_keyword;
@@ -57,29 +59,39 @@ public class KeywordListAdapter extends BaseAdapter {
         } else {
             holder = (DeviceHolder) convertView.getTag();
         }
-        holder.keywordTextView.setText(allSearchkeys[position]);
+        holder.keywordTextView.setText(keywords.get(position).getWord());
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                               @Override
+                                               public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+                                                    Keyword keyword = keywords.get(position);
+                                                    keyword.setSelected(isChecked);
+                                                    keywords.set(position,keyword);
+                                               }
+                                           }
+        );
+        holder.checkBox.setChecked(keywords.get(position).isSelected());
         return convertView;
     }
 
-//    public void setItems(List<BAC> bacs) {
-//        mBacs.clear();
-//        for (BAC bac : bacs) {
-//            mBacs.add(bac);
-//        }
-//        notifyDataSetChanged();
-//    }
+    public void setItems(List<Keyword> keywords) {
+        this.keywords.clear();
+        for (Keyword keyword : keywords) {
+            this.keywords.add(keyword);
+        }
+        notifyDataSetChanged();
+    }
 
-//    public void clear() {
-//        mBacs.clear();
-//        notifyDataSetChanged();
-//    }
+    public void clear() {
+        keywords.clear();
+        notifyDataSetChanged();
+    }
 
     static class DeviceHolder {
         @BindView(R.id.textView_keyword)
         TextView keywordTextView;
-//
-//        @BindView(R.id.text_date)
-//        TextView mDate;
+
+        @BindView(R.id.checkBox)
+        CheckBox checkBox;
 
         DeviceHolder(View view) {
             ButterKnife.bind(this, view);
