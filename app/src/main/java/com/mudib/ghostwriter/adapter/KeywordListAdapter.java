@@ -81,6 +81,16 @@ public class KeywordListAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public List<Keyword> getSelectedItems(){
+        List<Keyword> selectedKeywords = new ArrayList<>();
+        for(Keyword keyword:keywords){
+            if(keyword.isSelected()){
+                selectedKeywords.add(keyword);
+            }
+        }
+        return selectedKeywords;
+    }
+
     public void clear() {
         keywords.clear();
         notifyDataSetChanged();

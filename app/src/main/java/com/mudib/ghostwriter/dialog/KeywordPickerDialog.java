@@ -7,6 +7,7 @@ import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.mudib.ghostwriter.Interface.KeywordPickerDialogInterface;
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.adapter.KeywordListAdapter;
 import com.mudib.ghostwriter.models.Keyword;
@@ -35,6 +36,11 @@ public class KeywordPickerDialog extends BaseDialogFragment{
 
     @OnClick(R.id.button_ok)
     void onOkClicked() {
+        try{
+            ((KeywordPickerDialogInterface) getActivity()).onSelectedKeywords(keywordListAdapter.getSelectedItems());
+        }catch (ClassCastException cce){
+            throw new ClassCastException("DateTimePickerListener getTargetFragment is not set");
+        }
         dismiss();
     }
 
