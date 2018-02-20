@@ -9,17 +9,17 @@ import java.io.Serializable;
 public class SearchResultFlickr implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String description;
+    private String title;
     private String date;
     private String owner;
     private String url;
 
-    public String getDescription(){
-        return description;
+    public String getTitle(){
+        return title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDate(){

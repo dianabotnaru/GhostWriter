@@ -6,6 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
+import com.mudib.ghostwriter.Interface.FlickrImageLoadTaskInterface;
 import com.mudib.ghostwriter.Interface.KeywordPickerDialogInterface;
 import com.mudib.ghostwriter.R;
 
@@ -27,6 +28,7 @@ import com.mudib.ghostwriter.models.Keyword;
 import com.mudib.ghostwriter.models.SearchResultFlickr;
 import com.mudib.ghostwriter.models.SearchResultItem;
 import com.mudib.ghostwriter.models.SynonymWord;
+import com.mudib.ghostwriter.utils.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +43,7 @@ import butterknife.BindView;
  * Created by diana on 06/02/2018.
  */
 
-public class ImageDisplayActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener,KeywordPickerDialogInterface{
+public class ImageDisplayActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener,KeywordPickerDialogInterface,FlickrImageLoadTaskInterface{
 
     public static int Clustering_Count = 3;
 
@@ -58,11 +60,15 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     private ArrayList<SynonymWord> selectedSynonymList;
 
-    private ArrayList<SearchResultItem> allSearchResultItems = new ArrayList<>();
+    private ArrayList<SearchResultFlickr> allSearchResultItems = new ArrayList<>();
 
     private int currentSearchIndex;
     private int startNum;
     private int sliderCount;
+
+    private int perpage;
+    private int page;
+    private int fetchKeyCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     private void initDatas(){
         currentSearchIndex = 0;
+        fetchKeyCount = 0;
         sliderCount = 0;
         startNum = 1;
         searchKeyList = new ArrayList<Keyword>();
@@ -98,14 +105,14 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         imageSlider.addOnPageChangeListener(this);
     }
 
-    private void setSliderViewImages(ArrayList<SearchResultItem> searchResultItems){
+    private void setSliderViewImages(ArrayList<SearchResultFlickr> searchResultItems){
         sliderCount+=searchResultItems.size();
         for(int i = 0;i<searchResultItems.size();i++){
-            SearchResultItem searchResultItem = searchResultItems.get(i);
+            SearchResultFlickr searchResultFlickr = searchResultItems.get(i);
             TextSliderView textSliderView = new TextSliderView(this);
             textSliderView
-                    .description(searchResultItem.getTitle())
-                    .image(searchResultItem.getImage().getThumbnailLink())
+                    .description(searchResultFlickr.getTitle())
+                    .image(searchResultFlickr.getUrl())
                     .setScaleType(BaseSliderView.ScaleType.FitCenterCrop)
                     .setOnSliderClickListener(this);
 
@@ -114,68 +121,68 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         imageSlider.startAutoCycle();
     }
 
-    private void getGoogleSearchImages(){
-        if(imageSlider != null){
-            imageSlider.stopAutoCycle();
-        }
-        if(currentSearchIndex == 0)
-            showLoading();
-        ApiClient.with(this).startGoogleSearchAsync(searchKeyList.get(currentSearchIndex).getWord(), startNum,Clustering_Count, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        try {
-                            if (response != null) {
-                                Gson gson = new Gson();
-                                Type listType = new TypeToken<List<SearchResultItem>>() {
-                                }.getType();
-                                ArrayList<SearchResultItem> searchResultItems = gson.fromJson(response.getJSONArray("items").toString(), listType);
-                                for(int i = 0; i<searchResultItems.size();i++){
-                                    SearchResultItem searchResultItem = searchResultItems.get(i);
-                                    allSearchResultItems.add(searchResultItem);
-                                }
-                                if(currentSearchIndex<(searchKeyList.size()-1)){
-                                    currentSearchIndex++;
-                                    getGoogleSearchImages();
-                                }else{
-                                    setSliderViewImages(allSearchResultItems);
-                                    currentSearchIndex = 0;
-                                    startNum = startNum + Clustering_Count;
-                                    allSearchResultItems.clear();
-                                    dismissLoading();
-                                }
-                            }
-                        } catch (JSONException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers,Throwable throwable, JSONObject jsonObject ) {
-                        super.onFailure(statusCode, headers, throwable, jsonObject);
-                        dismissLoading();
-                        Toast.makeText(ImageDisplayActivity.this,throwable.getMessage(), Toast.LENGTH_SHORT).show();
-                        if(currentSearchIndex<(searchKeyList.size()-1)){
-                            currentSearchIndex++;
-                            getGoogleSearchImages();
-                        }else{
-                            setSliderViewImages(allSearchResultItems);
-                            currentSearchIndex = 0;
-                            startNum = startNum + Clustering_Count;
-                            allSearchResultItems.clear();
-                            dismissLoading();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
-                        super.onFailure(statusCode, headers, response, throwable);
-                        dismissLoading();
-                        Toast.makeText(ImageDisplayActivity.this,response, Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-        );
-    }
+//    private void getGoogleSearchImages(){
+//        if(imageSlider != null){
+//            imageSlider.stopAutoCycle();
+//        }
+//        if(currentSearchIndex == 0)
+//            showLoading();
+//        ApiClient.with(this).startGoogleSearchAsync(searchKeyList.get(currentSearchIndex).getWord(), startNum,Clustering_Count, new JsonHttpResponseHandler() {
+//                    @Override
+//                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+//                        try {
+//                            if (response != null) {
+//                                Gson gson = new Gson();
+//                                Type listType = new TypeToken<List<SearchResultItem>>() {
+//                                }.getType();
+//                                ArrayList<SearchResultItem> searchResultItems = gson.fromJson(response.getJSONArray("items").toString(), listType);
+//                                for(int i = 0; i<searchResultItems.size();i++){
+//                                    SearchResultItem searchResultItem = searchResultItems.get(i);
+//                                    allSearchResultItems.add(searchResultItem);
+//                                }
+//                                if(currentSearchIndex<(searchKeyList.size()-1)){
+//                                    currentSearchIndex++;
+//                                    getGoogleSearchImages();
+//                                }else{
+//                                    setSliderViewImages(allSearchResultItems);
+//                                    currentSearchIndex = 0;
+//                                    startNum = startNum + Clustering_Count;
+//                                    allSearchResultItems.clear();
+//                                    dismissLoading();
+//                                }
+//                            }
+//                        } catch (JSONException ex) {
+//                            ex.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(int statusCode, Header[] headers,Throwable throwable, JSONObject jsonObject ) {
+//                        super.onFailure(statusCode, headers, throwable, jsonObject);
+//                        dismissLoading();
+//                        Toast.makeText(ImageDisplayActivity.this,throwable.getMessage(), Toast.LENGTH_SHORT).show();
+//                        if(currentSearchIndex<(searchKeyList.size()-1)){
+//                            currentSearchIndex++;
+//                            getGoogleSearchImages();
+//                        }else{
+//                            setSliderViewImages(allSearchResultItems);
+//                            currentSearchIndex = 0;
+//                            startNum = startNum + Clustering_Count;
+//                            allSearchResultItems.clear();
+//                            dismissLoading();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+//                        super.onFailure(statusCode, headers, response, throwable);
+//                        dismissLoading();
+//                        Toast.makeText(ImageDisplayActivity.this,response, Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                }
+//        );
+//    }
 
     private void getSynonyms(){
 //        showLoading();
@@ -240,7 +247,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @Override
     public void onPageSelected(int position) {
         if((position == sliderCount-1)&&(isLoading==false)){
-            getGoogleSearchImages();
+//            getGoogleSearchImages();
 //            if(currentSearchIndex<selectedSynonymList.size()-1){
 //                    currentSearchIndex++;
 //                    getGoogleSearchImages(selectedSynonymList.get(currentSearchIndex).getWord());
@@ -268,10 +275,34 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                 keysTextView.setText(keysTextView.getText().toString()+" ,"+keyword.getWord());
             }
         }
-        FlickrImageLoadTask task = new FlickrImageLoadTask();
-        task.execute(new String[] { keywords.get(currentSearchIndex).getWord() });
+        showLoading();
 
+        page=1;
+        perpage = 100/searchKeyList.size();
+        fetchKeyCount = 0;
+        FlickrImageLoadTask task = new FlickrImageLoadTask(this);
+        task.execute(new String[] { searchKeyList.get(currentSearchIndex).getWord(),String.valueOf(perpage),String.valueOf(page) });
 //        getGoogleSearchImages();
+    }
+
+    @Override
+    public void onGetFlickrImageList(List<SearchResultFlickr> searchResultFlickrs) {
+        if(searchResultFlickrs.size()>0)
+            fetchKeyCount++;
+        for(int i = 0; i<searchResultFlickrs.size();i++){
+            SearchResultFlickr searchResultFlickr = searchResultFlickrs.get(i);
+            allSearchResultItems.add(searchResultFlickr);
+        }
+        if(currentSearchIndex<(searchKeyList.size()-1)){
+            currentSearchIndex++;
+            FlickrImageLoadTask task = new FlickrImageLoadTask(this);
+            task.execute(new String[] { searchKeyList.get(currentSearchIndex).getWord(),String.valueOf(perpage),String.valueOf(page) });
+        }else{
+            setSliderViewImages(Util.clusterArraryList(allSearchResultItems,perpage,fetchKeyCount));
+            currentSearchIndex = 0;
+            allSearchResultItems.clear();
+            dismissLoading();
+        }
     }
 
     private void initSliderFlags(){

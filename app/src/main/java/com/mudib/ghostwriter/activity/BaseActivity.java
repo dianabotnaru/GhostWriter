@@ -47,20 +47,24 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void showLoading(){
-        isLoading = true;
-        Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(getLayoutInflater().inflate(R.layout.dialog_progress, null));
-        dialog.setCancelable(false);
-        mProgressDialog = dialog;
-        mProgressDialog.show();
+        if(!isLoading) {
+            isLoading = true;
+            Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(getLayoutInflater().inflate(R.layout.dialog_progress, null));
+            dialog.setCancelable(false);
+            mProgressDialog = dialog;
+            mProgressDialog.show();
+        }
     }
 
 
     public void dismissLoading(){
         if(mProgressDialog != null) {
-            isLoading = false;
-            mProgressDialog.dismiss();
+            if(isLoading) {
+                isLoading = false;
+                mProgressDialog.dismiss();
+            }
         }
     }
 

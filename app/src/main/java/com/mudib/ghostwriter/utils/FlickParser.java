@@ -43,7 +43,7 @@ public class FlickParser {
         String secret;
         String farmId;
         String serverId;
-
+        String title;
         SearchResultFlickr entry = new SearchResultFlickr();;
 
         while (eventType != XmlPullParser.END_DOCUMENT) {
@@ -60,10 +60,12 @@ public class FlickParser {
                         secret = parser.getAttributeValue(null, "secret");
                         farmId =  parser.getAttributeValue(null, "farm");
                         serverId =  parser.getAttributeValue(null, "server");
+                        title =  parser.getAttributeValue(null, "title");
 
                         entry = new SearchResultFlickr();
                         entry.setDate(date);
                         entry.setOwner(owner);
+                        entry.setTitle(title);
                         entry.setUrl("http://farm"+farmId+".staticflickr.com/"+serverId+"/"+ photoId +"_"+secret+"_m.jpg");
 
 
@@ -79,9 +81,10 @@ public class FlickParser {
                     if (tagname.equalsIgnoreCase("photo")) {
                         // add employee object to list
                         entries.add(entry);
-                    } else if (tagname.equalsIgnoreCase("description")) {
-                        entry.setDescription(text);
                     }
+//                    else if (tagname.equalsIgnoreCase("description")) {
+//                        entry.setDescription(text);
+//                    }
                     break;
 
                 default:
