@@ -1,11 +1,7 @@
 package com.mudib.ghostwriter.activity;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,9 +14,9 @@ import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
-import com.mudib.ghostwriter.adapter.KeywordListAdapter;
 import com.mudib.ghostwriter.dialog.KeywordPickerDialog;
 import com.mudib.ghostwriter.manager.ApiClient;
+import com.mudib.ghostwriter.manager.FlickrImageLoadTask;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
 
 import butterknife.OnClick;
@@ -28,11 +24,10 @@ import cz.msebera.android.httpclient.Header;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mudib.ghostwriter.models.Keyword;
+import com.mudib.ghostwriter.models.SearchResultFlickr;
 import com.mudib.ghostwriter.models.SearchResultItem;
 import com.mudib.ghostwriter.models.SynonymWord;
-import com.mudib.ghostwriter.utils.Util;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.lang.reflect.Type;
@@ -170,6 +165,14 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                             dismissLoading();
                         }
                     }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+                        super.onFailure(statusCode, headers, response, throwable);
+                        dismissLoading();
+                        Toast.makeText(ImageDisplayActivity.this,response, Toast.LENGTH_SHORT).show();
+                    }
+
                 }
         );
     }
@@ -265,7 +268,10 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                 keysTextView.setText(keysTextView.getText().toString()+" ,"+keyword.getWord());
             }
         }
-        getGoogleSearchImages();
+        FlickrImageLoadTask task = new FlickrImageLoadTask();
+        task.execute(new String[] { keywords.get(currentSearchIndex).getWord() });
+
+//        getGoogleSearchImages();
     }
 
     private void initSliderFlags(){
