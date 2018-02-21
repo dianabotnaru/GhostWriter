@@ -77,26 +77,17 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
             }catch (ClassCastException cce){
                 throw new ClassCastException("FlickrImageLoadTaskInterface getTargetActivity is not set");
             }
-
             Log.d("onpostexecute", "imagelist is null");
         }
     }
 
     private InputStream loadXmlFromNetwork(String query,String perpage, String page) throws XmlPullParserException, IOException {
-
         Log.d("loadxmlfromnetwork", "into loadxmlfromnw");
-
         InputStream output = null;
-
         output = downloadUrl(query,perpage,page);
-
         return output;
-
-
     }
 
-    // Given a string representation of a URL, sets up a connection and gets
-    // an input stream.
 
     private InputStream downloadUrl(String query,String perpage, String page) throws IOException {
         InputStream in = null;
