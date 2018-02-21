@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.mudib.ghostwriter.Interface.KeywordPickerDialogInterface;
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.adapter.KeywordListAdapter;
+import com.mudib.ghostwriter.constant.Constant;
 import com.mudib.ghostwriter.models.Keyword;
 
 import java.util.ArrayList;
@@ -25,8 +26,6 @@ import butterknife.OnClick;
 
 public class KeywordPickerDialog extends BaseDialogFragment{
 
-    public static String[] allSearchkeys = {"Alpha", "Omega", "Anchor", "Angel","Ant","Apple","Baby","Beehive","Bird","Bread","Bull", "Camel", "Candle", "Cauldron","Chameleon","Compass","Cornucopia","Crocodile","Dolphin","Elephant"
-            ,"Globe", "Griffin", "Helmet", "Horse","Hourglass","Lute","Madonna","Marionette","Moon", "Owl", "Serpent", "Sun","Sword","Thunderbolt","Tree","Walled Garden","Wild Man"};
 
     private KeywordListAdapter keywordListAdapter;
     private List<Keyword> keywords = new ArrayList<>();
@@ -73,7 +72,7 @@ public class KeywordPickerDialog extends BaseDialogFragment{
     }
 
     private void initViews(){
-        for (String word:allSearchkeys){
+        for (String word: Constant.allSearchkeys){
             Keyword keyword = new Keyword(word);
             keywords.add(keyword);
         }

@@ -36,10 +36,15 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
 
     String FlickrApiKey = "062a6c0c49e4de1d78497d13a7dbb360";
 
-    Activity activity;
+    private FlickrImageLoadTaskInterface flickrImageLoadTaskInterface;
+
     String error = "";
-    public FlickrImageLoadTask(Activity activity) {
-        this.activity = activity;
+
+    public void setFlickrImageLoadTaskInterface(FlickrImageLoadTaskInterface flickrImageLoadTaskInterface){
+        this.flickrImageLoadTaskInterface = flickrImageLoadTaskInterface;
+    }
+
+    public FlickrImageLoadTask() {
     }
 
     @Override
@@ -66,18 +71,13 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
     @Override
     protected void onPostExecute(final List<SearchResultFlickr> entries) {
         if(entries!=null){
-            try{
-                ((FlickrImageLoadTaskInterface) activity).onGetFlickrImageList(entries);
-            }catch (ClassCastException cce){
-                throw new ClassCastException("FlickrImageLoadTaskInterface getTargetActivity is not set");
+            if(flickrImageLoadTaskInterface!=null){
+                flickrImageLoadTaskInterface.onGetFlickrImageList(entries);
             }
         }else{
-            try{
-                ((FlickrImageLoadTaskInterface) activity).onFailedGetFlickrImageList(error);
-            }catch (ClassCastException cce){
-                throw new ClassCastException("FlickrImageLoadTaskInterface getTargetActivity is not set");
+            if(flickrImageLoadTaskInterface!=null){
+                flickrImageLoadTaskInterface.onFailedGetFlickrImageList(error);
             }
-            Log.d("onpostexecute", "imagelist is null");
         }
     }
 
