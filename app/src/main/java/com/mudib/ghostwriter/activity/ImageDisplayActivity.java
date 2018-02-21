@@ -229,11 +229,26 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if(imageSlider!=null){
+            imageSlider.startAutoCycle();
+        }
+    }
+
+    @Override
     protected void onStop() {
+        super.onStop();
+        imageSlider.stopAutoCycle();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         imageSlider.stopAutoCycle();
         imageSlider.removeAllSliders();
-        super.onStop();
     }
+
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
