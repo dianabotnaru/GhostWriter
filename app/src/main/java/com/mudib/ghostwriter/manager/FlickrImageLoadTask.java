@@ -37,7 +37,7 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
     String FlickrApiKey = "062a6c0c49e4de1d78497d13a7dbb360";
 
     Activity activity;
-
+    String error = "";
     public FlickrImageLoadTask(Activity activity) {
         this.activity = activity;
     }
@@ -46,13 +46,17 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
     protected List<SearchResultFlickr> doInBackground(String... q) {
         try {
             InputStream result = loadXmlFromNetwork(q[0],q[1],q[2]);
-            return FlickParser.parse(result);
+            if(result!=null) {
+                return FlickParser.parse(result);
+            }else{
+                return null;
+            }
         } catch (XmlPullParserException e) {
-            // TODO Auto-generated catch block
+            error = e.getLocalizedMessage();
             e.printStackTrace();
             return null;
         } catch (IOException e) {
-            // TODO Auto-generated catch block
+            error = e.getLocalizedMessage();
             e.printStackTrace();
             return null;
         }
@@ -68,6 +72,12 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
                 throw new ClassCastException("FlickrImageLoadTaskInterface getTargetActivity is not set");
             }
         }else{
+            try{
+                ((FlickrImageLoadTaskInterface) activity).onFailedGetFlickrImageList(error);
+            }catch (ClassCastException cce){
+                throw new ClassCastException("FlickrImageLoadTaskInterface getTargetActivity is not set");
+            }
+
             Log.d("onpostexecute", "imagelist is null");
         }
     }
@@ -103,12 +113,10 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
             in = httpResponse.getEntity().getContent();
 
         } catch (ClientProtocolException e) {
-            // TODO Auto-generated catch block
-            Log.d("download url", "clientprotocolexception");
+            error = e.getLocalizedMessage();
             e.printStackTrace();
         } catch (IOException e) {
-            Log.d("download url", "ioexception");
-            // TODO Auto-generated catch block
+            error = e.getLocalizedMessage();
             e.printStackTrace();
         }
         return in;

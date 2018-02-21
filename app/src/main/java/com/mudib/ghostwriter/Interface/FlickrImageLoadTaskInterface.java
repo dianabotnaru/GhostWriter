@@ -11,4 +11,6 @@ import java.util.List;
 
 public interface FlickrImageLoadTaskInterface {
     void onGetFlickrImageList(List<SearchResultFlickr> searchResultFlickrs);
+    void onFailedGetFlickrImageList(String message);
+
 }

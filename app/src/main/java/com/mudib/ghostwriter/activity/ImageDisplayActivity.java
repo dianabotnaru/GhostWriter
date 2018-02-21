@@ -320,6 +320,15 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         }
     }
 
+    @Override
+    public void onFailedGetFlickrImageList(String message){
+        currentSearchIndex = 0;
+        allSearchResultItems.clear();
+        keysTextView.setText("");
+        dismissLoading();
+        Toast.makeText(ImageDisplayActivity.this,message, Toast.LENGTH_SHORT).show();
+    }
+
     private void initSliderFlags(){
         searchKeyList.clear();
         currentSearchIndex = 0;
