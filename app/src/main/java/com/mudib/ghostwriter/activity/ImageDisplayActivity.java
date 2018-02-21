@@ -113,7 +113,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             textSliderView
                     .description(searchResultFlickr.getTitle())
                     .image(searchResultFlickr.getUrl())
-                    .setScaleType(BaseSliderView.ScaleType.FitCenterCrop)
+                    .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .setOnSliderClickListener(this);
 
             imageSlider.addSlider(textSliderView);

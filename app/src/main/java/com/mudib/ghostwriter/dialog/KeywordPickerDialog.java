@@ -36,6 +36,7 @@ public class KeywordPickerDialog extends BaseDialogFragment{
 
     @OnClick(R.id.button_ok)
     void onOkClicked() {
+        dismiss();
         if (keywordListAdapter.getSelectedItems().size()>0) {
             try {
                 ((KeywordPickerDialogInterface) getActivity()).onSelectedKeywords(keywordListAdapter.getSelectedItems());
@@ -43,7 +44,6 @@ public class KeywordPickerDialog extends BaseDialogFragment{
                 throw new ClassCastException("DateTimePickerListener getTargetFragment is not set");
             }
         }
-        dismiss();
     }
 
     @OnClick(R.id.button_cancel)
