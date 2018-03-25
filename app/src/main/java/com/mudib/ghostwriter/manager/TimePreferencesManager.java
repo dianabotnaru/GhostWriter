@@ -22,7 +22,6 @@ public class TimePreferencesManager {
     private String DISPLAY_TRANSFORM_KEY = "display_transform_key";
 
     private long DISPLAY_TIME_DEFAULT = 5000;
-    private String DISPLAY_TRNSFORM_DEFAULT = "Default";
 
     public static TimePreferencesManager with(Context context) {
         if (singleton == null) synchronized (TimePreferencesManager.class) {
