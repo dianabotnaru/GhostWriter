@@ -3,6 +3,7 @@ package com.mudib.ghostwriter.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -63,12 +64,20 @@ public class SettingActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick(R.id.apply_btn)
-    public void onApplyClick() {
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         long displayTime = seekbar_displaytime.getProgress()*1000;
         TimePreferencesManager.with(this).saveImageDisplayTime(displayTime);
         finish();
     }
 
+    @OnClick(R.id.layout_displaytransform)
+    public void onDisplayTransformClicked() {
 
+        NumberPicker picker = new NumberPicker(this);
+        picker.setMinValue(0);
+        picker.setMaxValue(2);
+        picker.setDisplayedValues( new String[] { "Belgium", "France", "United Kingdom" } );
+    }
 }

@@ -17,6 +17,7 @@ public class TimePreferencesManager {
 
     private String TIME_PREFERENCE_FILE_KEY = "com.mudib.ghostwriter.prefsfile";
     private String DISPLAY_TIME_KEY = "display_time_key";
+    private String DISPLAY_CONVERT_KEY = "display_convert_key";
 
     private long DISPLAY_TIME_DEFAULT = 5000;
 
