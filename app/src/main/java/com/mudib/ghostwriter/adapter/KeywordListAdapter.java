@@ -24,13 +24,20 @@ import butterknife.ButterKnife;
 
 public class KeywordListAdapter extends BaseAdapter {
 
+    public interface KeywordListAdapterListener {
+        public abstract void onCheckedKeyword(Keyword keyword);
+        public abstract void onUnCheckedKeyword(Keyword keyword);
+    }
+
     private final LayoutInflater mLayoutInflater;
     private final Context mContext;
     private List<Keyword> keywords = new ArrayList<>();
+    private KeywordListAdapterListener mKeywordListAdapterListener = null;
 
-    public KeywordListAdapter(Context context) {
+    public KeywordListAdapter(Context context,KeywordListAdapterListener keywordListAdapterListener) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
+        mKeywordListAdapterListener = keywordListAdapterListener;
     }
 
     @Override
@@ -50,7 +57,7 @@ public class KeywordListAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        DeviceHolder holder;
+        final DeviceHolder holder;
         if (convertView == null) {
             int layoutId = R.layout.item_keyword;
             convertView = mLayoutInflater.inflate(layoutId, parent, false);
@@ -60,15 +67,37 @@ public class KeywordListAdapter extends BaseAdapter {
             holder = (DeviceHolder) convertView.getTag();
         }
         holder.keywordTextView.setText(keywords.get(position).getWord());
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                                               @Override
-                                               public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                                                    Keyword keyword = keywords.get(position);
-                                                    keyword.setSelected(isChecked);
-                                                    keywords.set(position,keyword);
-                                               }
-                                           }
-        );
+//        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//                                               @Override
+//                                               public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+//                                                   Keyword keyword = keywords.get(position);
+//                                                   keyword.setSelected(isChecked);
+//                                                   keywords.set(position,keyword);
+//                                                   if(mKeywordListAdapterListener!=null) {
+//                                                       if (isChecked){
+//                                                           mKeywordListAdapterListener.onCheckedKeyword(keyword);
+//                                                       }else{
+//                                                           mKeywordListAdapterListener.onUnCheckedKeyword(keyword);
+//                                                       }
+//                                                   }
+//                                               }
+//                                           }
+//        );
+
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Keyword keyword = keywords.get(position);
+                keyword.setSelected(holder.checkBox.isChecked());
+                keywords.set(position,keyword);
+                if (holder.checkBox.isChecked()) {
+                    mKeywordListAdapterListener.onCheckedKeyword(keyword);
+                }else {
+                    mKeywordListAdapterListener.onUnCheckedKeyword(keyword);
+                }
+            }
+        });
+
         holder.checkBox.setChecked(keywords.get(position).isSelected());
         return convertView;
     }

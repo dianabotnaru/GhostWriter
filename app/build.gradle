@@ -40,4 +40,5 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.anupcowkur:reservoir:3.1.0'
     compile 'com.github.hotchemi:stringpicker:0.0.2'
+    compile "com.splitwise:tokenautocomplete:2.0.8@aar"
 }

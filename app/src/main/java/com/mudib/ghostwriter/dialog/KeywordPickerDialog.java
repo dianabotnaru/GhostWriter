@@ -12,6 +12,8 @@ import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.adapter.KeywordListAdapter;
 import com.mudib.ghostwriter.constant.Constant;
 import com.mudib.ghostwriter.models.Keyword;
+import com.mudib.ghostwriter.views.ContactsCompletionView;
+import com.tokenautocomplete.TokenCompleteTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,9 @@ public class KeywordPickerDialog extends BaseDialogFragment{
     private KeywordListAdapter keywordListAdapter;
     private List<Keyword> keywords = new ArrayList<>();
 
+    @BindView(R.id.searchView)
+    ContactsCompletionView completionView;
+
     @BindView(R.id.listview_keyword)
     ListView listViewKeyword;
 
@@ -38,7 +43,7 @@ public class KeywordPickerDialog extends BaseDialogFragment{
         dismiss();
         if (keywordListAdapter.getSelectedItems().size()>0) {
             try {
-                ((KeywordPickerDialogInterface) getActivity()).onSelectedKeywords(keywordListAdapter.getSelectedItems());
+                ((KeywordPickerDialogInterface) getActivity()).onSelectedKeywords(completionView.getObjects());
             } catch (ClassCastException cce) {
                 throw new ClassCastException("DateTimePickerListener getTargetFragment is not set");
             }
@@ -76,13 +81,50 @@ public class KeywordPickerDialog extends BaseDialogFragment{
             Keyword keyword = new Keyword(word);
             keywords.add(keyword);
         }
-        keywordListAdapter = new KeywordListAdapter(getContext());
+        keywordListAdapter = new KeywordListAdapter(getContext(), new KeywordListAdapter.KeywordListAdapterListener() {
+            @Override
+            public void onCheckedKeyword(Keyword keyword) {
+                completionView.addObject(keyword);
+//                keywords.add(keyword);
+            }
+
+            @Override
+            public void onUnCheckedKeyword(Keyword keyword) {
+//                keywords.add(keyword);
+                completionView.removeObject(keyword);
+
+            }
+        });
+
         keywordListAdapter.setItems(keywords);
         listViewKeyword.setAdapter(keywordListAdapter);
+        completionView.setTokenListener(new TokenCompleteTextView.TokenListener<Keyword>() {
+            @Override
+            public void onTokenAdded(Keyword token) {
+
+            }
+
+            @Override
+            public void onTokenRemoved(Keyword token) {
+                Keyword tokenKeyword = (Keyword)token;
+                for(int i=0;i<keywords.size();i++){
+                    Keyword keyword = keywords.get(i);
+                    if(keyword.getWord().equalsIgnoreCase(tokenKeyword.getWord())){
+                        keyword.setSelected(false);
+                        keywords.set(i,keyword);
+                    }
+                }
+                keywordListAdapter.setItems(keywords);
+                listViewKeyword.setAdapter(keywordListAdapter);
+
+            }
+        });
     }
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
+
 }
