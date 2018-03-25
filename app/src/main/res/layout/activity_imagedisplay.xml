@@ -7,54 +7,68 @@
     android:layout_height="match_parent"
     tools:context="com.mudib.ghostwriter.activity.ImageDisplayActivity">
 
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#dcdcdc"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView_keys"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/background_light"
-            android:hint="Choose keys"
-            android:paddingLeft="5dp"
-            android:paddingTop="3dp" />
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            app:srcCompat="@drawable/icon_plus" />
 
-        <TextView
-            android:id="@+id/textView_synonym"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="3dp"
-            android:background="@android:color/background_light"
-            android:hint="SynonymWord"
-            android:paddingLeft="5dp"
-            android:paddingTop="3dp"
-            android:visibility="gone" />
-
-
-        <com.daimajia.slider.library.SliderLayout
-            android:id="@+id/slider_images"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="16dp"
-            android:background="@android:color/darker_gray"
-            custom:auto_cycle="true"
-            custom:indicator_visibility="visible"
-            custom:pager_animation="Accordion"
-            custom:pager_animation_span="1100">
+            android:background="#dcdcdc"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        </com.daimajia.slider.library.SliderLayout>
+            <TextView
+                android:id="@+id/textView_synonym"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="3dp"
+                android:background="@android:color/background_light"
+                android:hint="SynonymWord"
+                android:paddingLeft="5dp"
+                android:paddingTop="3dp"
+                android:visibility="gone" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/textView_keys"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="29dp"
+                android:background="@android:color/background_light"
+                android:hint="Choose keys"
+                android:paddingLeft="5dp"
+                android:paddingTop="3dp"
+                android:visibility="gone" />
+
+            <com.daimajia.slider.library.SliderLayout
+                android:id="@+id/slider_images"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                custom:auto_cycle="true"
+                custom:indicator_visibility="visible"
+                custom:pager_animation="Accordion"
+                custom:pager_animation_span="1100">
+
+            </com.daimajia.slider.library.SliderLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
 </android.support.constraint.ConstraintLayout>

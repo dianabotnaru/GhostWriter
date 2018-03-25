@@ -36,18 +36,6 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, ImageDisplayActivity.class));
                 finish();
             }
-        }, 3000);
-
-//        SearchImagesCacheManager.with().startFetchFlickrImages();
+        }, 2000);
     }
-
-//    @OnClick(R.id.start_btn)
-//    public void onStartClick() {
-//        startActivity(new Intent(this, ImageDisplayActivity.class));
-//    }
-//
-//    @OnClick(R.id.setting_btn)
-//    public void onSettingClick() {
-//        startActivity(new Intent(this, SettingActivity.class));
-//    }
 }

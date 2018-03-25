@@ -1,6 +1,12 @@
 package com.mudib.ghostwriter.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,6 +22,7 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.mudib.ghostwriter.constant.Constant;
 import com.mudib.ghostwriter.dialog.KeywordPickerDialog;
+import com.mudib.ghostwriter.dialog.WarningDialogFragment;
 import com.mudib.ghostwriter.manager.FlickrImageLoadTask;
 import com.mudib.ghostwriter.manager.SearchImagesCacheManager;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
@@ -33,7 +40,7 @@ import butterknife.BindView;
  * Created by diana on 06/02/2018.
  */
 
-public class ImageDisplayActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener,KeywordPickerDialogInterface{
+public class ImageDisplayActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener,KeywordPickerDialogInterface,WarningDialogFragment.WarningDialogListener{
 
     @BindView(R.id.slider_images)
     SliderLayout imageSlider;
@@ -53,16 +60,27 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagedisplay);
         initDatas();
-        initToolbar("Image Display");
         initSliderView();
+        showAlertDialog();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                startActivity(new Intent(this, SettingActivity.class));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.item, menu);
+        return true;
     }
 
     private void initDatas(){
@@ -105,8 +123,8 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         }
     }
 
-    @OnClick(R.id.textView_keys)
-    public void onkeysTextClick() {
+    @OnClick(R.id.fab)
+    public void onkeysFabClick() {
         KeywordPickerDialog keywordPickerDialog = KeywordPickerDialog.newInstance();
         keywordPickerDialog.show(getSupportFragmentManager(), KeywordPickerDialog.TAG);
     }
@@ -114,6 +132,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @Override
     protected void onResume() {
         super.onResume();
+        initToolbar("Ghost Writer",false);
         if(imageSlider!=null){
             imageSlider.startAutoCycle();
         }
@@ -138,7 +157,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
     }
 
     @Override
@@ -222,5 +240,16 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         currentSearchIndex = 0;
         imageSlider.stopAutoCycle();
         imageSlider.removeAllSliders();
+    }
+
+    private void showAlertDialog(){
+        WarningDialogFragment dialogFragment = WarningDialogFragment.newInstance("Choose Keyword","Please choose keywords to show images.",false);
+        dialogFragment.show(getSupportFragmentManager(), WarningDialogFragment.TAG);
+    }
+
+    @Override
+    public void onDialogOkButtonClicked(){
+        KeywordPickerDialog keywordPickerDialog = KeywordPickerDialog.newInstance();
+        keywordPickerDialog.show(getSupportFragmentManager(), KeywordPickerDialog.TAG);
     }
 }

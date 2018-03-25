@@ -40,10 +40,9 @@ public class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
     }
 
-    public void initToolbar(String title){
+    public void initToolbar(String title, boolean isDisplayHomeEnabled){
         getSupportActionBar().setTitle(title);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(isDisplayHomeEnabled);
     }
 
     public void showLoading(){
