@@ -89,7 +89,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     }
 
     private void initSliderView(){
-        imageSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
+        imageSlider.setPresetTransformer(TimePreferencesManager.with(this).getImageDisplayTransformer());
         imageSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         imageSlider.setCustomAnimation(new DescriptionAnimation());
         long displayTime = TimePreferencesManager.with(this).getImageDisplayTime();
@@ -134,6 +134,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         super.onResume();
         initToolbar("Ghost Writer",false);
         if(imageSlider!=null){
+            initSliderView();
             imageSlider.startAutoCycle();
         }
     }

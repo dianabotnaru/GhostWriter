@@ -3,6 +3,8 @@ package com.mudib.ghostwriter.manager;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.daimajia.slider.library.SliderLayout;
+
 /**
  * Created by diana on 07/02/2018.
  */
@@ -17,9 +19,10 @@ public class TimePreferencesManager {
 
     private String TIME_PREFERENCE_FILE_KEY = "com.mudib.ghostwriter.prefsfile";
     private String DISPLAY_TIME_KEY = "display_time_key";
-    private String DISPLAY_CONVERT_KEY = "display_convert_key";
+    private String DISPLAY_TRANSFORM_KEY = "display_transform_key";
 
     private long DISPLAY_TIME_DEFAULT = 5000;
+    private String DISPLAY_TRNSFORM_DEFAULT = "Default";
 
     public static TimePreferencesManager with(Context context) {
         if (singleton == null) synchronized (TimePreferencesManager.class) {
@@ -35,16 +38,29 @@ public class TimePreferencesManager {
         this.context = context;
     }
 
-    public  long getImageDisplayTime() {
+    public long getImageDisplayTime() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         return  sharedPreferences.getLong(DISPLAY_TIME_KEY,DISPLAY_TIME_DEFAULT);
 
     }
 
-    public  void saveImageDisplayTime(long displaytime) {
+    public String getImageDisplayTransformer() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        return  sharedPreferences.getString(DISPLAY_TRANSFORM_KEY, SliderLayout.Transformer.Accordion.toString());
+    }
+
+    public void saveImageDisplayTime(long displaytime) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor preferencesEditor = sharedPreferences.edit();
         preferencesEditor.putLong(DISPLAY_TIME_KEY, displaytime);
         preferencesEditor.apply();
     }
+
+    public void saveImageDisplayTransformer(String transform) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor preferencesEditor = sharedPreferences.edit();
+        preferencesEditor.putString(DISPLAY_TRANSFORM_KEY, transform);
+        preferencesEditor.apply();
+    }
+
 }

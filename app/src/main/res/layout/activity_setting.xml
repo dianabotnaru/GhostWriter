@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:gravity="right"
-                android:text="Rotate Up"
+                android:id="@+id/textView_displaytransform"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="16sp" />
 
