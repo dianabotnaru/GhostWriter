@@ -14,13 +14,13 @@ import com.mudib.ghostwriter.manager.TimePreferencesManager;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import hotchemi.stringpicker.StringPickerDialog;
+//import hotchemi.stringpicker.StringPickerDialog;
 
 /**
  * Created by diana on 06/02/2018.
  */
 
-public class SettingActivity extends BaseActivity implements StringPickerDialog.OnClickListener {
+public class SettingActivity extends BaseActivity /*implements StringPickerDialog.OnClickListener*/ {
 
     @BindView(R.id.seekbar_displaytime)
     SeekBar seekbar_displaytime;
@@ -77,20 +77,20 @@ public class SettingActivity extends BaseActivity implements StringPickerDialog.
     @OnClick(R.id.layout_displaytransform)
     public void onDisplayTransformClicked() {
 
-        StringPickerDialog dialog = new StringPickerDialog();
-        Bundle bundle = new Bundle();
-        String[] values = new String[SliderLayout.Transformer.values().length];
-        for(int i = 0; i<SliderLayout.Transformer.values().length;i++){
-            values[i] = SliderLayout.Transformer.values()[i].toString();
-        }
-        bundle.putStringArray(getString(R.string.string_picker_dialog_values), values);
-        dialog.setArguments(bundle);
-        dialog.show(getSupportFragmentManager(), "SettingActivity");
+//        StringPickerDialog dialog = new StringPickerDialog();
+//        Bundle bundle = new Bundle();
+//        String[] values = new String[SliderLayout.Transformer.values().length];
+//        for(int i = 0; i<SliderLayout.Transformer.values().length;i++){
+//            values[i] = SliderLayout.Transformer.values()[i].toString();
+//        }
+//        bundle.putStringArray(getString(R.string.string_picker_dialog_values), values);
+//        dialog.setArguments(bundle);
+//        dialog.show(getSupportFragmentManager(), "SettingActivity");
     }
 
-    @Override
-    public void onClick(String value) {
-        textView_displaytransform.setText(value);
-        TimePreferencesManager.with(this).saveImageDisplayTransformer(value);
-    }
+//    @Override
+//    public void onClick(String value) {
+//        textView_displaytransform.setText(value);
+//        TimePreferencesManager.with(this).saveImageDisplayTransformer(value);
+//    }
 }
