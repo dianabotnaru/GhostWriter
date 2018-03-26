@@ -6,7 +6,7 @@ import com.mudib.ghostwriter.models.SearchResultFlickr;
 import java.util.List;
 
 /**
- * Created by jordi on 20/02/2018.
+ * Created by diana on 20/02/2018.
  */
 
 public interface FlickrImageLoadTaskInterface {

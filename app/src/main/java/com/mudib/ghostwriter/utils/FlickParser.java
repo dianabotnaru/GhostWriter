@@ -66,9 +66,7 @@ public class FlickParser {
                         entry.setDate(date);
                         entry.setOwner(owner);
                         entry.setTitle(title);
-                        entry.setUrl("http://farm"+farmId+".staticflickr.com/"+serverId+"/"+ photoId +"_"+secret+"_m.jpg");
-
-
+                        entry.setUrl("http://farm"+farmId+".staticflickr.com/"+serverId+"/"+ photoId +"_"+secret+".jpg");
                     }
                     break;
 

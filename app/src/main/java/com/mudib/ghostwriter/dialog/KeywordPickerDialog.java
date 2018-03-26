@@ -41,7 +41,7 @@ public class KeywordPickerDialog extends BaseDialogFragment{
     @OnClick(R.id.button_ok)
     void onOkClicked() {
         dismiss();
-        if (keywordListAdapter.getSelectedItems().size()>0) {
+        if (completionView.getObjects().size()>0) {
             try {
                 ((KeywordPickerDialogInterface) getActivity()).onSelectedKeywords(completionView.getObjects());
             } catch (ClassCastException cce) {
