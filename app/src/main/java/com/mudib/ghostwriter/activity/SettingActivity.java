@@ -3,6 +3,7 @@ package com.mudib.ghostwriter.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -14,13 +15,14 @@ import com.mudib.ghostwriter.manager.TimePreferencesManager;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import stfalcon.universalpickerdialog.UniversalPickerDialog;
 //import hotchemi.stringpicker.StringPickerDialog;
 
 /**
  * Created by diana on 06/02/2018.
  */
 
-public class SettingActivity extends BaseActivity /*implements StringPickerDialog.OnClickListener*/ {
+public class SettingActivity extends BaseActivity implements UniversalPickerDialog.OnPickListener {
 
     @BindView(R.id.seekbar_displaytime)
     SeekBar seekbar_displaytime;
@@ -31,12 +33,14 @@ public class SettingActivity extends BaseActivity /*implements StringPickerDialo
     @BindView(R.id.textView_displaytransform)
     TextView textView_displaytransform;
 
+    private String[] transformValues;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         initToolbar("Setting",true);
+        transformValues = new String[SliderLayout.Transformer.values().length];
         initUi();
     }
 
@@ -76,21 +80,23 @@ public class SettingActivity extends BaseActivity /*implements StringPickerDialo
 
     @OnClick(R.id.layout_displaytransform)
     public void onDisplayTransformClicked() {
-
-//        StringPickerDialog dialog = new StringPickerDialog();
-//        Bundle bundle = new Bundle();
-//        String[] values = new String[SliderLayout.Transformer.values().length];
-//        for(int i = 0; i<SliderLayout.Transformer.values().length;i++){
-//            values[i] = SliderLayout.Transformer.values()[i].toString();
-//        }
-//        bundle.putStringArray(getString(R.string.string_picker_dialog_values), values);
-//        dialog.setArguments(bundle);
-//        dialog.show(getSupportFragmentManager(), "SettingActivity");
+        for(int i = 0; i<SliderLayout.Transformer.values().length;i++){
+            transformValues[i] = SliderLayout.Transformer.values()[i].toString();
+        }
+        new UniversalPickerDialog.Builder(this)
+                .setTitle("Image Display Transform")
+                .setListener(this)
+                .setInputs(
+                        new UniversalPickerDialog.Input(0, transformValues)
+                )
+                .show();
     }
 
-//    @Override
-//    public void onClick(String value) {
-//        textView_displaytransform.setText(value);
-//        TimePreferencesManager.with(this).saveImageDisplayTransformer(value);
-//    }
+    @Override
+    public void onPick(int[] selectedValues, int key) {
+        String value = transformValues[selectedValues[0]];
+        textView_displaytransform.setText(transformValues[selectedValues[0]]);
+        TimePreferencesManager.with(this).saveImageDisplayTransformer(value);
+    }
+
 }
