@@ -85,14 +85,11 @@ public class KeywordPickerDialog extends BaseDialogFragment{
             @Override
             public void onCheckedKeyword(Keyword keyword) {
                 completionView.addObject(keyword);
-//                keywords.add(keyword);
             }
 
             @Override
             public void onUnCheckedKeyword(Keyword keyword) {
-//                keywords.add(keyword);
                 completionView.removeObject(keyword);
-
             }
         });
 
