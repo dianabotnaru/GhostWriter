@@ -32,6 +32,9 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
     String FlickrQuery_text = "&text=";
     String FlickrQuery_key = "&api_key=";
     String FlickrQuery_perPage = "&per_page=";
+    String FlickrFilter_Key = "&safe_search=";
+    String FlickrFilter_Option = "1";
+
     String FlickrQuery_page = "&page=";
 
     String FlickrApiKey = "062a6c0c49e4de1d78497d13a7dbb360";
@@ -94,7 +97,7 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
 
         Log.d("downloadurl", query);
         String qString = FlickrQuery_url + FlickrQuery_key + FlickrApiKey
-                +  FlickrQuery_text + query +FlickrQuery_page+page+FlickrQuery_perPage+perpage+"&extras=date_taken,owner_name,description";
+                +  FlickrQuery_text + query +FlickrQuery_page+page+FlickrQuery_perPage+perpage+"&extras=date_taken,owner_name,description"+FlickrFilter_Key+FlickrFilter_Option;
         qString = qString.replaceAll(" ", "%20");
         HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(qString);

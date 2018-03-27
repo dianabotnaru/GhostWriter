@@ -221,7 +221,10 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                 for (int i = 0; i < searchKeyList.size(); i++) {
                     Keyword keyword = searchKeyList.get(i);
                     for (int j = 0; j < Constant.clusterCount; j++) {
-                        clusterSearchImages.add(keyword.getSearchResultFlickrs().get(j + k * Constant.clusterCount));
+                        int index = j + k * Constant.clusterCount;
+                        if(index<keyword.getSearchResultFlickrs().size()) {
+                            clusterSearchImages.add(keyword.getSearchResultFlickrs().get(index));
+                        }
                     }
                 }
             }
