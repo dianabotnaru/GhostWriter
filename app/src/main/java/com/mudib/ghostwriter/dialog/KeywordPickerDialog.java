@@ -116,6 +116,9 @@ public class KeywordPickerDialog extends BaseDialogFragment{
 
             }
         });
+        char[] splitChar = {',', ';', ' '};
+        completionView.setSplitChar(splitChar);
+        completionView.setThreshold(0);
     }
 
 
