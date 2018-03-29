@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.mudib.ghostwriter.R;
+import com.mudib.ghostwriter.constant.Constant;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
 
 import butterknife.BindView;
@@ -24,6 +25,10 @@ import stfalcon.universalpickerdialog.UniversalPickerDialog;
 
 public class SettingActivity extends BaseActivity implements UniversalPickerDialog.OnPickListener {
 
+    public static int DISPLAY_TRANSFORM = 1;
+
+    public static int KEYWORD_LNGUAGE = 2;
+
     @BindView(R.id.seekbar_displaytime)
     SeekBar seekbar_displaytime;
 
@@ -33,15 +38,25 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
     @BindView(R.id.textView_displaytransform)
     TextView textView_displaytransform;
 
+    @BindView(R.id.textView_language)
+    TextView textView_language;
+
     private String[] transformValues;
+
+    private int settingIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        initData();
         initToolbar("Setting",true);
-        transformValues = new String[SliderLayout.Transformer.values().length];
         initUi();
+    }
+
+    private void initData(){
+        settingIndex = 0;
+        transformValues = new String[SliderLayout.Transformer.values().length];
     }
 
     private void initUi(){
@@ -68,6 +83,7 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
             }
         });
         textView_displaytransform.setText(TimePreferencesManager.with(this).getImageDisplayTransformer());
+        textView_language.setText(TimePreferencesManager.with(this).getKeywordLangauge());
     }
 
     @Override
@@ -80,6 +96,7 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
 
     @OnClick(R.id.layout_displaytransform)
     public void onDisplayTransformClicked() {
+        settingIndex = DISPLAY_TRANSFORM;
         for(int i = 0; i<SliderLayout.Transformer.values().length;i++){
             transformValues[i] = SliderLayout.Transformer.values()[i].toString();
         }
@@ -92,11 +109,27 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
                 .show();
     }
 
+    @OnClick(R.id.layout_language)
+    public void onLanguageLayoutClicked() {
+        settingIndex = KEYWORD_LNGUAGE;
+        new UniversalPickerDialog.Builder(this)
+                .setTitle("Keyword Language")
+                .setListener(this)
+                .setInputs(
+                        new UniversalPickerDialog.Input(0, Constant.languages)
+                )
+                .show();
+    }
+
     @Override
     public void onPick(int[] selectedValues, int key) {
-        String value = transformValues[selectedValues[0]];
-        textView_displaytransform.setText(transformValues[selectedValues[0]]);
-        TimePreferencesManager.with(this).saveImageDisplayTransformer(value);
+        if(settingIndex == DISPLAY_TRANSFORM) {
+            textView_displaytransform.setText(transformValues[selectedValues[0]]);
+            TimePreferencesManager.with(this).saveImageDisplayTransformer(transformValues[selectedValues[0]]);
+        }else{
+            textView_language.setText(Constant.languages[selectedValues[0]]);
+            TimePreferencesManager.with(this).saveKeywordLangauge(Constant.languages[selectedValues[0]]);
+        }
     }
 
 }
