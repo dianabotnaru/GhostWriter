@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="keyword_array">
+        <item>ا &amp; ع</item>
+        <item>مرساة السفينة</item>
+        <item>ملاك</item>
+        <item>نملة</item>
+        <item>تفاحة</item>
+        <item>طفل</item>
+        <item>خلية نحل</item>
+        <item>طائر</item>
+        <item>خبز</item>
+        <item>ثور</item>
+        <item>جمل</item>
+        <item>شمعة</item>
+        <item>مرجل</item>
+        <item>حرباء</item>
+        <item>بوصلة</item>
+        <item>الوفرة</item>
+        <item>تمساح</item>
+        <item>دولفين</item>
+        <item>فيل</item>
+        <item>كره ارضيه</item>
+        <item>العنقاء</item>
+        <item>خوذة</item>
+        <item>حصان</item>
+        <item>الساعة الرملية</item>
+        <item>كمان</item>
+        <item>مادونه</item>
+        <item>دمية تتحرك بالاسلاكي</item>
+        <item>القمر</item>
+        <item>بومة</item>
+        <item>أفعى</item>
+        <item>شمس</item>
+        <item>سيف</item>
+        <item>صاعقة</item>
+        <item>شجرة</item>
+        <item>حديقة مسورة</item>
+        <item>رجل البرية</item>
+    </string-array>
+</resources>

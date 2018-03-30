@@ -13,6 +13,9 @@ import com.daimajia.slider.library.SliderLayout;
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.constant.Constant;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
+import com.mudib.ghostwriter.utils.Util;
+
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -127,6 +130,7 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
             textView_displaytransform.setText(transformValues[selectedValues[0]]);
             TimePreferencesManager.with(this).saveImageDisplayTransformer(transformValues[selectedValues[0]]);
         }else{
+            Util.setLocale(getApplicationContext(), "ar");
             textView_language.setText(Constant.languages[selectedValues[0]]);
             TimePreferencesManager.with(this).saveKeywordLangauge(Constant.languages[selectedValues[0]]);
         }

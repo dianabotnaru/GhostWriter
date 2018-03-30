@@ -1,8 +1,11 @@
 package com.mudib.ghostwriter.dialog;
 
 import android.app.Dialog;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.view.Window;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -12,11 +15,13 @@ import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.adapter.KeywordListAdapter;
 import com.mudib.ghostwriter.constant.Constant;
 import com.mudib.ghostwriter.models.Keyword;
+import com.mudib.ghostwriter.utils.Util;
 import com.mudib.ghostwriter.views.ContactsCompletionView;
 import com.tokenautocomplete.TokenCompleteTextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,10 +82,13 @@ public class KeywordPickerDialog extends BaseDialogFragment{
     }
 
     private void initViews(){
-        for (String word: Constant.allSearchkeys){
-            Keyword keyword = new Keyword(word);
+
+        String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
+        for (int i=0; i<keyword_array.length; i++){
+            Keyword keyword = new Keyword(keyword_array[i]);
             keywords.add(keyword);
         }
+
         keywordListAdapter = new KeywordListAdapter(getContext(), new KeywordListAdapter.KeywordListAdapterListener() {
             @Override
             public void onCheckedKeyword(Keyword keyword) {

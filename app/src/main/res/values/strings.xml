@@ -9,4 +9,52 @@
     <string name="string_picker_dialog_ok">OK</string>
     <string name="string_picker_dialog_cancel">Cancel</string>
 
+
+    <string-array name="keyword_array">
+        <item>Alpha&amp;Omega</item>
+        <item>Anchor</item>
+        <item>Angel</item>
+        <item>Ant</item>
+        <item>Apple</item>
+        <item>Baby</item>
+
+        <item>Beehive</item>
+        <item>Bird</item>
+        <item>Bread</item>
+
+        <item>Bull</item>
+        <item>Camel</item>
+        <item>Candle</item>
+
+        <item>Cauldron</item>
+        <item>Chameleon</item>
+        <item>Compass</item>
+
+        <item>Cornucopia</item>
+        <item>Crocodile</item>
+        <item>Dolphin</item>
+
+        <item>Elephant</item>
+        <item>Globe</item>
+        <item>Griffin</item>
+        <item>Helmet</item>
+        <item>Horse</item>
+        <item>Hourglass</item>
+        <item>Lute</item>
+        <item>Madonna</item>
+
+        <item>Marionette</item>
+        <item>Moon</item>
+        <item>Owl</item>
+        <item>Serpent</item>
+        <item>Sun</item>
+        <item>Sword</item>
+        <item>Thunderbolt</item>
+        <item>Tree</item>
+        <item>Walled Garden</item>
+        <item>Wild Man</item>
+    </string-array>
+
+
+
 </resources>
