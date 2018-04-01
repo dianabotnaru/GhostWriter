@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.mudib.ghostwriter.R;
+import com.mudib.ghostwriter.constant.Constant;
 import com.mudib.ghostwriter.models.Keyword;
 
 import java.util.ArrayList;
@@ -89,6 +90,7 @@ public class KeywordListAdapter extends BaseAdapter {
             public void onClick(View v) {
                 Keyword keyword = keywords.get(position);
                 keyword.setSelected(holder.checkBox.isChecked());
+                keyword.setEnWord(Constant.allSearchkeys[position]);
                 keywords.set(position,keyword);
                 if (holder.checkBox.isChecked()) {
                     mKeywordListAdapterListener.onCheckedKeyword(keyword);

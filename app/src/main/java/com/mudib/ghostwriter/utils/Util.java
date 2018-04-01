@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.util.DisplayMetrics;
 
 import com.mudib.ghostwriter.models.Keyword;
 import com.mudib.ghostwriter.models.SearchResultFlickr;
@@ -33,11 +34,34 @@ public class Util {
     }
 
     public static void setLocale(Context context,String lang) {
-        Locale locale = new Locale(lang);
+        Locale locale;
+        if(lang.equalsIgnoreCase("English") ){
+            locale = new Locale("en");
+        }else if(lang.equalsIgnoreCase("arbic") ){
+            locale = new Locale("ar");
+        }else if(lang.equalsIgnoreCase("Hindi") ){
+            locale = new Locale("hi","IN");
+        }else if(lang.equalsIgnoreCase("Mahratti") ){
+            locale = new Locale("mr","IN");
+        }else if(lang.equalsIgnoreCase("Urdu") ){
+            locale = new Locale("ur","IN");
+        }else if(lang.equalsIgnoreCase("Bangla") ){
+            locale = new Locale("bn","BD");
+        }else{
+            locale = new Locale("en");
+        }
         Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+        Configuration config = context.getResources().getConfiguration();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            config.setLocale(locale);
+        } else{
+            config.locale = locale;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            context.createConfigurationContext(config);
+        } else {
+            context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+        }
     }
 
 }

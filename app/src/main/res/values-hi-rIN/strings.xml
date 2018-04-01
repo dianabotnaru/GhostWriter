@@ -1,2 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string-array name="keyword_array">
+        <item>अल्फा ओमेगा</item>
+        <item>लंगर</item>
+        <item>देवदूत</item>
+        <item>चींटी</item>
+        <item>सेब</item>
+        <item>बच्चा</item>
+
+        <item>मधुमक्खी का छत्ता</item>
+        <item>चिड़िया</item>
+        <item>रोटी</item>
+
+        <item>सांड</item>
+        <item>ऊंट</item>
+        <item>मोमबत्ती</item>
+
+        <item>हंडा</item>
+        <item>गिरगिट</item>
+        <item>दिशा सूचक यंत्र</item>
+
+        <item>प्रचुरता</item>
+        <item>मगरमच्छ</item>
+        <item>डॉल्फिन</item>
+
+        <item>हाथी</item>
+        <item>ग्लोब</item>
+        <item>शेर / ईगल</item>
+        <item>हेलमेट</item>
+        <item>घोड़ा</item>
+        <item>घंटा कांच</item>
+        <item>वीणा</item>
+        <item>ईसा की माता</item>
+
+        <item>कठपुतली</item>
+        <item>चांद</item>
+        <item>उल्लू</item>
+        <item>साँप</item>
+        <item>रवि</item>
+        <item>तलवार</item>
+        <item>वज्र</item>
+        <item>पेड़</item>
+        <item>दीवारों वाला उद्यान</item>
+        <item>जंगली आदमी</item>
+    </string-array>
+
+</resources>

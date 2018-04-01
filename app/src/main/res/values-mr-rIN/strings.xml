@@ -1,4 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="keyword_array">
+        <item>अल्फा आणि ओमेगा</item>
+        <item>अँकर</item>
+        <item>देवदूत</item>
+        <item>मुंगी</item>
+        <item>सफरचंद</item>
+        <item>बाळ</item>
+
+        <item>घुमटाकार केशरचना</item>
+        <item>पक्षी</item>
+        <item>ब्रेड</item>
+
+        <item>बैल</item>
+        <item>उंट</item>
+        <item>मेणबत्ती</item>
+
+        <item>कढई</item>
+        <item>कावळा</item>
+        <item>होकायंत्र</item>
+
+        <item>भरपूर प्रमाणात असणे</item>
+        <item>मगर</item>
+        <item>डॉल्फिन</item>
+
+        <item>हत्ती</item>
+        <item>जगभरात</item>
+        <item>ग्रिफीन</item>
+        <item>शिरस्त्राण</item>
+        <item>घोडा</item>
+        <item>तास काच</item>
+        <item>ल्यूट</item>
+        <item>मॅडोना</item>
+
+        <item>कठपुतळी</item>
+        <item>चंद्र</item>
+        <item>घुबड</item>
+        <item>सर्प</item>
+        <item>सूर्य</item>
+        <item>तलवार</item>
+        <item>गडगडाटा</item>
+        <item>झाड</item>
+        <item>भिंत बाग</item>
+        <item>जंगली मनुष्य</item>
+    </string-array>
 
 </resources>

@@ -2,6 +2,7 @@ package com.mudib.ghostwriter.activity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -79,5 +80,12 @@ public class BaseActivity extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();
     }
+
+    public void restartActivity() {
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
+    }
+
 
 }

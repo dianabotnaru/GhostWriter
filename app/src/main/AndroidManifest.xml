@@ -20,8 +20,8 @@
         </activity>
 
         <activity android:name=".activity.ImageDisplayActivity"
-                  android:configChanges="orientation|screenSize"/>
-        <activity android:name=".activity.SettingActivity" />
+                  android:configChanges="orientation|screenSize|locale"/>
+        <activity android:name=".activity.SettingActivity" android:configChanges="orientation|screenSize|locale" />
 
     </application>
 

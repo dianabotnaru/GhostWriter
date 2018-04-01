@@ -1,2 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string-array name="keyword_array">
+        <item>الفا اور ومیگا</item>
+        <item>لنگر</item>
+        <item>فرشتہ</item>
+        <item>اینٹی</item>
+        <item>سیب</item>
+        <item>بچه</item>
+
+        <item>زندہ رہو</item>
+        <item>پرندہ</item>
+        <item>روٹی</item>
+
+        <item>بیل</item>
+        <item>اونٹ</item>
+        <item>مومل</item>
+
+        <item>بوائلر</item>
+        <item>گلی</item>
+        <item>کمپاس</item>
+
+        <item>کوکیوپیپیا</item>
+        <item>مگرمچھ</item>
+        <item>ڈالفن</item>
+
+        <item>ہاتھی</item>
+        <item>دنیا</item>
+        <item>گرفن</item>
+        <item>ہیلمیٹ</item>
+        <item>گھوڑے</item>
+        <item>گھنٹے گلاس</item>
+        <item>گونگا</item>
+        <item>پاگل</item>
+
+        <item>کٹھ پتلی</item>
+        <item>چاند</item>
+        <item>اللو</item>
+        <item>سانپ</item>
+        <item>سورج</item>
+        <item>تلوار</item>
+        <item>تھنڈربالٹ</item>
+        <item>درخت</item>
+        <item>دیوار باغ</item>
+        <item>جنگلی آدمی</item>
+    </string-array>
+</resources>

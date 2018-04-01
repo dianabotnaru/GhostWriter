@@ -32,6 +32,8 @@ public class ContactsCompletionView extends TokenCompleteTextView<Keyword> {
 
     @Override
     protected Keyword defaultObject(String completionText) {
-        return new Keyword(completionText);
+        Keyword keyword = new Keyword(completionText);
+        keyword.setEnWord(completionText);
+        return keyword;
     }
 }

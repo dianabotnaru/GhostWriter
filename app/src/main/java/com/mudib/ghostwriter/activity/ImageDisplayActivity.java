@@ -45,12 +45,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @BindView(R.id.slider_images)
     SliderLayout imageSlider;
 
-    @BindView(R.id.textView_keys)
-    TextView keysTextView;
-
-    @BindView(R.id.textView_synonym)
-    TextView synonymTextView;
-
     private ArrayList<Keyword> searchKeyList;
 
     private int currentSearchIndex;
@@ -61,7 +55,16 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         setContentView(R.layout.activity_imagedisplay);
         initDatas();
         initSliderView();
-        showAlertDialog();
+        if(TimePreferencesManager.with(this).isFirstLaunch){
+            TimePreferencesManager.with(this).isFirstLaunch = false;
+            searchKeyList = TimePreferencesManager.with(this).getKeywordList();
+            if(searchKeyList.size() == 0){
+                showAlertDialog();
+            }else{
+                showLoading();
+                fetchFlickImage();
+            }
+        }
     }
 
     @Override
@@ -111,18 +114,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         imageSlider.startAutoCycle();
     }
 
-    private void setKeysTextViewText(){
-        keysTextView.setText("");
-        for(int i=0;i<searchKeyList.size();i++){
-            Keyword keyword = searchKeyList.get(i);
-            if(keysTextView.getText().toString() == ""){
-                keysTextView.setText(keyword.getWord());
-            }else{
-                keysTextView.setText(keysTextView.getText().toString()+" ,"+keyword.getWord());
-            }
-        }
-    }
-
     @OnClick(R.id.fab)
     public void onkeysFabClick() {
         KeywordPickerDialog keywordPickerDialog = KeywordPickerDialog.newInstance();
@@ -136,6 +127,10 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         if(imageSlider!=null){
             initSliderView();
             imageSlider.startAutoCycle();
+        }
+        if(TimePreferencesManager.with(this).isChangedLocale){
+            TimePreferencesManager.with(this).isChangedLocale = false;
+            restartActivity();
         }
     }
 
@@ -173,7 +168,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         for(Keyword keyword:keywords){
             searchKeyList.add(keyword);
         }
-        setKeysTextViewText();
+        TimePreferencesManager.with(this).saveSearchKeyword(searchKeyList);
         showLoading();
         fetchFlickImage();
     }
@@ -201,7 +196,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                     nextFetchFlckImage();
                 }
             });
-            task.execute(new String[]{keyword.getWord(), String.valueOf(keyword.getPerPage()), String.valueOf(keyword.getPage())});
+            task.execute(new String[]{keyword.getEnWord(), String.valueOf(keyword.getPerPage()), String.valueOf(keyword.getPage())});
         }else{
             keyword.setSearchResultFlickrs(SearchImagesCacheManager.with().getCachedSearchImages(keyword.getWord()));
             nextFetchFlckImage();

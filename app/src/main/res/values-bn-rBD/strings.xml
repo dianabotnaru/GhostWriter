@@ -1,2 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <string-array name="keyword_array">
+        <item>আলফা ওমেগা</item>
+        <item>নোঙ্গর</item>
+        <item>ফেরেশতা</item>
+        <item>পিপীলিকা</item>
+        <item>আপেল</item>
+        <item>বাচ্চা</item>
+
+        <item>মধুচক্র</item>
+        <item>পাখি</item>
+        <item>রুটি</item>
+
+        <item>ষাঁড়</item>
+        <item>উট</item>
+        <item>বাতি</item>
+
+        <item>কটাহ</item>
+        <item>বহুরুপী</item>
+        <item>কম্পাস</item>
+
+        <item>প্রাচুর্য</item>
+        <item>কুম্ভীর</item>
+        <item>শুশুক</item>
+
+        <item>হাতি</item>
+        <item>পৃথিবী</item>
+        <item>গ্রিফন</item>
+        <item>শিরস্ত্রাণ</item>
+        <item>ঘোড়া</item>
+        <item>ঘন্টা কাচ</item>
+        <item>বেহালা</item>
+        <item>মেয়ে</item>
+
+        <item>পুতুল</item>
+        <item>চাঁদ</item>
+        <item>পেঁচা</item>
+        <item>সর্প</item>
+        <item>সূর্য</item>
+        <item>তরবারি</item>
+        <item>অশনি</item>
+        <item>গাছ</item>
+        <item>দেওয়াল বাগান</item>
+        <item>বন মানুষ</item>
+    </string-array>
+
+</resources>

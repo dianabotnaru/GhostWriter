@@ -4,6 +4,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.daimajia.slider.library.SliderLayout;
+import com.mudib.ghostwriter.models.Keyword;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by diana on 07/02/2018.
@@ -11,6 +15,8 @@ import com.daimajia.slider.library.SliderLayout;
 
 public class TimePreferencesManager {
 
+    public boolean isChangedLocale = false;
+    public boolean isFirstLaunch = true;
 
     static volatile TimePreferencesManager singleton = null;
 
@@ -21,6 +27,8 @@ public class TimePreferencesManager {
     private String DISPLAY_TIME_KEY = "display_time_key";
     private String DISPLAY_TRANSFORM_KEY = "display_transform_key";
     private String KEYWORD_LANGUAGE_KEY = "keyword_language_key";
+
+    private String SEARCH_KEYWORD_KEYS = "search_keyword_key";
 
     private long DISPLAY_TIME_DEFAULT = 5000;
 
@@ -54,6 +62,22 @@ public class TimePreferencesManager {
         return  sharedPreferences.getString(KEYWORD_LANGUAGE_KEY, "English");
     }
 
+    public ArrayList<Keyword> getKeywordList() {
+        ArrayList<Keyword> keywordArray = new ArrayList<Keyword>();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        String keywords = sharedPreferences.getString(SEARCH_KEYWORD_KEYS, "");
+        if (!keywords.equalsIgnoreCase("")){
+            String[] keywordsList = keywords.split(",");
+            for (int i = 0; i < keywordsList.length; i++) {
+                Keyword keyword = new Keyword(keywordsList[i]);
+                keyword.setEnWord(keywordsList[i]);
+                keywordArray.add(keyword);
+            }
+        }
+        return keywordArray;
+    }
+
+
     public void saveImageDisplayTime(long displaytime) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor preferencesEditor = sharedPreferences.edit();
@@ -74,5 +98,20 @@ public class TimePreferencesManager {
         preferencesEditor.putString(KEYWORD_LANGUAGE_KEY, keywordLanguage);
         preferencesEditor.apply();
     }
+
+    public void saveSearchKeyword(ArrayList<Keyword> keywords) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        SharedPreferences.Editor preferencesEditor = sharedPreferences.edit();
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < keywords.size(); i++) {
+            sb.append(keywords.get(i).getEnWord()).append(",");
+        }
+
+        preferencesEditor.putString(SEARCH_KEYWORD_KEYS, sb.toString());
+        preferencesEditor.apply();
+    }
+
+
 
 }

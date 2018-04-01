@@ -91,7 +91,6 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
         return output;
     }
 
-
     private InputStream downloadUrl(String query,String perpage, String page) throws IOException {
         InputStream in = null;
 

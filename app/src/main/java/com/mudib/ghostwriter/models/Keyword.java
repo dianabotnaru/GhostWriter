@@ -13,6 +13,8 @@ import java.util.List;
 
 public class Keyword {
 
+    private String enWord;
+
     private String word;
 
     private boolean isSelected;
@@ -68,5 +70,13 @@ public class Keyword {
 
     public void setSearchResultFlickrs(List<SearchResultFlickr> searchResultFlickrs) {
         this.searchResultFlickrs = searchResultFlickrs;
+    }
+
+    public String getEnWord() {
+        return enWord;
+    }
+
+    public void setEnWord(String enWord) {
+        this.enWord = enWord;
     }
 }

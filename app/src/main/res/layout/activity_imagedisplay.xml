@@ -11,14 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="16dp"
-            app:srcCompat="@drawable/icons_reset" />
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -26,34 +20,6 @@
             android:background="#dcdcdc"
             android:orientation="vertical"
             android:padding="16dp">
-
-            <TextView
-                android:id="@+id/textView_synonym"
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="3dp"
-                android:background="@android:color/background_light"
-                android:hint="SynonymWord"
-                android:paddingLeft="5dp"
-                android:paddingTop="3dp"
-                android:visibility="gone" />
-
-            <TextView
-                android:id="@+id/textView_keys"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="29dp"
-                android:background="@android:color/background_light"
-                android:hint="Choose keys"
-                android:paddingLeft="5dp"
-                android:paddingTop="3dp"
-                android:visibility="gone" />
 
             <com.daimajia.slider.library.SliderLayout
                 android:id="@+id/slider_images"
@@ -67,8 +33,17 @@
 
             </com.daimajia.slider.library.SliderLayout>
 
-
         </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/icons_reset" />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

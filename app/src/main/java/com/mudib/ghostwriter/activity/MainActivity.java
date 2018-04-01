@@ -10,6 +10,8 @@ import android.view.WindowManager;
 
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.manager.SearchImagesCacheManager;
+import com.mudib.ghostwriter.manager.TimePreferencesManager;
+import com.mudib.ghostwriter.utils.Util;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,9 +35,14 @@ public class MainActivity extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                setLocale();
                 startActivity(new Intent(MainActivity.this, ImageDisplayActivity.class));
                 finish();
             }
         }, 2000);
+    }
+
+    private void setLocale(){
+        Util.setLocale(getApplicationContext(), TimePreferencesManager.with(this).getKeywordLangauge());
     }
 }

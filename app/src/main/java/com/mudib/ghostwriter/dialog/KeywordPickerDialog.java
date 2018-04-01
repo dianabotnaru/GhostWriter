@@ -111,10 +111,9 @@ public class KeywordPickerDialog extends BaseDialogFragment{
 
             @Override
             public void onTokenRemoved(Keyword token) {
-                Keyword tokenKeyword = (Keyword)token;
                 for(int i=0;i<keywords.size();i++){
                     Keyword keyword = keywords.get(i);
-                    if(keyword.getWord().equalsIgnoreCase(tokenKeyword.getWord())){
+                    if(keyword.getWord().equalsIgnoreCase(token.getWord())){
                         keyword.setSelected(false);
                         keywords.set(i,keyword);
                     }
