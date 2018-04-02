@@ -49,6 +49,8 @@ public class Util {
             locale = new Locale("bn","BD");
         }else if(lang.equalsIgnoreCase("Nepali") ){
             locale = new Locale("ne","IN");
+        }else if(lang.equalsIgnoreCase("Filipino") ){
+            locale = new Locale("fil","PH");
         }else if(lang.equalsIgnoreCase("Aze1rbaijani") ){
             locale = new Locale("az","AZ");
         }else if(lang.equalsIgnoreCase("French") ){
