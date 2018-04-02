@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">GhostWriter</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="keywords_dialog_title">KEYWORDS</string>
+
+    <string name="string_picker_dialog_values">STRING_PICKER_DIALOG_VALUES</string>
+    <string name="string_picker_dialog_title">Image Display Transformer</string>
+    <string name="string_picker_dialog_ok">OK</string>
+    <string name="string_picker_dialog_cancel">Cancel</string>
+
+
+    <string-array name="keyword_array">
+        <item>alpha&amp;omega</item>
+        <item>锚</item>
+        <item>天使</item>
+        <item>蚂蚁</item>
+        <item>苹果</item>
+        <item>宝宝</item>
+
+        <item>蜂窝</item>
+        <item>鸟</item>
+        <item>面包</item>
+
+        <item>公牛</item>
+        <item>骆驼</item>
+        <item>蜡烛</item>
+
+        <item>釜</item>
+        <item>变色龙</item>
+        <item>罗盘</item>
+
+        <item>聚宝盆</item>
+        <item>鳄鱼</item>
+        <item>海豚</item>
+
+        <item>象</item>
+        <item>地球</item>
+        <item>格里芬</item>
+        <item>头盔</item>
+        <item>马</item>
+        <item>滴漏</item>
+        <item>琵琶</item>
+        <item>麦当娜</item>
+
+        <item>木偶</item>
+        <item>月亮</item>
+        <item>猫头鹰</item>
+        <item>蛇</item>
+        <item>太阳</item>
+        <item>剑</item>
+        <item>霹雳</item>
+        <item>树</item>
+        <item>有围墙的花园</item>
+        <item>野人</item>
+    </string-array>
+
+
+
+</resources>

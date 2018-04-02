@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">GhostWriter</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="keywords_dialog_title">KEYWORDS</string>
+
+    <string name="string_picker_dialog_values">STRING_PICKER_DIALOG_VALUES</string>
+    <string name="string_picker_dialog_title">Image Display Transformer</string>
+    <string name="string_picker_dialog_ok">OK</string>
+    <string name="string_picker_dialog_cancel">Cancel</string>
+
+
+    <string-array name="keyword_array">
+        <item>alpha&amp;omega</item>
+        <item>anker</item>
+        <item>Engel</item>
+        <item>Myre</item>
+        <item>Æble</item>
+        <item>spædbarn</item>
+
+        <item>bikube</item>
+        <item>fugl</item>
+        <item>brød</item>
+
+        <item>tyr</item>
+        <item>kamel</item>
+        <item>lys</item>
+
+        <item>kedel</item>
+        <item>kamæleon</item>
+        <item>kompas</item>
+
+        <item>overflødighedshorn</item>
+        <item>krokodille</item>
+        <item>delfin</item>
+
+        <item>elefant</item>
+        <item>globus</item>
+        <item>griffin</item>
+        <item>hjelm</item>
+        <item>hest</item>
+        <item>timeglas</item>
+        <item>lut</item>
+        <item>madonna</item>
+
+        <item>marionet</item>
+        <item>måne</item>
+        <item>ugle</item>
+        <item>slange</item>
+        <item>sol</item>
+        <item>sværd</item>
+        <item>lyn</item>
+        <item>træ</item>
+        <item>walled garden</item>
+        <item>vild mand</item>
+    </string-array>
+
+
+
+</resources>
