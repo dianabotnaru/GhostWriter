@@ -53,6 +53,20 @@ public class Util {
             locale = new Locale("az","AZ");
         }else if(lang.equalsIgnoreCase("French") ){
             locale = new Locale("fr");
+        }else if(lang.equalsIgnoreCase("Spanish") ){
+            locale = new Locale("es","MX");
+        }else if(lang.equalsIgnoreCase("German") ){
+            locale = new Locale("de","DE");
+        }else if(lang.equalsIgnoreCase("Portugese") ){
+            locale = new Locale("pt","BR");
+        }else if(lang.equalsIgnoreCase("Africaans") ){
+            locale = new Locale("af","ZA");
+        }else if(lang.equalsIgnoreCase("Amharic") ){
+            locale = new Locale("am","ET");
+        }else if(lang.equalsIgnoreCase("Sudanese") ){
+            locale = new Locale("su");
+        }else if(lang.equalsIgnoreCase("Polish") ){
+            locale = new Locale("pl","PL");
         }else{
             locale = new Locale("en");
         }
