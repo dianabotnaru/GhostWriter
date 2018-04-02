@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GhostWriter</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="keywords_dialog_title">KEYWORDS</string>
+
+    <string name="string_picker_dialog_values">STRING_PICKER_DIALOG_VALUES</string>
+    <string name="string_picker_dialog_title">Image Display Transformer</string>
+    <string name="string_picker_dialog_ok">OK</string>
+    <string name="string_picker_dialog_cancel">Cancel</string>
+
+
+    <string-array name="keyword_array">
+        <item>अल्फा र ओमेगा</item>
+        <item>एंकर</item>
+        <item>परी</item>
+        <item>एन्ट</item>
+        <item>स्याऊ</item>
+        <item>बच्चा</item>
+
+        <item>घाइते</item>
+        <item>चरा</item>
+        <item>रोटी</item>
+
+        <item>बुल</item>
+        <item>ऊल</item>
+        <item>मोमबत्ती</item>
+
+        <item>बर्तन</item>
+        <item>छेउमा</item>
+        <item>कम्पास</item>
+
+        <item>कोंक्रोपिया</item>
+        <item>मकवानपुर</item>
+        <item>डल्फिन</item>
+
+        <item>हात्ती</item>
+        <item>विश्व</item>
+        <item>गफिन</item>
+        <item>हेलमेट</item>
+        <item>घोडा</item>
+        <item>घडी</item>
+        <item>साधन</item>
+        <item>केटी</item>
+
+        <item>कठपुतली</item>
+        <item>चन्द्र</item>
+        <item>उल्लू</item>
+        <item>सांप</item>
+        <item>सूर्य</item>
+        <item>तरवार</item>
+        <item>गोरखा</item>
+        <item>रूख</item>
+        <item>भित्री बगैंचा</item>
+        <item>जंगली मान्छे</item>
+    </string-array>
+
+</resources>

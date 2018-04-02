@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GhostWriter</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="keywords_dialog_title">KEYWORDS</string>
+
+    <string name="string_picker_dialog_values">STRING_PICKER_DIALOG_VALUES</string>
+    <string name="string_picker_dialog_title">Image Display Transformer</string>
+    <string name="string_picker_dialog_ok">OK</string>
+    <string name="string_picker_dialog_cancel">Cancel</string>
+
+
+    <string-array name="keyword_array">
+        <item>alfa və omeqa</item>
+        <item>anker</item>
+        <item>mələk</item>
+        <item>qarışqa</item>
+        <item>alma</item>
+        <item>körpə</item>
+
+        <item>arıçılıq</item>
+        <item>quş</item>
+        <item>çörək</item>
+
+        <item>boğa</item>
+        <item>dəvə</item>
+        <item>şam</item>
+
+        <item>qazan</item>
+        <item>buqələmun</item>
+        <item>kompas</item>
+
+        <item>qarışıqlıq</item>
+        <item>timsah</item>
+        <item>Yunus</item>
+
+        <item>fil</item>
+        <item>dünya</item>
+        <item>qrif</item>
+        <item>dəbilqə</item>
+        <item>atı</item>
+        <item>saatglass</item>
+        <item>rübab</item>
+        <item>madonna</item>
+
+        <item>oyun-oyuncaq</item>
+        <item>qəmər</item>
+        <item>bayquş</item>
+        <item>ilan</item>
+        <item>günəş</item>
+        <item>qılınc</item>
+        <item>gurultulu</item>
+        <item>ağac</item>
+        <item>divarlı bağ</item>
+        <item>Vəhşi adam</item>
+    </string-array>
+
+</resources>

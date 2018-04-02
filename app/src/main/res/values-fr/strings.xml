@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GhostWriter</string>
+    <string name="button_ok">OK</string>
+    <string name="button_cancel">CANCEL</string>
+    <string name="keywords_dialog_title">KEYWORDS</string>
+
+    <string name="string_picker_dialog_values">STRING_PICKER_DIALOG_VALUES</string>
+    <string name="string_picker_dialog_title">Image Display Transformer</string>
+    <string name="string_picker_dialog_ok">OK</string>
+    <string name="string_picker_dialog_cancel">Cancel</string>
+
+
+    <string-array name="keyword_array">
+        <item>alpha et Omega</item>
+        <item>Ancre</item>
+        <item>ange</item>
+        <item>Fourmi</item>
+        <item>Pomme</item>
+        <item>Bébé</item>
+
+        <item>ruche</item>
+        <item>oiseau</item>
+        <item>pain</item>
+
+        <item>taureau</item>
+        <item>chameau</item>
+        <item>bougie</item>
+
+        <item>chaudron</item>
+        <item>caméléon</item>
+        <item>boussole</item>
+
+        <item>corne d\'abondance</item>
+        <item>crocodile</item>
+        <item>dauphin</item>
+        <item>éléphant</item>
+        <item>globe</item>
+        <item>griffon</item>
+        <item>casque</item>
+        <item>cheval</item>
+        <item>Sablier</item>
+        <item>luth</item>
+        <item>Madone</item>
+
+        <item>marionnette</item>
+        <item>lune</item>
+        <item>hibou</item>
+        <item>serpent</item>
+        <item>Soleil</item>
+        <item>épée</item>
+        <item>coup de tonnerre</item>
+        <item>arbre</item>
+        <item>jardin fermé</item>
+        <item>homme sauvage</item>
+    </string-array>
+
+</resources>
