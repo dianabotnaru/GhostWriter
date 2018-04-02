@@ -242,7 +242,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     }
 
     private void showAlertDialog(){
-        WarningDialogFragment dialogFragment = WarningDialogFragment.newInstance("Choose Keyword","Please choose keywords to show images.",false);
+        WarningDialogFragment dialogFragment = WarningDialogFragment.newInstance(getResources().getString(R.string.choose_keyword),getResources().getString(R.string.show_keyword_dialog_message),false);
         dialogFragment.show(getSupportFragmentManager(), WarningDialogFragment.TAG);
     }
 

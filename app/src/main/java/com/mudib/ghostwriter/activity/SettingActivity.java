@@ -53,7 +53,7 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         initData();
-        initToolbar("Setting",true);
+        initToolbar(getResources().getString(R.string.setting),true);
         initUi();
     }
 
@@ -104,7 +104,9 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
             transformValues[i] = SliderLayout.Transformer.values()[i].toString();
         }
         new UniversalPickerDialog.Builder(this)
-                .setTitle("Image Display Transform")
+                .setTitle(getResources().getString(R.string.image_display_transform))
+                .setPositiveButtonText(getResources().getString(R.string.button_ok))
+                .setNegativeButtonText(getResources().getString(R.string.button_cancel))
                 .setListener(this)
                 .setInputs(
                         new UniversalPickerDialog.Input(0, transformValues)
@@ -116,7 +118,9 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
     public void onLanguageLayoutClicked() {
         settingIndex = KEYWORD_LNGUAGE;
         new UniversalPickerDialog.Builder(this)
-                .setTitle("Keyword Language")
+                .setTitle(getResources().getString(R.string.keyword_language))
+                .setPositiveButtonText(getResources().getString(R.string.button_ok))
+                .setNegativeButtonText(getResources().getString(R.string.button_cancel))
                 .setListener(this)
                 .setInputs(
                         new UniversalPickerDialog.Input(0, Constant.languages)

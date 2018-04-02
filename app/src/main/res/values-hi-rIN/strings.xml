@@ -6,10 +6,14 @@
     <string name="button_cancel">CANCEL</string>
     <string name="keywords_dialog_title">KEYWORDS</string>
 
-    <string name="string_picker_dialog_values">STRING_PICKER_DIALOG_VALUES</string>
-    <string name="string_picker_dialog_title">Image Display Transformer</string>
-    <string name="string_picker_dialog_ok">OK</string>
-    <string name="string_picker_dialog_cancel">Cancel</string>
+    <string name="setting">SETTING</string>
+    <string name="keywords">KEYWORDS</string>
+    <string name="image_display_time">Image Display Time</string>
+    <string name="image_display_transform">Image Display Transform</string>
+    <string name="app_version">App Version</string>
+    <string name="keyword_language">Keyword Language</string>
+    <string name="choose_keyword">Choose keyword</string>
+    <string name="show_keyword_dialog_message">Please choose keywords to show images</string>
 
     <string-array name="keyword_array">
         <item>अल्फा ओमेगा</item>

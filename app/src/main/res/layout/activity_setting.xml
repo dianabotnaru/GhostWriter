@@ -22,7 +22,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Image Display Time"
+                android:text="@string/image_display_time"
                 android:textColor="@android:color/background_dark"
                 android:textSize="16sp" />
 
@@ -76,7 +76,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Image Display Transform"
+                android:text="@string/image_display_transform"
                 android:textColor="@android:color/background_dark"
                 android:textSize="16sp" />
 
@@ -102,7 +102,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Language"
+                android:text="@string/keyword_language"
                 android:textColor="@android:color/background_dark"
                 android:textSize="16sp" />
 
@@ -140,7 +140,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="App Version"
+                android:text="@string/app_version"
                 android:textColor="@android:color/background_dark"
                 android:textSize="16sp" />
 
