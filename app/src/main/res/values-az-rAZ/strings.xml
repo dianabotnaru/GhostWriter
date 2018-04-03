@@ -2,18 +2,18 @@
 <resources>
 
     <string name="app_name">GhostWriter</string>
-    <string name="button_ok">OK</string>
-    <string name="button_cancel">CANCEL</string>
-    <string name="keywords_dialog_title">KEYWORDS</string>
+    <string name="button_ok">tamam</string>
+    <string name="button_cancel">ləğv edin</string>
+    <string name="keywords_dialog_title">söz</string>
 
-    <string name="setting">SETTING</string>
-    <string name="keywords">KEYWORDS</string>
-    <string name="image_display_time">Image Display Time</string>
-    <string name="image_display_transform">Image Display Transform</string>
-    <string name="app_version">App Version</string>
-    <string name="keyword_language">Keyword Language</string>
-    <string name="choose_keyword">Choose keyword</string>
-    <string name="show_keyword_dialog_message">Please choose keywords to show images</string>
+    <string name="setting">qəbulu</string>
+    <string name="keywords">söz</string>
+    <string name="image_display_time">şəkil nümayiş müddəti</string>
+    <string name="image_display_transform">image görüntü çevirir</string>
+    <string name="app_version">App versiyası</string>
+    <string name="keyword_language">söz dili</string>
+    <string name="choose_keyword">Söz seçin</string>
+    <string name="show_keyword_dialog_message">Xahiş edirik şəkilləri göstərmək üçün açar sözlər seçin</string>
 
 
     <string-array name="keyword_array">

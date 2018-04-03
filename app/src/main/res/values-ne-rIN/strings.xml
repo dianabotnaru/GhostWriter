@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GhostWriter</string>
-    <string name="button_ok">OK</string>
-    <string name="button_cancel">CANCEL</string>
-    <string name="keywords_dialog_title">KEYWORDS</string>
+    <string name="button_ok">ठिक छ</string>
+    <string name="button_cancel">रद्द गर्नुहोस्</string>
+    <string name="keywords_dialog_title">खोजशब्द</string>
 
-    <string name="setting">SETTING</string>
-    <string name="keywords">KEYWORDS</string>
-    <string name="image_display_time">Image Display Time</string>
-    <string name="image_display_transform">Image Display Transform</string>
-    <string name="app_version">App Version</string>
-    <string name="keyword_language">Keyword Language</string>
-    <string name="choose_keyword">Choose keyword</string>
-    <string name="show_keyword_dialog_message">Please choose keywords to show images</string>
+    <string name="setting">सेटिङ</string>
+    <string name="keywords">खोजशब्द</string>
+    <string name="image_display_time">छवि प्रदर्शन समय</string>
+    <string name="image_display_transform">छवि प्रदर्शन ट्रान्फर्म</string>
+    <string name="app_version">एप संस्करण</string>
+    <string name="keyword_language">खोजशब्द भाषा</string>
+    <string name="choose_keyword">कीवर्ड छनौट गर्नुहोस्</string>
+    <string name="show_keyword_dialog_message">कृपया छवि देखाउनका लागि कीवर्ड चयन गर्नुहोस्</string>
 
     <string-array name="keyword_array">
         <item>अल्फा र ओमेगा</item>
