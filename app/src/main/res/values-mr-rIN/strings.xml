@@ -2,18 +2,18 @@
 <resources>
 
     <string name="app_name">GhostWriter</string>
-    <string name="button_ok">OK</string>
-    <string name="button_cancel">CANCEL</string>
-    <string name="keywords_dialog_title">KEYWORDS</string>
+    <string name="button_ok">ठीक आहे</string>
+    <string name="button_cancel">रद्द करा</string>
+    <string name="keywords_dialog_title">मुख्यशब्द</string>
 
-    <string name="setting">SETTING</string>
-    <string name="keywords">KEYWORDS</string>
-    <string name="image_display_time">Image Display Time</string>
-    <string name="image_display_transform">Image Display Transform</string>
-    <string name="app_version">App Version</string>
-    <string name="keyword_language">Keyword Language</string>
-    <string name="choose_keyword">Choose keyword</string>
-    <string name="show_keyword_dialog_message">Please choose keywords to show images</string>
+    <string name="setting">सेटिंग</string>
+    <string name="keywords">मुख्यशब्द</string>
+    <string name="image_display_time">प्रतिमा प्रदर्शन वेळ</string>
+    <string name="image_display_transform">प्रतिमा प्रदर्शन रूपांतर</string>
+    <string name="app_version">अॅप आवृत्ती</string>
+    <string name="keyword_language">मुख्यशब्द भाषा</string>
+    <string name="choose_keyword">कीवर्ड निवडा</string>
+    <string name="show_keyword_dialog_message">कृपया प्रतिमा दर्शविण्यासाठी कीवर्ड निवडा</string>
 
     <string-array name="keyword_array">
         <item>अल्फा आणि ओमेगा</item>
