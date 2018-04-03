@@ -14,6 +14,7 @@
     <string name="keyword_language">मुख्यशब्द भाषा</string>
     <string name="choose_keyword">कीवर्ड निवडा</string>
     <string name="show_keyword_dialog_message">कृपया प्रतिमा दर्शविण्यासाठी कीवर्ड निवडा</string>
+    <string name="selected_language">मराठी</string>
 
     <string-array name="keyword_array">
         <item>अल्फा आणि ओमेगा</item>

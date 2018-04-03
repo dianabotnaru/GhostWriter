@@ -12,7 +12,7 @@
     <string name="keyword_language">lingua delle parole chiave</string>
     <string name="choose_keyword">Scegli la parola chiave</string>
     <string name="show_keyword_dialog_message">Si prega di scegliere le parole chiave per mostrare le immagini</string>
-
+    <string name="selected_language">italiano</string>
 
     <string-array name="keyword_array">
         <item>Alfa Omega</item>

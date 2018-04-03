@@ -12,7 +12,7 @@
     <string name="keyword_language">idioma da palavra-chave</string>
     <string name="choose_keyword">escolher palavra-chave</string>
     <string name="show_keyword_dialog_message">por favor escolha palavras-chave para mostrar</string>
-
+    <string name="selected_language">Português</string>
 
     <string-array name="keyword_array">
         <item>Alfa Ômega</item>

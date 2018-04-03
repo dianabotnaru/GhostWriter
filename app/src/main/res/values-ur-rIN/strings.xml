@@ -14,6 +14,7 @@
     <string name="keyword_language">مطلوبہ الفاظ کی زبان</string>
     <string name="choose_keyword">مطلوبہ الفاظ کا انتخاب کریں</string>
     <string name="show_keyword_dialog_message">برائے مہربانی تصاویر دکھانے کے لئے مطلوبہ الفاظ کا انتخاب کریں</string>
+    <string name="selected_language">اردو</string>
 
     <string-array name="keyword_array">
         <item>الفا اور ومیگا</item>

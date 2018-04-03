@@ -12,7 +12,7 @@
     <string name="keyword_language">trefwoord talen</string>
     <string name="choose_keyword">Kies trefwoord</string>
     <string name="show_keyword_dialog_message">Kies zoekwoorden om afbeeldingen weer te geven</string>
-
+    <string name="selected_language">Nederlands</string>
 
     <string-array name="keyword_array">
         <item>alpha&amp;omega</item>

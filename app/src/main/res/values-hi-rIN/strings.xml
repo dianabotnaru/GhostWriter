@@ -14,6 +14,7 @@
     <string name="keyword_language">कीवर्ड की भाषा</string>
     <string name="choose_keyword">कीवर्ड चुनें</string>
     <string name="show_keyword_dialog_message">कृपया चित्र दिखाने के लिए कीवर्ड चुनें</string>
+    <string name="selected_language">हिंदी</string>
 
     <string-array name="keyword_array">
         <item>अल्फा ओमेगा</item>

@@ -12,6 +12,7 @@
     <string name="keyword_language">jazyk klíčových slov</string>
     <string name="choose_keyword">Vyberte klíčové slovo</string>
     <string name="show_keyword_dialog_message">Zvolte prosím klíčová slova pro zobrazení obrázků</string>
+    <string name="selected_language">čeština</string>
 
     <string-array name="keyword_array">
         <item>alfa a omega</item>

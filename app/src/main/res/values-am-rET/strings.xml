@@ -12,6 +12,7 @@
     <string name="keyword_language">ቁልፍ ቃል ቋንቋ</string>
     <string name="choose_keyword">ቁልፍ ቃል ይምረጡ</string>
     <string name="show_keyword_dialog_message">እባክዎ ምስሎችን ለማሳየት ቁልፍ ቃላትን ይምረጡ</string>
+    <string name="selected_language">አማርኛ</string>
 
 
     <string-array name="keyword_array">

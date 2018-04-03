@@ -13,6 +13,7 @@
     <string name="keyword_language">关键字语言</string>
     <string name="choose_keyword">选择关键字</string>
     <string name="show_keyword_dialog_message">请选择关键字来显示图像</string>
+    <string name="selected_language">中文</string>
 
     <string-array name="keyword_array">
         <item>alpha&amp;omega</item>

@@ -86,7 +86,7 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
             }
         });
         textView_displaytransform.setText(TimePreferencesManager.with(this).getImageDisplayTransformer());
-        textView_language.setText(TimePreferencesManager.with(this).getKeywordLangauge());
+        textView_language.setText(getResources().getString(R.string.selected_language));
     }
 
     @Override
@@ -136,7 +136,6 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
         }else{
             String value = Constant.languages[selectedValues[0]];
             if(!value.equalsIgnoreCase(TimePreferencesManager.with(this).getKeywordLangauge())) {
-                textView_language.setText(value);
                 TimePreferencesManager.with(this).saveKeywordLangauge(value);
                 Util.setLocale(getApplicationContext(), value);
                 TimePreferencesManager.with(this).isChangedLocale = true;

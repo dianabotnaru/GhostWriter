@@ -12,7 +12,7 @@
     <string name="keyword_language">anahtar kelime dili</string>
     <string name="choose_keyword">anahtar kelime seçin</string>
     <string name="show_keyword_dialog_message">Lütfen resimleri göstermek için anahtar kelimeler seçin</string>
-
+    <string name="selected_language">Türk</string>
 
     <string-array name="keyword_array">
         <item>Alfa Omega</item>

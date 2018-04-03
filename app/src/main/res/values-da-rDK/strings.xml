@@ -12,6 +12,7 @@
     <string name="keyword_language">søgeordssprog</string>
     <string name="choose_keyword">Vælg søgeord</string>
     <string name="show_keyword_dialog_message">Vælg venligst nøgleord for at vise billeder</string>
+    <string name="selected_language">dansk</string>
 
 
     <string-array name="keyword_array">

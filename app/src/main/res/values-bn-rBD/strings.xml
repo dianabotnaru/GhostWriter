@@ -13,6 +13,7 @@
     <string name="keyword_language">কীওয়ার্ড ভাষা</string>
     <string name="choose_keyword">কীওয়ার্ড চয়ন করুন</string>
     <string name="show_keyword_dialog_message">চিত্রগুলি দেখানোর জন্য কীওয়ার্ড চয়ন করুন</string>
+    <string name="selected_language">বাংলা</string>
 
     <string-array name="keyword_array">
         <item>আলফা ওমেগা</item>

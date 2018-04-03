@@ -14,6 +14,8 @@
     <string name="choose_keyword">Choose keyword</string>
     <string name="show_keyword_dialog_message">Please choose keywords to show images</string>
 
+    <string name="selected_language">English</string>
+
     <string-array name="keyword_array">
         <item>Alpha&amp;Omega</item>
         <item>Anchor</item>

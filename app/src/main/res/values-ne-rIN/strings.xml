@@ -13,6 +13,7 @@
     <string name="keyword_language">खोजशब्द भाषा</string>
     <string name="choose_keyword">कीवर्ड छनौट गर्नुहोस्</string>
     <string name="show_keyword_dialog_message">कृपया छवि देखाउनका लागि कीवर्ड चयन गर्नुहोस्</string>
+    <string name="selected_language">नेपाली</string>
 
     <string-array name="keyword_array">
         <item>अल्फा र ओमेगा</item>

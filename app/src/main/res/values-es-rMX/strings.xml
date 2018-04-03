@@ -13,7 +13,7 @@
     <string name="keyword_language">palabra clave</string>
     <string name="choose_keyword">elegir palabra clave</string>
     <string name="show_keyword_dialog_message">por favor elija palabras clave para mostrar imágenes</string>
-
+    <string name="selected_language">Español</string>
 
     <string-array name="keyword_array">
         <item>Alpha&amp;Omega</item>

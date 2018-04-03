@@ -12,6 +12,7 @@
     <string name="keyword_language">Sleutelwoord Taal</string>
     <string name="choose_keyword">Kies sleutelwoord</string>
     <string name="show_keyword_dialog_message">Kies asseblief sleutelwoorde om prente te wys</string>
+    <string name="selected_language">Afrikaans</string>
 
     <string-array name="keyword_array">
         <item>alfa en omega</item>

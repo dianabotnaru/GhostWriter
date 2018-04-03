@@ -14,6 +14,7 @@
     <string name="keyword_language">لغة الكلمات الرئيسية</string>
     <string name="choose_keyword">اختر الكلمة</string>
     <string name="show_keyword_dialog_message">يرجى اختيار الكلمات الرئيسية لعرض الصور</string>
+    <string name="selected_language">عربى</string>
 
     <string-array name="keyword_array">
         <item>ا &amp; ع</item>

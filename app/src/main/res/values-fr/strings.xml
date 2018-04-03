@@ -13,7 +13,7 @@
     <string name="keyword_language">Mot-clé Langue</string>
     <string name="choose_keyword">Choisir un mot clé</string>
     <string name="show_keyword_dialog_message">Veuillez choisir des mots-clés pour afficher les images</string>
-
+    <string name="selected_language">français</string>
 
     <string-array name="keyword_array">
         <item>alpha et Omega</item>

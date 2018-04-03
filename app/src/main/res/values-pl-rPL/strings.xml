@@ -12,7 +12,7 @@
     <string name="keyword_language">język słów kluczowych</string>
     <string name="choose_keyword">wybierz słowo kluczowe</string>
     <string name="show_keyword_dialog_message">wybierz słowa kluczowe, aby wyświetlić obrazy</string>
-
+    <string name="selected_language">Polskie</string>
 
     <string-array name="keyword_array">
         <item>alfa i omega</item>

@@ -12,7 +12,7 @@
     <string name="keyword_language">basa keyword</string>
     <string name="choose_keyword">milih keyword</string>
     <string name="show_keyword_dialog_message">mangga milih kecap konci pikeun némbongkeun gambar</string>
-
+    <string name="selected_language">Sunda</string>
 
     <string-array name="keyword_array">
         <item>alfa&amp;omega</item>

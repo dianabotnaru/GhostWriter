@@ -12,6 +12,7 @@
     <string name="keyword_language">Schlüsselwortsprache</string>
     <string name="choose_keyword">Wählen Sie ein Keyword</string>
     <string name="show_keyword_dialog_message">Bitte wählen Sie Suchbegriffe, um Bilder anzuzeigen</string>
+    <string name="selected_language">Deutsche</string>
 
     <string-array name="keyword_array">
         <item>Alpha&amp;omega</item>
