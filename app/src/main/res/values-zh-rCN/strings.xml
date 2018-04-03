@@ -1,18 +1,18 @@
 <resources>
 
     <string name="app_name">GhostWriter</string>
-    <string name="button_ok">OK</string>
-    <string name="button_cancel">CANCEL</string>
-    <string name="keywords_dialog_title">KEYWORDS</string>
+    <string name="button_ok">好</string>
+    <string name="button_cancel">取消</string>
+    <string name="keywords_dialog_title">关键词</string>
 
-    <string name="setting">SETTING</string>
-    <string name="keywords">KEYWORDS</string>
-    <string name="image_display_time">Image Display Time</string>
-    <string name="image_display_transform">Image Display Transform</string>
-    <string name="app_version">App Version</string>
-    <string name="keyword_language">Keyword Language</string>
-    <string name="choose_keyword">Choose keyword</string>
-    <string name="show_keyword_dialog_message">Please choose keywords to show images</string>
+    <string name="setting">设置</string>
+    <string name="keywords">关键词</string>
+    <string name="image_display_time">图像显示时间</string>
+    <string name="image_display_transform">图像显示变换</string>
+    <string name="app_version">应用版本</string>
+    <string name="keyword_language">关键字语言</string>
+    <string name="choose_keyword">选择关键字</string>
+    <string name="show_keyword_dialog_message">请选择关键字来显示图像</string>
 
     <string-array name="keyword_array">
         <item>alpha&amp;omega</item>

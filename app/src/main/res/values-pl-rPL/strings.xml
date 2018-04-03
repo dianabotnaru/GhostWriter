@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">GhostWriter</string>
-    <string name="button_ok">OK</string>
-    <string name="button_cancel">CANCEL</string>
-    <string name="keywords_dialog_title">KEYWORDS</string>
+    <string name="button_ok">ok</string>
+    <string name="button_cancel">Anuluj</string>
+    <string name="keywords_dialog_title">słowa kluczowe</string>
 
-    <string name="setting">SETTING</string>
-    <string name="keywords">KEYWORDS</string>
-    <string name="image_display_time">Image Display Time</string>
-    <string name="image_display_transform">Image Display Transform</string>
-    <string name="app_version">App Version</string>
-    <string name="keyword_language">Keyword Language</string>
-    <string name="choose_keyword">Choose keyword</string>
-    <string name="show_keyword_dialog_message">Please choose keywords to show images</string>
+    <string name="setting">oprawa</string>
+    <string name="keywords">słowa kluczowe</string>
+    <string name="image_display_time">czas wyświetlania obrazu</string>
+    <string name="image_display_transform">transformacja obrazu</string>
+    <string name="app_version">Wersja aplikacji</string>
+    <string name="keyword_language">język słów kluczowych</string>
+    <string name="choose_keyword">wybierz słowo kluczowe</string>
+    <string name="show_keyword_dialog_message">wybierz słowa kluczowe, aby wyświetlić obrazy</string>
 
 
     <string-array name="keyword_array">
