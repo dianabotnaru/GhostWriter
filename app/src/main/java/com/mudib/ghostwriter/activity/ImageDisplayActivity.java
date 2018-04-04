@@ -73,7 +73,16 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingActivity.class));
                 return true;
-
+            case R.id.action_contact:
+                Intent intent=new Intent(Intent.ACTION_SEND);
+                String[] recipients={"xyz@gmail.com"};
+                intent.putExtra(Intent.EXTRA_EMAIL, recipients);
+                intent.putExtra(Intent.EXTRA_SUBJECT,"");
+                intent.putExtra(Intent.EXTRA_TEXT,"");
+                intent.putExtra(Intent.EXTRA_CC,"");
+                intent.setType("text/html");
+                startActivity(Intent.createChooser(intent, ""));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
