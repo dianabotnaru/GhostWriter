@@ -91,11 +91,12 @@ public class Util {
         } else{
             config.locale = locale;
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            context.createConfigurationContext(config);
-        } else {
-            context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+//            context.createConfigurationContext(config);
+//        } else {
+//            context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
+//        }
+        context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
 
 }
