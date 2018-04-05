@@ -76,7 +76,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                 return true;
             case R.id.action_contact:
                 Intent intent=new Intent(Intent.ACTION_SEND);
-                String[] recipients={"xyz@gmail.com"};
+                String[] recipients={"mrawappt1@gmail.com"};
                 intent.putExtra(Intent.EXTRA_EMAIL, recipients);
                 intent.putExtra(Intent.EXTRA_SUBJECT,"");
                 intent.putExtra(Intent.EXTRA_TEXT,"");
