@@ -1,12 +1,15 @@
 package com.mudib.ghostwriter.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mudib.ghostwriter.R;
@@ -101,6 +104,27 @@ public class KeywordListAdapter extends BaseAdapter {
         });
 
         holder.checkBox.setChecked(keywords.get(position).isSelected());
+
+        Resources resources = mContext.getResources();
+        int resourceId;
+        if (position == 0){
+           resourceId = resources.getIdentifier("alpha", "drawable",
+                    mContext.getPackageName());
+
+        }else if(position == Constant.allSearchkeys.length-2){
+            resourceId = resources.getIdentifier("garden", "drawable",
+                    mContext.getPackageName());
+        }else if(position == Constant.allSearchkeys.length-1){
+            resourceId = resources.getIdentifier("wildman", "drawable",
+                    mContext.getPackageName());
+        }else{
+            resourceId = resources.getIdentifier(Constant.allSearchkeys[position], "drawable",
+                    mContext.getPackageName());
+        }
+        holder.imageView_keyword.setImageDrawable(resources.getDrawable(resourceId));
+        if(Constant.isRTL){
+            holder.linearLayout_keyword.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+        }
         return convertView;
     }
 
@@ -133,6 +157,12 @@ public class KeywordListAdapter extends BaseAdapter {
 
         @BindView(R.id.checkBox)
         CheckBox checkBox;
+
+        @BindView(R.id.imageView_keyword)
+        ImageView imageView_keyword;
+
+        @BindView(R.id.linearLayout_keyword)
+        LinearLayout linearLayout_keyword;
 
         DeviceHolder(View view) {
             ButterKnife.bind(this, view);

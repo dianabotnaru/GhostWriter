@@ -3,6 +3,7 @@ package com.mudib.ghostwriter.activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -10,9 +11,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.Explode;
+import android.view.View;
 import android.view.Window;
 
 import com.mudib.ghostwriter.R;
+import com.mudib.ghostwriter.constant.Constant;
 
 import butterknife.ButterKnife;
 
@@ -87,5 +90,12 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
+    public void setRTLState(){
+        Configuration config = getResources().getConfiguration();
+        if(config.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL) {
+            Constant.isRTL = true;
+        }else{
+            Constant.isRTL = false;
+        }
+    }
 }

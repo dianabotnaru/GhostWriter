@@ -65,6 +65,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                 fetchFlickImage();
             }
         }
+        setRTLState();
     }
 
     @Override

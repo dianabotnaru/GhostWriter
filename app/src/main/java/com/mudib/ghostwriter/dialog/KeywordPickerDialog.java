@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 

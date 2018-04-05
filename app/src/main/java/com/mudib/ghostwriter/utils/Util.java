@@ -51,7 +51,7 @@ public class Util {
             locale = new Locale("ne","IN");
         }else if(lang.equalsIgnoreCase("Filipino") ){
             locale = new Locale("fil","PH");
-        }else if(lang.equalsIgnoreCase("Aze1rbaijani") ){
+        }else if(lang.equalsIgnoreCase("Azerbaijani") ){
             locale = new Locale("az","AZ");
         }else if(lang.equalsIgnoreCase("French") ){
             locale = new Locale("fr");
