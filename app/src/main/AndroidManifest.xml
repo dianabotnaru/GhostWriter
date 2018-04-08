@@ -20,7 +20,10 @@
         </activity>
 
         <activity android:name=".activity.ImageDisplayActivity"
-                  android:configChanges="orientation|screenSize|locale"/>
+                  android:configChanges="orientation|screenSize|locale"
+                  android:clickable="true"
+                  android:focusable="true"
+                  android:focusableInTouchMode="true"/>
         <activity android:name=".activity.SettingActivity" android:configChanges="orientation|screenSize|locale" />
 
     </application>

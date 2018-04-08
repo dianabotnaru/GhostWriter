@@ -1,6 +1,8 @@
 package com.mudib.ghostwriter.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -43,6 +45,9 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
 
     @BindView(R.id.textView_language)
     TextView textView_language;
+
+    @BindView(R.id.textView_version)
+    TextView textView_version;
 
     private String[] transformValues;
 
@@ -87,6 +92,18 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
         });
         textView_displaytransform.setText(TimePreferencesManager.with(this).getImageDisplayTransformer());
         textView_language.setText(getResources().getString(R.string.selected_language));
+        setVerisonTextView();
+    }
+
+    private void setVerisonTextView(){
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            String version = pInfo.versionName+"."+pInfo.versionCode;
+            textView_version.setText(version);
+
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

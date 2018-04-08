@@ -5,9 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +51,20 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @BindView(R.id.slider_images)
     SliderLayout imageSlider;
 
+    @BindView(R.id.slider_layout)
+    RelativeLayout sliderLayout;
+
+    @BindView(R.id.fab)
+    FloatingActionButton floatingActionButton;
+
+    @BindView(R.id.textView_keyword)
+    TextView keywordTextView;
+
     private ArrayList<Keyword> searchKeyList;
 
     private int currentSearchIndex;
+
+    private boolean isFullScreen = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,9 +131,12 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         for(int i = 0;i<searchResultItems.size();i++){
             SearchResultFlickr searchResultFlickr = searchResultItems.get(i);
             TextSliderView textSliderView = new TextSliderView(this);
+            Bundle arguments = new Bundle();
+            arguments.putString("Keyword_key",searchResultFlickr.getKeyword());
             textSliderView
                     .description(searchResultFlickr.getTitle())
                     .image(searchResultFlickr.getUrl())
+                    .bundle(arguments)
                     .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .setOnSliderClickListener(this);
             imageSlider.addSlider(textSliderView);
@@ -159,10 +179,24 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     @Override
     public void onSliderClick(BaseSliderView slider) {
+        if(isFullScreen){
+            showToolbar();
+            float density = getResources().getDisplayMetrics().density;
+            sliderLayout.setPadding((int)(16*density),(int)(32*density),(int)(16*density),(int)(16*density));
+            floatingActionButton.setVisibility(View.VISIBLE);
+            isFullScreen = false;
+        }else{
+            hideToolbar();
+            sliderLayout.setPadding(0,0,0,0);
+            floatingActionButton.setVisibility(View.GONE);
+            isFullScreen = true;
+        }
+        imageSlider.startAutoCycle();
     }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
     }
 
     @Override
@@ -170,11 +204,19 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     }
 
     @Override
-    public void onPageScrollStateChanged(int state) {}
+    public void onPageScrollStateChanged(int state) {
+
+        if(state == 2) {
+            Bundle bundle = imageSlider.getCurrentSlider().getBundle();
+            String keyword = bundle.getString("Keyword_key");
+            keywordTextView.setText(keyword);
+        }
+    }
 
     @Override
     public void onSelectedKeywords(List<Keyword> keywords) {
         initSliderFlags();
+        keywordTextView.setText("");
         for(Keyword keyword:keywords){
             searchKeyList.add(keyword);
         }
@@ -196,8 +238,14 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             task.setFlickrImageLoadTaskInterface(new FlickrImageLoadTaskInterface() {
                 @Override
                 public void onGetFlickrImageList(List<SearchResultFlickr> searchResultFlickrs) {
-                    SearchImagesCacheManager.with().setSearchImages(keyword.getWord(),searchResultFlickrs);
-                    keyword.setSearchResultFlickrs(searchResultFlickrs);
+                    ArrayList<SearchResultFlickr> updatedSearchResultFlickrs = new ArrayList<SearchResultFlickr>();
+                    for(SearchResultFlickr searchResultFlickr:searchResultFlickrs){
+                        searchResultFlickr.setKeyword(keyword.getEnWord());
+                        updatedSearchResultFlickrs.add(searchResultFlickr);
+                    }
+
+                    SearchImagesCacheManager.with().setSearchImages(keyword.getWord(),updatedSearchResultFlickrs);
+                    keyword.setSearchResultFlickrs(updatedSearchResultFlickrs);
                     nextFetchFlckImage();
                 }
 

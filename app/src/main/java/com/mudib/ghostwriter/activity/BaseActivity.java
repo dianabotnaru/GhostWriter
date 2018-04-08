@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.transition.Explode;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.constant.Constant;
@@ -48,6 +49,17 @@ public class BaseActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(isDisplayHomeEnabled);
     }
+
+    public void hideToolbar(){
+        getSupportActionBar().hide();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    public void showToolbar(){
+        getSupportActionBar().show();
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
 
     public void showLoading(){
         if(!isLoading) {

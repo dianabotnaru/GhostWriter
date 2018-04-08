@@ -13,6 +13,7 @@ public class SearchResultFlickr implements Serializable {
     private String date;
     private String owner;
     private String url;
+    private String keyword;
 
     public String getTitle(){
         return title;
@@ -41,5 +42,13 @@ public class SearchResultFlickr implements Serializable {
     }
     public void setUrl(String url){
         this.url = url;
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 }

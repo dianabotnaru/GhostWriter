@@ -43,6 +43,7 @@ public class FlickrImageLoadTask extends AsyncTask<String, Void, List<SearchResu
 
     String error = "";
 
+
     public void setFlickrImageLoadTaskInterface(FlickrImageLoadTaskInterface flickrImageLoadTaskInterface){
         this.flickrImageLoadTaskInterface = flickrImageLoadTaskInterface;
     }
