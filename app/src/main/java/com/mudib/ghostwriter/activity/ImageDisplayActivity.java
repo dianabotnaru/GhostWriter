@@ -220,6 +220,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         for(Keyword keyword:keywords){
             searchKeyList.add(keyword);
         }
+        
         TimePreferencesManager.with(this).saveSearchKeyword(searchKeyList);
         showLoading();
         fetchFlickImage();
