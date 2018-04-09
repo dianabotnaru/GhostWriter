@@ -206,19 +206,22 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @Override
     public void onPageScrollStateChanged(int state) {
 
-        if(state == 2) {
-            Bundle bundle = imageSlider.getCurrentSlider().getBundle();
-            String keyword = bundle.getString("Keyword_key");
-            keywordTextView.setText(keyword);
-        }
     }
 
     @Override
     public void onSelectedKeywords(List<Keyword> keywords) {
         initSliderFlags();
+        String keywordStrings = "";
         keywordTextView.setText("");
-        for(Keyword keyword:keywords){
+        for(int i= 0; i<keywords.size();i++){
+            Keyword keyword = keywords.get(i);
             searchKeyList.add(keyword);
+            if (i==0){
+                keywordStrings = keyword.getWord();
+            }else{
+                keywordStrings += ","+keyword.getWord();
+            }
+            keywordTextView.setText(keywordStrings);
         }
         
         TimePreferencesManager.with(this).saveSearchKeyword(searchKeyList);
