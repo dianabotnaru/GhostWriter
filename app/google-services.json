@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "961091112977",
+    "firebase_url": "https://ghost-writer-alpha.firebaseio.com",
+    "project_id": "ghost-writer-alpha",
+    "storage_bucket": "ghost-writer-alpha.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:961091112977:android:2494a00de4a3c246",
+        "android_client_info": {
+          "package_name": "com.mudib.ghostwriter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "961091112977-fadjpvb7nidfohflc39fsk6048eim8qd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mudib.ghostwriter",
+            "certificate_hash": "91284ccd142ad02a73db9f2fc398d2e4f89c94a9"
+          }
+        },
+        {
+          "client_id": "961091112977-rn3pfirpo4js798mf7bq2dof1qmjidlo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCORmWd1Y2kBSZKXZxYiofkWKR8nd5Ja4w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "961091112977-rn3pfirpo4js798mf7bq2dof1qmjidlo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
