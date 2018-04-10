@@ -1,6 +1,5 @@
 package com.mudib.ghostwriter.activity;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -9,12 +8,8 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.mudib.ghostwriter.R;
-import com.mudib.ghostwriter.manager.SearchImagesCacheManager;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
 import com.mudib.ghostwriter.utils.Util;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 

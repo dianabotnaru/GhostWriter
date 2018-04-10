@@ -15,4 +15,7 @@ public class Constant {
     public static int defaulSliderCount = 100;
     public static boolean isRTL = false;
 
+    public static String google_analytics_item_id = "1001";
+    public static String google_analytics_item_content = "Selected Keywords";
+
 }

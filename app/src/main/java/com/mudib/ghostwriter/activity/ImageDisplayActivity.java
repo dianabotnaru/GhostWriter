@@ -1,22 +1,16 @@
 package com.mudib.ghostwriter.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mudib.ghostwriter.Interface.FlickrImageLoadTaskInterface;
 import com.mudib.ghostwriter.Interface.KeywordPickerDialogInterface;
 import com.mudib.ghostwriter.R;
@@ -66,6 +60,8 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     private boolean isFullScreen = false;
 
+    private FirebaseAnalytics mFirebaseAnalytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +74,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             if(searchKeyList.size() == 0){
                 showAlertDialog();
             }else{
+                setKeywordTextViewString(searchKeyList);
                 showLoading();
                 fetchFlickImage();
             }
@@ -116,6 +113,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     private void initDatas(){
         currentSearchIndex = 0;
         searchKeyList = new ArrayList<Keyword>();
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
     private void initSliderView(){
@@ -125,6 +123,20 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         long displayTime = TimePreferencesManager.with(this).getImageDisplayTime();
         imageSlider.setDuration(displayTime);
         imageSlider.addOnPageChangeListener(this);
+    }
+
+    private void setKeywordTextViewString(List<Keyword> keywords){
+        String keywordStrings = "";
+        keywordTextView.setText("");
+        for(int i= 0; i<keywords.size();i++){
+            Keyword keyword = keywords.get(i);
+            if (i==0){
+                keywordStrings = keyword.getWord();
+            }else{
+                keywordStrings += ","+keyword.getWord();
+            }
+        }
+        keywordTextView.setText(keywordStrings);
     }
 
     private void setSliderViewImages(ArrayList<SearchResultFlickr> searchResultItems){
@@ -211,23 +223,18 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @Override
     public void onSelectedKeywords(List<Keyword> keywords) {
         initSliderFlags();
-        String keywordStrings = "";
-        keywordTextView.setText("");
         for(int i= 0; i<keywords.size();i++){
             Keyword keyword = keywords.get(i);
             searchKeyList.add(keyword);
-            if (i==0){
-                keywordStrings = keyword.getWord();
-            }else{
-                keywordStrings += ","+keyword.getWord();
-            }
-            keywordTextView.setText(keywordStrings);
         }
-        
+        setKeywordTextViewString(keywords);
         TimePreferencesManager.with(this).saveSearchKeyword(searchKeyList);
         showLoading();
         fetchFlickImage();
+
+        getGoogleAnalyticsEvent();
     }
+
 
     private void fetchFlickImage(){
         if(currentSearchIndex == searchKeyList.size()){
@@ -312,5 +319,13 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     public void onDialogOkButtonClicked(){
         KeywordPickerDialog keywordPickerDialog = KeywordPickerDialog.newInstance();
         keywordPickerDialog.show(getSupportFragmentManager(), KeywordPickerDialog.TAG);
+    }
+
+    private void getGoogleAnalyticsEvent(){
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, Constant.google_analytics_item_id);
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, Constant.google_analytics_item_content);
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, Constant.google_analytics_item_content);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 }
