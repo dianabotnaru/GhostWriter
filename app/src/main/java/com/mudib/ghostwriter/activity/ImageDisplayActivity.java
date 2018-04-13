@@ -284,10 +284,12 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             for (int k = 0; k < totalClusterCount - 1; k++) {
                 for (int i = 0; i < searchKeyList.size(); i++) {
                     Keyword keyword = searchKeyList.get(i);
-                    for (int j = 0; j < Constant.clusterCount; j++) {
-                        int index = j + k * Constant.clusterCount;
-                        if(index<keyword.getSearchResultFlickrs().size()) {
-                            clusterSearchImages.add(keyword.getSearchResultFlickrs().get(index));
+                    if (keyword.getSearchResultFlickrs() !=null) {
+                        for (int j = 0; j < Constant.clusterCount; j++) {
+                            int index = j + k * Constant.clusterCount;
+                            if (index < keyword.getSearchResultFlickrs().size()) {
+                                clusterSearchImages.add(keyword.getSearchResultFlickrs().get(index));
+                            }
                         }
                     }
                 }
@@ -295,8 +297,12 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         }else {
             for (int i = 0; i < searchKeyList.size(); i++) {
                 Keyword keyword = searchKeyList.get(i);
-                for (int j = 0; j < Constant.clusterCount; j++) {
-                    clusterSearchImages.add(keyword.getSearchResultFlickrs().get(j));
+                if (keyword.getSearchResultFlickrs() !=null) {
+                    for (int j = 0; j < Constant.clusterCount; j++) {
+                        if (j < keyword.getSearchResultFlickrs().size()) {
+                            clusterSearchImages.add(keyword.getSearchResultFlickrs().get(j));
+                        }
+                    }
                 }
             }
         }
