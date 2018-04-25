@@ -5,6 +5,9 @@ package com.mudib.ghostwriter.constant;
  */
 
 public class Constant {
+
+    public static String ADMOB_APP_ID = "ADMOB_APP_ID";
+
     public static String[] allSearchkeys = {"Alpha & Omega", "anchor", "angel","ant","apple","baby","beehive","bird","bread","bull", "camel", "candle", "cauldron","chameleon","compass","cornucopia","crocodile","dolphin","elephant"
             ,"globe", "griffin", "helmet", "horse","hourglass","lute","madonna","marionette","moon", "owl", "serpent", "sun","sword","thunderbolt","tree","walled garden","wild man"};
 

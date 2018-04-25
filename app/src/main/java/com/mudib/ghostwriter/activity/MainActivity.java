@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.mudib.ghostwriter.R;
+import com.mudib.ghostwriter.constant.Constant;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
 import com.mudib.ghostwriter.utils.Util;
+import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends BaseActivity {
 
@@ -17,6 +19,9 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        MobileAds.initialize(this, Constant.ADMOB_APP_ID);
+
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
