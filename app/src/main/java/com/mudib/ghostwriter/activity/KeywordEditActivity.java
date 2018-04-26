@@ -6,6 +6,7 @@ import android.widget.ListView;
 
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.adapter.KeywordListAdapter;
+import com.mudib.ghostwriter.dialog.AddKeywordDialog;
 import com.mudib.ghostwriter.dialog.KeywordPickerDialog;
 import com.mudib.ghostwriter.dialog.WarningDialogFragment;
 import com.mudib.ghostwriter.models.Keyword;
@@ -68,12 +69,16 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
 
     @OnClick(R.id.button_add)
     public void onAddButtonClick() {
+        AddKeywordDialog dialogFragment = AddKeywordDialog.newInstance();
+        dialogFragment.show(getSupportFragmentManager(), AddKeywordDialog.TAG);
     }
 
     @OnClick(R.id.button_delete)
     public void onDeleteButtonClick() {
-        WarningDialogFragment dialogFragment = WarningDialogFragment.newInstance(getResources().getString(R.string.delete_keyword_warning_title),getResources().getString(R.string.delete_keyword_warning_message),false);
-        dialogFragment.show(getSupportFragmentManager(), WarningDialogFragment.TAG);
+        if(keywordListAdapter.getUnSelectedItems().size()>0) {
+            WarningDialogFragment dialogFragment = WarningDialogFragment.newInstance(getResources().getString(R.string.delete_keyword_warning_title), getResources().getString(R.string.delete_keyword_warning_message), false);
+            dialogFragment.show(getSupportFragmentManager(), WarningDialogFragment.TAG);
+        }
     }
 
     @Override

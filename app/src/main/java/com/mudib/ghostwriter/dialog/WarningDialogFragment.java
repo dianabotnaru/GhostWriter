@@ -86,7 +86,7 @@ public class WarningDialogFragment extends BaseDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.fragment_dialog_warning);
+        dialog.setContentView(R.layout.dialog_warning);
         mUnbinder = ButterKnife.bind(this, dialog.getWindow().getDecorView());
         initViews();
         return dialog;
