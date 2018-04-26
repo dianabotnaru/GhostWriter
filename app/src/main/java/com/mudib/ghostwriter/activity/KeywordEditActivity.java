@@ -21,7 +21,7 @@ import butterknife.OnClick;
  * Created by jordi on 26/04/2018.
  */
 
-public class KeywordEditActivity extends BaseActivity implements WarningDialogFragment.WarningDialogListener{
+public class KeywordEditActivity extends BaseActivity implements WarningDialogFragment.WarningDialogListener,AddKeywordDialog.AddKeywordDialogListener{
 
     @BindView(R.id.keywordListView)
     ListView listViewKeyword;
@@ -84,6 +84,10 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
     @Override
     public void onDialogOkButtonClicked(){
         deleteSelectedKeywords();
+    }
+
+    @Override
+    public void onAddKeywordDialogOkButtonClicked(List<Keyword> keywords){
     }
 
     private void deleteSelectedKeywords(){
