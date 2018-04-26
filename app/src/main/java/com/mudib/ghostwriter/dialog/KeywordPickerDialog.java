@@ -41,8 +41,18 @@ public class KeywordPickerDialog extends BaseDialogFragment{
     @BindView(R.id.searchView)
     ContactsCompletionView completionView;
 
-    @BindView(R.id.listview_keyword)
+    @BindView(R.id.keywordListView)
     ListView listViewKeyword;
+
+    @OnClick(R.id.button_keywords)
+    void onEditKeywordsClicked() {
+        dismiss();
+        try {
+            ((KeywordPickerDialogInterface) getActivity()).onEditKeywordClicked();
+        } catch (ClassCastException cce) {
+            throw new ClassCastException("DateTimePickerListener getTargetFragment is not set");
+        }
+    }
 
     @OnClick(R.id.button_ok)
     void onOkClicked() {

@@ -10,4 +10,5 @@ import java.util.List;
 
 public interface KeywordPickerDialogInterface {
     void onSelectedKeywords(List<Keyword> keywords);
+    void onEditKeywordClicked();
 }
