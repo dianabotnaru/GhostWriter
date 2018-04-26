@@ -7,9 +7,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mudib.ghostwriter.Interface.FlickrImageLoadTaskInterface;
 import com.mudib.ghostwriter.Interface.KeywordPickerDialogInterface;
@@ -42,11 +46,28 @@ import butterknife.BindView;
 
 public class ImageDisplayActivity extends BaseActivity implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener,KeywordPickerDialogInterface,WarningDialogFragment.WarningDialogListener{
 
+
+    @BindView(R.id.adView)
+    AdView adView;
+
     @BindView(R.id.slider_images)
     SliderLayout imageSlider;
 
     @BindView(R.id.slider_layout)
     RelativeLayout sliderLayout;
+
+    @BindView(R.id.slider_top_layout)
+    LinearLayout topMarginLayout;
+
+    @BindView(R.id.slider_bottom_layout)
+    LinearLayout bottomMarginLayout;
+
+    @BindView(R.id.slider_left_layout)
+    LinearLayout leftMarginLayout;
+
+    @BindView(R.id.slider_right_layout)
+    LinearLayout rightMarginLayout;
+
 
     @BindView(R.id.fab)
     FloatingActionButton floatingActionButton;
@@ -80,6 +101,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             }
         }
         setRTLState();
+        adRequest();
     }
 
     @Override
@@ -125,6 +147,37 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         imageSlider.addOnPageChangeListener(this);
     }
 
+    private void initAdView(){
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+            }
+
+            @Override
+            public void onAdOpened() {
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+            }
+
+            @Override
+            public void onAdClosed() {
+            }
+        });
+    }
+
+    private void adRequest(){
+        AdRequest request = new AdRequest.Builder()
+                .build();
+        adView.loadAd(request);
+    }
+
     private void setKeywordTextViewString(List<Keyword> keywords){
         String keywordStrings = "";
         keywordTextView.setText("");
@@ -162,19 +215,6 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         keywordPickerDialog.show(getSupportFragmentManager(), KeywordPickerDialog.TAG);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initToolbar("Ghost Writer",false);
-        if(imageSlider!=null){
-            initSliderView();
-            imageSlider.startAutoCycle();
-        }
-        if(TimePreferencesManager.with(this).isChangedLocale){
-            TimePreferencesManager.with(this).isChangedLocale = false;
-            restartActivity();
-        }
-    }
 
     @Override
     protected void onStop() {
@@ -183,25 +223,25 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        imageSlider.stopAutoCycle();
-        imageSlider.removeAllSliders();
-    }
-
-    @Override
     public void onSliderClick(BaseSliderView slider) {
         if(isFullScreen){
             showToolbar();
-            float density = getResources().getDisplayMetrics().density;
-            sliderLayout.setPadding((int)(16*density),(int)(32*density),(int)(16*density),(int)(16*density));
             floatingActionButton.setVisibility(View.VISIBLE);
             isFullScreen = false;
+
+            topMarginLayout.setVisibility(View.VISIBLE);
+            bottomMarginLayout.setVisibility(View.VISIBLE);
+            leftMarginLayout.setVisibility(View.VISIBLE);
+            rightMarginLayout.setVisibility(View.VISIBLE);
         }else{
             hideToolbar();
-            sliderLayout.setPadding(0,0,0,0);
             floatingActionButton.setVisibility(View.GONE);
             isFullScreen = true;
+
+            topMarginLayout.setVisibility(View.GONE);
+            bottomMarginLayout.setVisibility(View.GONE);
+            leftMarginLayout.setVisibility(View.GONE);
+            rightMarginLayout.setVisibility(View.GONE);
         }
         imageSlider.startAutoCycle();
     }
@@ -235,6 +275,11 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         getGoogleAnalyticsEvent();
     }
 
+    @Override
+    public void onEditKeywordClicked(){
+        KeywordPickerDialog keywordPickerDialog = KeywordPickerDialog.newInstance();
+        keywordPickerDialog.show(getSupportFragmentManager(), KeywordPickerDialog.TAG);
+    }
 
     private void fetchFlickImage(){
         if(currentSearchIndex == searchKeyList.size()){
@@ -333,5 +378,40 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, Constant.google_analytics_item_content);
         bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, Constant.google_analytics_item_content);
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+    }
+
+    @Override
+    public void onPause() {
+        if (adView != null) {
+            adView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initToolbar("Ghost Writer",false);
+        if(imageSlider!=null){
+            initSliderView();
+            imageSlider.startAutoCycle();
+        }
+        if(TimePreferencesManager.with(this).isChangedLocale){
+            TimePreferencesManager.with(this).isChangedLocale = false;
+            restartActivity();
+        }
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        imageSlider.stopAutoCycle();
+        imageSlider.removeAllSliders();
+        super.onDestroy();
     }
 }
