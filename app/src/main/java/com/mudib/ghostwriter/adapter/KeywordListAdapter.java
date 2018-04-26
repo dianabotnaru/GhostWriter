@@ -146,6 +146,17 @@ public class KeywordListAdapter extends BaseAdapter {
         return selectedKeywords;
     }
 
+    public List<Keyword> getUnSelectedItems(){
+        List<Keyword> selectedKeywords = new ArrayList<>();
+        for(Keyword keyword:keywords){
+            if(!keyword.isSelected()){
+                selectedKeywords.add(keyword);
+            }
+        }
+        return selectedKeywords;
+    }
+
+
     public void clear() {
         keywords.clear();
         notifyDataSetChanged();

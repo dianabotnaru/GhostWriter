@@ -277,8 +277,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     @Override
     public void onEditKeywordClicked(){
-        KeywordPickerDialog keywordPickerDialog = KeywordPickerDialog.newInstance();
-        keywordPickerDialog.show(getSupportFragmentManager(), KeywordPickerDialog.TAG);
+        startActivity(new Intent(ImageDisplayActivity.this, KeywordEditActivity.class));
     }
 
     private void fetchFlickImage(){
