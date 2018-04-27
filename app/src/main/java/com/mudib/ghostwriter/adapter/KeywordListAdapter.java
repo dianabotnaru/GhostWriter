@@ -71,23 +71,6 @@ public class KeywordListAdapter extends BaseAdapter {
             holder = (DeviceHolder) convertView.getTag();
         }
         holder.keywordTextView.setText(keywords.get(position).getWord());
-//        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                                               @Override
-//                                               public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-//                                                   Keyword keyword = keywords.get(position);
-//                                                   keyword.setSelected(isChecked);
-//                                                   keywords.set(position,keyword);
-//                                                   if(mKeywordListAdapterListener!=null) {
-//                                                       if (isChecked){
-//                                                           mKeywordListAdapterListener.onCheckedKeyword(keyword);
-//                                                       }else{
-//                                                           mKeywordListAdapterListener.onUnCheckedKeyword(keyword);
-//                                                       }
-//                                                   }
-//                                               }
-//                                           }
-//        );
-
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,23 +88,36 @@ public class KeywordListAdapter extends BaseAdapter {
 
         holder.checkBox.setChecked(keywords.get(position).isSelected());
 
-//        Resources resources = mContext.getResources();
-//        int resourceId;
-//        if (position == 0){
-//           resourceId = resources.getIdentifier("alpha", "drawable",
-//                    mContext.getPackageName());
-//
-//        }else if(position == Constant.allSearchkeys.length-2){
-//            resourceId = resources.getIdentifier("garden", "drawable",
-//                    mContext.getPackageName());
-//        }else if(position == Constant.allSearchkeys.length-1){
-//            resourceId = resources.getIdentifier("wildman", "drawable",
-//                    mContext.getPackageName());
-//        }else{
-//            resourceId = resources.getIdentifier(Constant.allSearchkeys[position], "drawable",
-//                    mContext.getPackageName());
-//        }
-//        holder.imageView_keyword.setImageDrawable(resources.getDrawable(resourceId));
+        Keyword keyword = keywords.get(position);
+
+        Resources resources = mContext.getResources();
+        int resourceId;
+        if (keyword.getEnWord().equalsIgnoreCase("Alpha&Omega")){
+           resourceId = resources.getIdentifier("alpha", "drawable",
+                    mContext.getPackageName());
+
+        }else if (keyword.getEnWord().equalsIgnoreCase("walled garden")){
+            resourceId = resources.getIdentifier("garden", "drawable",
+                    mContext.getPackageName());
+        }else if (keyword.getEnWord().equalsIgnoreCase("wild man")){
+            resourceId = resources.getIdentifier("wildman", "drawable",
+                    mContext.getPackageName());
+        }else{
+            String identifier = "";
+            if (keyword.getEnWord().length() <= 1) {
+                identifier = keyword.getEnWord().toLowerCase();
+            } else {
+                identifier = keyword.getEnWord().substring(0, 1).toLowerCase() + keyword.getEnWord().substring(1);
+            }
+
+            resourceId = resources.getIdentifier(identifier, "drawable",
+                    mContext.getPackageName());
+            if(resourceId == 0){
+                resourceId = resources.getIdentifier("logo", "drawable",
+                        mContext.getPackageName());
+            }
+        }
+        holder.imageView_keyword.setImageDrawable(resources.getDrawable(resourceId));
         if(Constant.isRTL){
             holder.linearLayout_keyword.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }

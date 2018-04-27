@@ -26,6 +26,7 @@ public class Keyword {
 
     public Keyword(String word){
         this.word = word;
+        this.enWord = word;
         this.page = Constant.defaultPage;
         this.perPage=Constant.detfaultPerPage;
         isSelected = false;
