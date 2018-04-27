@@ -23,12 +23,15 @@ public class TimePreferencesManager {
     private Context context;
 
 
-    private String TIME_PREFERENCE_FILE_KEY = "com.mudib.ghostwriter.prefsfile";
-    private String DISPLAY_TIME_KEY = "display_time_key";
-    private String DISPLAY_TRANSFORM_KEY = "display_transform_key";
-    private String KEYWORD_LANGUAGE_KEY = "keyword_language_key";
+    public static String TIME_PREFERENCE_FILE_KEY = "com.mudib.ghostwriter.prefsfile";
+    public static String DISPLAY_TIME_KEY = "display_time_key";
+    public static String DISPLAY_TRANSFORM_KEY = "display_transform_key";
+    public static String KEYWORD_LANGUAGE_KEY = "keyword_language_key";
 
-    private String SEARCH_KEYWORD_KEYS = "search_keyword_key";
+    public static String SEARCH_KEYWORD_KEYS = "search_keyword_key";
+
+    public static String DEFAULT_KEYWORD_KEYS = "default_keyword_key";
+
 
     private long DISPLAY_TIME_DEFAULT = 5000;
 
@@ -62,10 +65,10 @@ public class TimePreferencesManager {
         return  sharedPreferences.getString(KEYWORD_LANGUAGE_KEY, "English");
     }
 
-    public ArrayList<Keyword> getKeywordList() {
+    public ArrayList<Keyword> getKeywordList(String key) {
         ArrayList<Keyword> keywordArray = new ArrayList<Keyword>();
         SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
-        String keywords = sharedPreferences.getString(SEARCH_KEYWORD_KEYS, "");
+        String keywords = sharedPreferences.getString(key, "");
         if (!keywords.equalsIgnoreCase("")){
             String[] keywordsList = keywords.split(",");
             for (int i = 0; i < keywordsList.length; i++) {
@@ -99,7 +102,8 @@ public class TimePreferencesManager {
         preferencesEditor.apply();
     }
 
-    public void saveSearchKeyword(ArrayList<Keyword> keywords) {
+
+    public void saveKeyword(ArrayList<Keyword> keywords, String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor preferencesEditor = sharedPreferences.edit();
 
@@ -108,10 +112,7 @@ public class TimePreferencesManager {
             sb.append(keywords.get(i).getEnWord()).append(",");
         }
 
-        preferencesEditor.putString(SEARCH_KEYWORD_KEYS, sb.toString());
+        preferencesEditor.putString(key, sb.toString());
         preferencesEditor.apply();
     }
-
-
-
 }

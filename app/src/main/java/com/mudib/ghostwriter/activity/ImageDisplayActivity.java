@@ -91,7 +91,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         initSliderView();
         if(TimePreferencesManager.with(this).isFirstLaunch){
             TimePreferencesManager.with(this).isFirstLaunch = false;
-            searchKeyList = TimePreferencesManager.with(this).getKeywordList();
+            searchKeyList = TimePreferencesManager.with(this).getKeywordList(TimePreferencesManager.SEARCH_KEYWORD_KEYS);
             if(searchKeyList.size() == 0){
                 showAlertDialog();
             }else{
@@ -268,7 +268,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             searchKeyList.add(keyword);
         }
         setKeywordTextViewString(keywords);
-        TimePreferencesManager.with(this).saveSearchKeyword(searchKeyList);
+        TimePreferencesManager.with(this).saveKeyword(searchKeyList,TimePreferencesManager.SEARCH_KEYWORD_KEYS);
         showLoading();
         fetchFlickImage();
 
