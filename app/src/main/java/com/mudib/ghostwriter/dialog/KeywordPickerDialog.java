@@ -15,6 +15,7 @@ import com.mudib.ghostwriter.Interface.KeywordPickerDialogInterface;
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.adapter.KeywordListAdapter;
 import com.mudib.ghostwriter.constant.Constant;
+import com.mudib.ghostwriter.manager.TimePreferencesManager;
 import com.mudib.ghostwriter.models.Keyword;
 import com.mudib.ghostwriter.utils.Util;
 import com.mudib.ghostwriter.views.ContactsCompletionView;
@@ -94,10 +95,13 @@ public class KeywordPickerDialog extends BaseDialogFragment{
 
     private void initViews(){
 
-        String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
-        for (int i=0; i<keyword_array.length; i++){
-            Keyword keyword = new Keyword(keyword_array[i]);
-            keywords.add(keyword);
+        keywords = TimePreferencesManager.with(getContext()).getKeywordList(TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
+        if(keywords.size()==0) {
+            String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
+            for (int i = 0; i < keyword_array.length; i++) {
+                Keyword keyword = new Keyword(keyword_array[i]);
+                keywords.add(keyword);
+            }
         }
 
         keywordListAdapter = new KeywordListAdapter(getContext(), new KeywordListAdapter.KeywordListAdapterListener() {

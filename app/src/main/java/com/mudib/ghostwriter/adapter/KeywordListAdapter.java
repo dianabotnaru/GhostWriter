@@ -105,23 +105,23 @@ public class KeywordListAdapter extends BaseAdapter {
 
         holder.checkBox.setChecked(keywords.get(position).isSelected());
 
-        Resources resources = mContext.getResources();
-        int resourceId;
-        if (position == 0){
-           resourceId = resources.getIdentifier("alpha", "drawable",
-                    mContext.getPackageName());
-
-        }else if(position == Constant.allSearchkeys.length-2){
-            resourceId = resources.getIdentifier("garden", "drawable",
-                    mContext.getPackageName());
-        }else if(position == Constant.allSearchkeys.length-1){
-            resourceId = resources.getIdentifier("wildman", "drawable",
-                    mContext.getPackageName());
-        }else{
-            resourceId = resources.getIdentifier(Constant.allSearchkeys[position], "drawable",
-                    mContext.getPackageName());
-        }
-        holder.imageView_keyword.setImageDrawable(resources.getDrawable(resourceId));
+//        Resources resources = mContext.getResources();
+//        int resourceId;
+//        if (position == 0){
+//           resourceId = resources.getIdentifier("alpha", "drawable",
+//                    mContext.getPackageName());
+//
+//        }else if(position == Constant.allSearchkeys.length-2){
+//            resourceId = resources.getIdentifier("garden", "drawable",
+//                    mContext.getPackageName());
+//        }else if(position == Constant.allSearchkeys.length-1){
+//            resourceId = resources.getIdentifier("wildman", "drawable",
+//                    mContext.getPackageName());
+//        }else{
+//            resourceId = resources.getIdentifier(Constant.allSearchkeys[position], "drawable",
+//                    mContext.getPackageName());
+//        }
+//        holder.imageView_keyword.setImageDrawable(resources.getDrawable(resourceId));
         if(Constant.isRTL){
             holder.linearLayout_keyword.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }

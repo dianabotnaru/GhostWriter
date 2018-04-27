@@ -9,6 +9,7 @@ import com.mudib.ghostwriter.adapter.KeywordListAdapter;
 import com.mudib.ghostwriter.dialog.AddKeywordDialog;
 import com.mudib.ghostwriter.dialog.KeywordPickerDialog;
 import com.mudib.ghostwriter.dialog.WarningDialogFragment;
+import com.mudib.ghostwriter.manager.TimePreferencesManager;
 import com.mudib.ghostwriter.models.Keyword;
 
 import java.util.ArrayList;
@@ -38,10 +39,13 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
     }
 
     private void initListViewKeyword(){
-        String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
-        for (int i=0; i<keyword_array.length; i++){
-            Keyword keyword = new Keyword(keyword_array[i]);
-            keywords.add(keyword);
+        keywords = TimePreferencesManager.with(this).getKeywordList(TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
+        if(keywords.size()==0) {
+            String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
+            for (int i = 0; i < keyword_array.length; i++) {
+                Keyword keyword = new Keyword(keyword_array[i]);
+                keywords.add(keyword);
+            }
         }
 
         keywordListAdapter = new KeywordListAdapter(this, new KeywordListAdapter.KeywordListAdapterListener() {
@@ -75,7 +79,7 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
 
     @OnClick(R.id.button_delete)
     public void onDeleteButtonClick() {
-        if(keywordListAdapter.getUnSelectedItems().size()>0) {
+        if(keywordListAdapter.getSelectedItems().size()>0) {
             WarningDialogFragment dialogFragment = WarningDialogFragment.newInstance(getResources().getString(R.string.delete_keyword_warning_title), getResources().getString(R.string.delete_keyword_warning_message), false);
             dialogFragment.show(getSupportFragmentManager(), WarningDialogFragment.TAG);
         }
@@ -88,6 +92,12 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
 
     @Override
     public void onAddKeywordDialogOkButtonClicked(List<Keyword> keywords){
+        for(Keyword keyword:keywords){
+            this.keywords.add(keyword);
+        }
+        keywordListAdapter.setItems(this.keywords);
+        listViewKeyword.setAdapter(keywordListAdapter);
+        TimePreferencesManager.with(this).saveKeyword(this.keywords,TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
     }
 
     private void deleteSelectedKeywords(){
@@ -95,5 +105,6 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
         keywords = keywordListAdapter.getUnSelectedItems();
         keywordListAdapter.setItems(keywords);
         listViewKeyword.setAdapter(keywordListAdapter);
+        TimePreferencesManager.with(this).saveKeyword(keywords,TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
     }
 }

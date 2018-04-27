@@ -74,6 +74,7 @@ public class TimePreferencesManager {
             for (int i = 0; i < keywordsList.length; i++) {
                 Keyword keyword = new Keyword(keywordsList[i]);
                 keyword.setEnWord(keywordsList[i]);
+                keyword.setWord(keywordsList[i]);
                 keywordArray.add(keyword);
             }
         }
@@ -103,13 +104,14 @@ public class TimePreferencesManager {
     }
 
 
-    public void saveKeyword(ArrayList<Keyword> keywords, String key) {
+    public void saveKeyword(List<Keyword> keywords, String key) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor preferencesEditor = sharedPreferences.edit();
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < keywords.size(); i++) {
-            sb.append(keywords.get(i).getEnWord()).append(",");
+//            sb.append(keywords.get(i).getEnWord()).append(",");
+             sb.append(keywords.get(i).getWord()).append(",");
         }
 
         preferencesEditor.putString(key, sb.toString());
