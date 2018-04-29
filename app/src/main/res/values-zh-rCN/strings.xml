@@ -16,6 +16,11 @@
     <string name="show_keyword_dialog_message">请选择关键字来显示图像</string>
     <string name="selected_language">中文</string>
 
+    <string name="delete_keyword_warning_title">Delete Keywords</string>
+    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
+    <string name="edit_keyword">EDIT KEYWORD</string>
+
+
     <string-array name="keyword_array">
         <item>alpha&amp;omega</item>
         <item>锚</item>

@@ -17,6 +17,11 @@
     <string name="show_keyword_dialog_message">Xahiş edirik şəkilləri göstərmək üçün açar sözlər seçin</string>
     <string name="selected_language">Azerbaijani</string>
 
+    <string name="delete_keyword_warning_title">Delete Keywords</string>
+    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
+    <string name="edit_keyword">EDIT KEYWORD</string>
+
+
 
     <string-array name="keyword_array">
         <item>alfa və omeqa</item>

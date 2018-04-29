@@ -15,6 +15,11 @@
     <string name="show_keyword_dialog_message">Lütfen resimleri göstermek için anahtar kelimeler seçin</string>
     <string name="selected_language">Türk</string>
 
+    <string name="delete_keyword_warning_title">Delete Keywords</string>
+    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
+    <string name="edit_keyword">EDIT KEYWORD</string>
+
+
     <string-array name="keyword_array">
         <item>Alfa Omega</item>
         <item>Çapa</item>

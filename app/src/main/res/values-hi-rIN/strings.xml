@@ -17,6 +17,11 @@
     <string name="show_keyword_dialog_message">कृपया चित्र दिखाने के लिए कीवर्ड चुनें</string>
     <string name="selected_language">हिंदी</string>
 
+    <string name="delete_keyword_warning_title">Delete Keywords</string>
+    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
+    <string name="edit_keyword">EDIT KEYWORD</string>
+
+
     <string-array name="keyword_array">
         <item>अल्फा ओमेगा</item>
         <item>लंगर</item>

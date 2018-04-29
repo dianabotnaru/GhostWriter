@@ -15,6 +15,11 @@
     <string name="show_keyword_dialog_message">por favor escolha palavras-chave para mostrar</string>
     <string name="selected_language">Português</string>
 
+    <string name="delete_keyword_warning_title">Delete Keywords</string>
+    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
+    <string name="edit_keyword">EDIT KEYWORD</string>
+
+
     <string-array name="keyword_array">
         <item>Alfa Ômega</item>
         <item>âncora</item>
