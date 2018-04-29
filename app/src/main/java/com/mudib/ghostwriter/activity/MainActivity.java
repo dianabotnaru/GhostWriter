@@ -9,7 +9,7 @@ import android.view.WindowManager;
 
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.constant.Constant;
-import com.mudib.ghostwriter.manager.TimePreferencesManager;
+import com.mudib.ghostwriter.manager.SharedPreferencesManager;
 import com.mudib.ghostwriter.utils.Util;
 import com.google.android.gms.ads.MobileAds;
 
@@ -43,6 +43,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private void setLocale(){
-        Util.setLocale(getApplicationContext(), TimePreferencesManager.with(this).getKeywordLangauge());
+        Util.setLocale(getApplicationContext(), SharedPreferencesManager.with(this).getKeywordLangauge());
     }
 }

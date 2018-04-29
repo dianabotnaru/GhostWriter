@@ -1,23 +1,17 @@
 package com.mudib.ghostwriter.activity;
 
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.constant.Constant;
-import com.mudib.ghostwriter.manager.TimePreferencesManager;
+import com.mudib.ghostwriter.manager.SharedPreferencesManager;
 import com.mudib.ghostwriter.utils.Util;
-
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -68,7 +62,7 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
     }
 
     private void initUi(){
-        seekbar_displaytime.setProgress((int)TimePreferencesManager.with(this).getImageDisplayTime()/1000);
+        seekbar_displaytime.setProgress((int) SharedPreferencesManager.with(this).getImageDisplayTime()/1000);
         textView_displaytime.setText(String.valueOf(seekbar_displaytime.getProgress())+"s");
         seekbar_displaytime.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
@@ -87,10 +81,10 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
                 }
                 textView_displaytime.setText(String.valueOf(seekBar.getProgress())+"s");
                 long displayTime = seekbar_displaytime.getProgress()*1000;
-                TimePreferencesManager.with(SettingActivity.this).saveImageDisplayTime(displayTime);
+                SharedPreferencesManager.with(SettingActivity.this).saveImageDisplayTime(displayTime);
             }
         });
-        textView_displaytransform.setText(TimePreferencesManager.with(this).getImageDisplayTransformer());
+        textView_displaytransform.setText(SharedPreferencesManager.with(this).getImageDisplayTransformer());
         textView_language.setText(getResources().getString(R.string.selected_language));
         setVerisonTextView();
     }
@@ -149,13 +143,13 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
     public void onPick(int[] selectedValues, int key) {
         if(settingIndex == DISPLAY_TRANSFORM) {
             textView_displaytransform.setText(transformValues[selectedValues[0]]);
-            TimePreferencesManager.with(this).saveImageDisplayTransformer(transformValues[selectedValues[0]]);
+            SharedPreferencesManager.with(this).saveImageDisplayTransformer(transformValues[selectedValues[0]]);
         }else{
             String value = Constant.languages[selectedValues[0]];
-            if(!value.equalsIgnoreCase(TimePreferencesManager.with(this).getKeywordLangauge())) {
-                TimePreferencesManager.with(this).saveKeywordLangauge(value);
+            if(!value.equalsIgnoreCase(SharedPreferencesManager.with(this).getKeywordLangauge())) {
+                SharedPreferencesManager.with(this).saveKeywordLangauge(value);
                 Util.setLocale(getApplicationContext(), value);
-                TimePreferencesManager.with(this).isChangedLocale = true;
+                SharedPreferencesManager.with(this).isChangedLocale = true;
                 restartActivity();
             }
         }

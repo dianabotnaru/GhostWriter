@@ -9,9 +9,8 @@ import android.widget.ListView;
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.adapter.KeywordListAdapter;
 import com.mudib.ghostwriter.dialog.AddKeywordDialog;
-import com.mudib.ghostwriter.dialog.KeywordPickerDialog;
 import com.mudib.ghostwriter.dialog.WarningDialogFragment;
-import com.mudib.ghostwriter.manager.TimePreferencesManager;
+import com.mudib.ghostwriter.manager.SharedPreferencesManager;
 import com.mudib.ghostwriter.models.Keyword;
 import com.mudib.ghostwriter.utils.Util;
 
@@ -48,15 +47,7 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
     }
 
     private void initListViewKeyword(){
-        keywords = TimePreferencesManager.with(this).getKeywordList(TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
-        if(keywords.size()==0) {
-            String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
-            for (int i = 0; i < keyword_array.length; i++) {
-                Keyword keyword = new Keyword(this,keyword_array[i]);
-                keywords.add(keyword);
-            }
-        }
-
+        keywords = SharedPreferencesManager.with(this).getAppKeywordList();
         keywordListAdapter = new KeywordListAdapter(this, new KeywordListAdapter.KeywordListAdapterListener() {
             @Override
             public void onCheckedKeyword(Keyword keyword) {
@@ -130,14 +121,12 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
         sortKeywordList();
         keywordListAdapter.setItems(this.keywords);
         listViewKeyword.setAdapter(keywordListAdapter);
-        TimePreferencesManager.with(this).saveKeyword(this.keywords,TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
     }
 
     private void setDefaultKeywords(){
         keywords = Util.getDefaultKeywordList(this);
         keywordListAdapter.setItems(keywords);
         listViewKeyword.setAdapter(keywordListAdapter);
-        TimePreferencesManager.with(this).saveKeyword(this.keywords,TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
     }
 
     private void deleteSelectedKeywords(){
@@ -146,7 +135,6 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
         sortKeywordList();
         keywordListAdapter.setItems(keywords);
         listViewKeyword.setAdapter(keywordListAdapter);
-        TimePreferencesManager.with(this).saveKeyword(keywords,TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
     }
 
     private void sortKeywordList(){
@@ -156,5 +144,11 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
                 return s1.getEnWord().compareToIgnoreCase(s2.getEnWord());
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        SharedPreferencesManager.with(this).saveAppKeyword(keywords);
+        super.onDestroy();
     }
 }

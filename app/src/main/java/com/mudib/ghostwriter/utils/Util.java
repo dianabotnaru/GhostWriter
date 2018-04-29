@@ -38,6 +38,15 @@ public class Util {
         return stringList;
     }
 
+    public static ArrayList<Keyword> getArrayFromList(Keyword[] keywords){
+        ArrayList<Keyword> keywordList = new ArrayList<Keyword>();
+        for(int i = 0; i<keywords.length;i++ ){
+            keywordList.add(keywords[i]);
+        }
+        return keywordList;
+    }
+
+
     public static void setLocale(Context context,String lang) {
         Locale locale;
         if(lang.equalsIgnoreCase("English") ){

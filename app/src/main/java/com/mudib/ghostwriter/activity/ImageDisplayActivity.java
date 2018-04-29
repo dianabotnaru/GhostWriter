@@ -1,6 +1,5 @@
 package com.mudib.ghostwriter.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -30,7 +29,7 @@ import com.mudib.ghostwriter.dialog.KeywordPickerDialog;
 import com.mudib.ghostwriter.dialog.WarningDialogFragment;
 import com.mudib.ghostwriter.manager.FlickrImageLoadTask;
 import com.mudib.ghostwriter.manager.SearchImagesCacheManager;
-import com.mudib.ghostwriter.manager.TimePreferencesManager;
+import com.mudib.ghostwriter.manager.SharedPreferencesManager;
 
 import butterknife.OnClick;
 import com.mudib.ghostwriter.models.Keyword;
@@ -90,9 +89,9 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         setContentView(R.layout.activity_imagedisplay);
         initDatas();
         initSliderView();
-        if(TimePreferencesManager.with(this).isFirstLaunch){
-            TimePreferencesManager.with(this).isFirstLaunch = false;
-            searchKeyList = TimePreferencesManager.with(this).getKeywordList(TimePreferencesManager.SEARCH_KEYWORD_KEYS);
+        if(SharedPreferencesManager.with(this).isFirstLaunch){
+            SharedPreferencesManager.with(this).isFirstLaunch = false;
+            searchKeyList = SharedPreferencesManager.with(this).getSearchKeywordList();
             if(searchKeyList.size() == 0){
                 showAlertDialog();
             }else{
@@ -140,10 +139,10 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     }
 
     private void initSliderView(){
-        imageSlider.setPresetTransformer(TimePreferencesManager.with(this).getImageDisplayTransformer());
+        imageSlider.setPresetTransformer(SharedPreferencesManager.with(this).getImageDisplayTransformer());
         imageSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         imageSlider.setCustomAnimation(new DescriptionAnimation());
-        long displayTime = TimePreferencesManager.with(this).getImageDisplayTime();
+        long displayTime = SharedPreferencesManager.with(this).getImageDisplayTime();
         imageSlider.setDuration(displayTime);
         imageSlider.addOnPageChangeListener(this);
     }
@@ -269,9 +268,9 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             searchKeyList.add(keyword);
         }
         setKeywordTextViewString(keywords);
-        TimePreferencesManager.with(this).saveKeyword(searchKeyList,TimePreferencesManager.SEARCH_KEYWORD_KEYS);
-        showLoading();
-        fetchFlickImage();
+        SharedPreferencesManager.with(this).saveSearchKeyword(searchKeyList);
+//        showLoading();
+//        fetchFlickImage();
 
 //        getGoogleAnalyticsEvent();
     }
@@ -396,8 +395,8 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             initSliderView();
             imageSlider.startAutoCycle();
         }
-        if(TimePreferencesManager.with(this).isChangedLocale){
-            TimePreferencesManager.with(this).isChangedLocale = false;
+        if(SharedPreferencesManager.with(this).isChangedLocale){
+            SharedPreferencesManager.with(this).isChangedLocale = false;
             restartActivity();
         }
         if (adView != null) {

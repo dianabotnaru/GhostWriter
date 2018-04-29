@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.mudib.ghostwriter.Interface.FlickrImageLoadTaskInterface;
-import com.mudib.ghostwriter.constant.Constant;
 import com.mudib.ghostwriter.models.Keyword;
 import com.mudib.ghostwriter.models.SearchResultFlickr;
 
@@ -36,7 +35,7 @@ public class SearchImagesCacheManager {
     protected SearchImagesCacheManager(Context context){
         this.context = context;
         allSearchKeyList = new ArrayList<Keyword>();
-        allSearchKeyList = TimePreferencesManager.with(context).getKeywordList(TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
+        allSearchKeyList = SharedPreferencesManager.with(context).getAppKeywordList();
         currentSearchIndex = 0;
     }
 

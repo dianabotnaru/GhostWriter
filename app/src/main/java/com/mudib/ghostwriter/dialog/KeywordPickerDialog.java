@@ -1,21 +1,15 @@
 package com.mudib.ghostwriter.dialog;
 
 import android.app.Dialog;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.DisplayMetrics;
 import android.view.Window;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.mudib.ghostwriter.Interface.KeywordPickerDialogInterface;
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.adapter.KeywordListAdapter;
-import com.mudib.ghostwriter.constant.Constant;
-import com.mudib.ghostwriter.manager.TimePreferencesManager;
+import com.mudib.ghostwriter.manager.SharedPreferencesManager;
 import com.mudib.ghostwriter.models.Keyword;
 import com.mudib.ghostwriter.utils.Util;
 import com.mudib.ghostwriter.views.ContactsCompletionView;
@@ -23,7 +17,6 @@ import com.tokenautocomplete.TokenCompleteTextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,12 +87,7 @@ public class KeywordPickerDialog extends BaseDialogFragment{
     }
 
     private void initViews(){
-
-        keywords = TimePreferencesManager.with(getContext()).getKeywordList(TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
-        if(keywords.size()==0) {
-            keywords = Util.getDefaultKeywordList(getContext());
-        }
-
+        keywords = SharedPreferencesManager.with(getContext()).getAppKeywordList();
         keywordListAdapter = new KeywordListAdapter(getContext(), new KeywordListAdapter.KeywordListAdapterListener() {
             @Override
             public void onCheckedKeyword(Keyword keyword) {
