@@ -53,7 +53,7 @@ public class SearchImagesCacheManager {
 
     public List<SearchResultFlickr> getCachedSearchImages(String word){
         for(Keyword keyword:allSearchKeyList){
-            if(keyword.getWord().equalsIgnoreCase(word)){
+            if(keyword.getEnWord().equalsIgnoreCase(word)){
                 return keyword.getSearchResultFlickrs();
             }
         }
@@ -89,7 +89,7 @@ public class SearchImagesCacheManager {
                 nextKeywordFetch();
             }
         });
-        task.execute(new String[]{keyword.getWord(), String.valueOf(keyword.getPerPage()), String.valueOf(keyword.getPage())});
+        task.execute(new String[]{keyword.getEnWord(), String.valueOf(keyword.getPerPage()), String.valueOf(keyword.getPage())});
     }
 
     private void nextKeywordFetch(){

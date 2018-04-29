@@ -29,7 +29,7 @@ public class Keyword {
 
     public Keyword(Context context,String word){
         this.word = word;
-        this.enWord = "";
+        this.enWord = word;
         this.page = Constant.defaultPage;
         this.perPage=Constant.detfaultPerPage;
         isSelected = false;

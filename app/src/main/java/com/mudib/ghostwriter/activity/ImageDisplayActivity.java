@@ -269,10 +269,10 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         }
         setKeywordTextViewString(keywords);
         SharedPreferencesManager.with(this).saveSearchKeyword(searchKeyList);
-//        showLoading();
-//        fetchFlickImage();
+        showLoading();
+        fetchFlickImage();
 
-//        getGoogleAnalyticsEvent();
+        getGoogleAnalyticsEvent();
     }
 
     @Override
@@ -311,7 +311,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             });
             task.execute(new String[]{keyword.getEnWord(), String.valueOf(keyword.getPerPage()), String.valueOf(keyword.getPage())});
         }else{
-            keyword.setSearchResultFlickrs(SearchImagesCacheManager.with(this).getCachedSearchImages(keyword.getWord()));
+            keyword.setSearchResultFlickrs(SearchImagesCacheManager.with(this).getCachedSearchImages(keyword.getEnWord()));
             nextFetchFlckImage();
         }
     }
