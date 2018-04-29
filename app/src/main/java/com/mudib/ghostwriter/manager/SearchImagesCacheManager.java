@@ -1,5 +1,6 @@
 package com.mudib.ghostwriter.manager;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.mudib.ghostwriter.Interface.FlickrImageLoadTaskInterface;
@@ -20,22 +21,22 @@ public class SearchImagesCacheManager {
 
     private ArrayList<Keyword> allSearchKeyList;
     private int currentSearchIndex;
+    private Context context;
 
-    public static SearchImagesCacheManager with() {
+
+    public static SearchImagesCacheManager with(Context context) {
         if (singleton == null) synchronized (SearchImagesCacheManager.class) {
             if (singleton == null) {
-                singleton = new SearchImagesCacheManager();
+                singleton = new SearchImagesCacheManager(context);
             }
         }
         return singleton;
     }
 
-    protected SearchImagesCacheManager(){
+    protected SearchImagesCacheManager(Context context){
+        this.context = context;
         allSearchKeyList = new ArrayList<Keyword>();
-        for(int i=0;i< Constant.allSearchkeys.length;i++){
-            Keyword keyword = new Keyword(Constant.allSearchkeys[i]);
-            allSearchKeyList.add(keyword);
-        }
+        allSearchKeyList = TimePreferencesManager.with(context).getKeywordList(TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
         currentSearchIndex = 0;
     }
 

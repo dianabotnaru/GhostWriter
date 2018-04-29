@@ -72,7 +72,7 @@ public class TimePreferencesManager {
         if (!keywords.equalsIgnoreCase("")){
             String[] keywordsList = keywords.split(",");
             for (int i = 0; i < keywordsList.length; i++) {
-                Keyword keyword = new Keyword(keywordsList[i]);
+                Keyword keyword = new Keyword(context,keywordsList[i]);
                 keyword.setEnWord(keywordsList[i]);
                 keyword.setWord(keywordsList[i]);
                 keywordArray.add(keyword);

@@ -1,6 +1,7 @@
 package com.mudib.ghostwriter.models;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import com.mudib.ghostwriter.constant.Constant;
 
@@ -17,6 +18,8 @@ public class Keyword {
 
     private String word;
 
+    private int resourceId;
+
     private boolean isSelected;
 
     private int page;
@@ -24,13 +27,15 @@ public class Keyword {
 
     private List<SearchResultFlickr> searchResultFlickrs;
 
-    public Keyword(String word){
+    public Keyword(Context context,String word){
         this.word = word;
         this.enWord = word;
         this.page = Constant.defaultPage;
         this.perPage=Constant.detfaultPerPage;
         isSelected = false;
         searchResultFlickrs = new ArrayList<SearchResultFlickr>();
+        this.resourceId = 0;
+        setResourceIdfromName(context);
     }
 
     public String getWord() {
@@ -79,5 +84,43 @@ public class Keyword {
 
     public void setEnWord(String enWord) {
         this.enWord = enWord;
+    }
+
+    public int getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    public void setResourceIdfromName(Context context){
+        Resources resources = context.getResources();
+
+        if (enWord.equalsIgnoreCase("Alpha&Omega")){
+            resourceId = resources.getIdentifier("alpha", "drawable",
+                    context.getPackageName());
+
+        }else if (enWord.equalsIgnoreCase("walled garden")){
+            resourceId = resources.getIdentifier("garden", "drawable",
+                    context.getPackageName());
+        }else if (enWord.equalsIgnoreCase("wild man")){
+            resourceId = resources.getIdentifier("wildman", "drawable",
+                    context.getPackageName());
+        }else{
+            String identifier = "";
+            if (enWord.length() <= 1) {
+                identifier = enWord.toLowerCase();
+            } else {
+                identifier = enWord.substring(0, 1).toLowerCase() + enWord.substring(1);
+            }
+
+            resourceId = resources.getIdentifier(identifier, "drawable",
+                    context.getPackageName());
+            if(resourceId == 0){
+                resourceId = resources.getIdentifier("logo", "drawable",
+                        context.getPackageName());
+            }
+        }
     }
 }

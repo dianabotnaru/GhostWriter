@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by jordi on 26/04/2018.
+ * Created by diana on 26/04/2018.
  */
 
 public class KeywordEditActivity extends BaseActivity implements WarningDialogFragment.WarningDialogListener,AddKeywordDialog.AddKeywordDialogListener{
@@ -37,6 +37,7 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
     private KeywordListAdapter keywordListAdapter;
     private List<Keyword> keywords = new ArrayList<>();
 
+    private boolean isDeleteDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +51,7 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
         if(keywords.size()==0) {
             String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
             for (int i = 0; i < keyword_array.length; i++) {
-                Keyword keyword = new Keyword(keyword_array[i]);
+                Keyword keyword = new Keyword(this,keyword_array[i]);
                 keywords.add(keyword);
             }
         }
@@ -95,6 +96,7 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
 
     @OnClick(R.id.button_delete)
     public void onDeleteButtonClick() {
+        isDeleteDialog = true;
         if(keywordListAdapter.getSelectedItems().size()>0) {
             WarningDialogFragment dialogFragment = WarningDialogFragment.newInstance(getResources().getString(R.string.delete_keyword_warning_title), getResources().getString(R.string.delete_keyword_warning_message), false);
             dialogFragment.show(getSupportFragmentManager(), WarningDialogFragment.TAG);
@@ -103,22 +105,20 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
 
     @OnClick(R.id.button_default)
     public void onDefaultButtonClick() {
-        keywords = new ArrayList<>();
-        String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
-        for (int i = 0; i < keyword_array.length; i++) {
-            Keyword keyword = new Keyword(keyword_array[i]);
-            keywords.add(keyword);
-        }
-        keywordListAdapter.setItems(this.keywords);
-        listViewKeyword.setAdapter(keywordListAdapter);
-        TimePreferencesManager.with(this).saveKeyword(this.keywords,TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
+        isDeleteDialog = false;
+        WarningDialogFragment dialogFragment = WarningDialogFragment.newInstance(getResources().getString(R.string.default_keyword_warning_title), getResources().getString(R.string.default_keyword_warning_message), false);
+        dialogFragment.show(getSupportFragmentManager(), WarningDialogFragment.TAG);
     }
 
 
     @Override
     public void onDialogOkButtonClicked(){
-        deleteSelectedKeywords();
-        layoutDeleteButton.setVisibility(View.GONE);
+        if(isDeleteDialog) {
+            deleteSelectedKeywords();
+            layoutDeleteButton.setVisibility(View.GONE);
+        }else{
+            setDefaultKeywords();
+        }
     }
 
     @Override
@@ -127,6 +127,18 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
             this.keywords.add(keyword);
         }
         sortKeywordList();
+        keywordListAdapter.setItems(this.keywords);
+        listViewKeyword.setAdapter(keywordListAdapter);
+        TimePreferencesManager.with(this).saveKeyword(this.keywords,TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
+    }
+
+    private void setDefaultKeywords(){
+        keywords = new ArrayList<>();
+        String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
+        for (int i = 0; i < keyword_array.length; i++) {
+            Keyword keyword = new Keyword(this,keyword_array[i]);
+            keywords.add(keyword);
+        }
         keywordListAdapter.setItems(this.keywords);
         listViewKeyword.setAdapter(keywordListAdapter);
         TimePreferencesManager.with(this).saveKeyword(this.keywords,TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
@@ -148,6 +160,5 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
                 return s1.getEnWord().compareToIgnoreCase(s2.getEnWord());
             }
         });
-
     }
 }

@@ -3,11 +3,13 @@ package com.mudib.ghostwriter.dialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.view.Window;
 
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.models.Keyword;
 import com.mudib.ghostwriter.views.ContactsCompletionView;
+import com.tokenautocomplete.TokenCompleteTextView;
 
 import java.util.List;
 
@@ -16,12 +18,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by jordi on 26/04/2018.
+ * Created by diana on 26/04/2018.
  */
 
-public class AddKeywordDialog extends BaseDialogFragment{
+public class AddKeywordDialog extends BaseDialogFragment implements TokenCompleteTextView.TokenListener{
+
     public static final String TAG = AddKeywordDialog.class.getCanonicalName();
 
+    private boolean isEditableAdded;
     public interface AddKeywordDialogListener {
         void onAddKeywordDialogOkButtonClicked(List<Keyword> keywords);
     }
@@ -31,11 +35,21 @@ public class AddKeywordDialog extends BaseDialogFragment{
 
     @OnClick(R.id.button_ok)
     void onOkClicked() {
-        dismiss();
-        try{
-            ((AddKeywordDialog.AddKeywordDialogListener) getActivity()).onAddKeywordDialogOkButtonClicked(completionView.getObjects());
-        }catch (ClassCastException cce){
-            throw new ClassCastException("ScanNearbyDialogListener getTargetFragment is not set");
+        Editable editable = completionView.getText();
+        String editableString = editable.toString();
+        editableString = editableString.replace(",", "");
+        editableString = editableString.replace(" ", "");
+        if(editableString.equalsIgnoreCase("")){
+            dismiss();
+            try{
+                ((AddKeywordDialog.AddKeywordDialogListener) getActivity()).onAddKeywordDialogOkButtonClicked(completionView.getObjects());
+            }catch (ClassCastException cce){
+                throw new ClassCastException("ScanNearbyDialogListener getTargetFragment is not set");
+            }
+        }else{
+            Keyword keyword = new Keyword(getContext(),editableString);
+            isEditableAdded = true;
+            completionView.addObject(keyword);
         }
     }
 
@@ -65,11 +79,16 @@ public class AddKeywordDialog extends BaseDialogFragment{
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.dialog_addkeyword);
         mUnbinder = ButterKnife.bind(this, dialog.getWindow().getDecorView());
+        isEditableAdded = false;
         initViews();
         return dialog;
     }
 
     private void initViews(){
+        completionView.setTokenListener(this);
+        char[] splitChar = {',', ';', ' '};
+        completionView.setSplitChar(splitChar);
+        completionView.setThreshold(0);
     }
 
     @Override
@@ -77,4 +96,19 @@ public class AddKeywordDialog extends BaseDialogFragment{
         super.onDestroyView();
     }
 
+    @Override
+    public void onTokenAdded(Object token) {
+        if(isEditableAdded){
+            dismiss();
+            try{
+                ((AddKeywordDialog.AddKeywordDialogListener) getActivity()).onAddKeywordDialogOkButtonClicked(completionView.getObjects());
+            }catch (ClassCastException cce){
+                throw new ClassCastException("ScanNearbyDialogListener getTargetFragment is not set");
+            }
+        }
+    }
+
+    @Override
+    public void onTokenRemoved(Object token) {
+    }
 }

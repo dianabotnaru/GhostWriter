@@ -1,5 +1,6 @@
 package com.mudib.ghostwriter.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -270,9 +271,9 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         setKeywordTextViewString(keywords);
         TimePreferencesManager.with(this).saveKeyword(searchKeyList,TimePreferencesManager.SEARCH_KEYWORD_KEYS);
         showLoading();
-        fetchFlickImage();
+//        fetchFlickImage();
 
-        getGoogleAnalyticsEvent();
+//        getGoogleAnalyticsEvent();
     }
 
     @Override
@@ -288,7 +289,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         }
 
         final Keyword keyword = searchKeyList.get(currentSearchIndex);
-        if(SearchImagesCacheManager.with().getCachedSearchImages(keyword.getWord()).size()==0) {
+        if(SearchImagesCacheManager.with(this).getCachedSearchImages(keyword.getWord()).size()==0) {
             FlickrImageLoadTask task = new FlickrImageLoadTask();
             task.setFlickrImageLoadTaskInterface(new FlickrImageLoadTaskInterface() {
                 @Override
@@ -299,7 +300,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                         updatedSearchResultFlickrs.add(searchResultFlickr);
                     }
 
-                    SearchImagesCacheManager.with().setSearchImages(keyword.getWord(),updatedSearchResultFlickrs);
+                    SearchImagesCacheManager.with(ImageDisplayActivity.this).setSearchImages(keyword.getWord(),updatedSearchResultFlickrs);
                     keyword.setSearchResultFlickrs(updatedSearchResultFlickrs);
                     nextFetchFlckImage();
                 }
@@ -311,7 +312,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
             });
             task.execute(new String[]{keyword.getEnWord(), String.valueOf(keyword.getPerPage()), String.valueOf(keyword.getPage())});
         }else{
-            keyword.setSearchResultFlickrs(SearchImagesCacheManager.with().getCachedSearchImages(keyword.getWord()));
+            keyword.setSearchResultFlickrs(SearchImagesCacheManager.with(this).getCachedSearchImages(keyword.getWord()));
             nextFetchFlckImage();
         }
     }

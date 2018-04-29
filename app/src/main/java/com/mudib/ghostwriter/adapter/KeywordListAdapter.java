@@ -70,13 +70,13 @@ public class KeywordListAdapter extends BaseAdapter {
         } else {
             holder = (DeviceHolder) convertView.getTag();
         }
-        holder.keywordTextView.setText(keywords.get(position).getWord());
+        Keyword keyword = keywords.get(position);
+        holder.keywordTextView.setText(keyword.getWord());
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Keyword keyword = keywords.get(position);
                 keyword.setSelected(holder.checkBox.isChecked());
-                keyword.setEnWord(Constant.allSearchkeys[position]);
                 keywords.set(position,keyword);
                 if (holder.checkBox.isChecked()) {
                     mKeywordListAdapterListener.onCheckedKeyword(keyword);
@@ -86,38 +86,12 @@ public class KeywordListAdapter extends BaseAdapter {
             }
         });
 
-        holder.checkBox.setChecked(keywords.get(position).isSelected());
-
-        Keyword keyword = keywords.get(position);
-
+        holder.checkBox.setChecked(keyword.isSelected());
         Resources resources = mContext.getResources();
-        int resourceId;
-        if (keyword.getEnWord().equalsIgnoreCase("Alpha&Omega")){
-           resourceId = resources.getIdentifier("alpha", "drawable",
-                    mContext.getPackageName());
-
-        }else if (keyword.getEnWord().equalsIgnoreCase("walled garden")){
-            resourceId = resources.getIdentifier("garden", "drawable",
-                    mContext.getPackageName());
-        }else if (keyword.getEnWord().equalsIgnoreCase("wild man")){
-            resourceId = resources.getIdentifier("wildman", "drawable",
-                    mContext.getPackageName());
-        }else{
-            String identifier = "";
-            if (keyword.getEnWord().length() <= 1) {
-                identifier = keyword.getEnWord().toLowerCase();
-            } else {
-                identifier = keyword.getEnWord().substring(0, 1).toLowerCase() + keyword.getEnWord().substring(1);
-            }
-
-            resourceId = resources.getIdentifier(identifier, "drawable",
-                    mContext.getPackageName());
-            if(resourceId == 0){
-                resourceId = resources.getIdentifier("logo", "drawable",
-                        mContext.getPackageName());
-            }
+        if(keyword.getResourceId()!=0) {
+            holder.imageView_keyword.setImageDrawable(resources.getDrawable(keyword.getResourceId()));
         }
-        holder.imageView_keyword.setImageDrawable(resources.getDrawable(resourceId));
+
         if(Constant.isRTL){
             holder.linearLayout_keyword.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         }
