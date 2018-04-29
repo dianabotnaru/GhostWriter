@@ -271,7 +271,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         setKeywordTextViewString(keywords);
         TimePreferencesManager.with(this).saveKeyword(searchKeyList,TimePreferencesManager.SEARCH_KEYWORD_KEYS);
         showLoading();
-//        fetchFlickImage();
+        fetchFlickImage();
 
 //        getGoogleAnalyticsEvent();
     }

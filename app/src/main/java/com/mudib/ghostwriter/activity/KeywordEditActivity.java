@@ -13,6 +13,7 @@ import com.mudib.ghostwriter.dialog.KeywordPickerDialog;
 import com.mudib.ghostwriter.dialog.WarningDialogFragment;
 import com.mudib.ghostwriter.manager.TimePreferencesManager;
 import com.mudib.ghostwriter.models.Keyword;
+import com.mudib.ghostwriter.utils.Util;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -133,13 +134,8 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
     }
 
     private void setDefaultKeywords(){
-        keywords = new ArrayList<>();
-        String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
-        for (int i = 0; i < keyword_array.length; i++) {
-            Keyword keyword = new Keyword(this,keyword_array[i]);
-            keywords.add(keyword);
-        }
-        keywordListAdapter.setItems(this.keywords);
+        keywords = Util.getDefaultKeywordList(this);
+        keywordListAdapter.setItems(keywords);
         listViewKeyword.setAdapter(keywordListAdapter);
         TimePreferencesManager.with(this).saveKeyword(this.keywords,TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
     }

@@ -97,11 +97,7 @@ public class KeywordPickerDialog extends BaseDialogFragment{
 
         keywords = TimePreferencesManager.with(getContext()).getKeywordList(TimePreferencesManager.DEFAULT_KEYWORD_KEYS);
         if(keywords.size()==0) {
-            String[] keyword_array = getResources().getStringArray(R.array.keyword_array);
-            for (int i = 0; i < keyword_array.length; i++) {
-                Keyword keyword = new Keyword(getContext(),keyword_array[i]);
-                keywords.add(keyword);
-            }
+            keywords = Util.getDefaultKeywordList(getContext());
         }
 
         keywordListAdapter = new KeywordListAdapter(getContext(), new KeywordListAdapter.KeywordListAdapterListener() {

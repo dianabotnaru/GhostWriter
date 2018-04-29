@@ -29,14 +29,25 @@ public class Keyword {
 
     public Keyword(Context context,String word){
         this.word = word;
-        this.enWord = word;
+        this.enWord = "";
         this.page = Constant.defaultPage;
         this.perPage=Constant.detfaultPerPage;
         isSelected = false;
         searchResultFlickrs = new ArrayList<SearchResultFlickr>();
-        this.resourceId = 0;
+        resourceId = context.getResources().getIdentifier("logo", "drawable",
+                context.getPackageName());
+    }
+
+    public Keyword(Context context,String word,String enWord){
+        this.word = word;
+        this.enWord = enWord;
+        this.page = Constant.defaultPage;
+        this.perPage=Constant.detfaultPerPage;
+        isSelected = false;
+        searchResultFlickrs = new ArrayList<SearchResultFlickr>();
         setResourceIdfromName(context);
     }
+
 
     public String getWord() {
         return word;
@@ -96,7 +107,6 @@ public class Keyword {
 
     public void setResourceIdfromName(Context context){
         Resources resources = context.getResources();
-
         if (enWord.equalsIgnoreCase("Alpha&Omega")){
             resourceId = resources.getIdentifier("alpha", "drawable",
                     context.getPackageName());

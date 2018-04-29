@@ -1,11 +1,16 @@
 package com.mudib.ghostwriter.utils;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 
+import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.models.Keyword;
 import com.mudib.ghostwriter.models.SearchResultFlickr;
 
@@ -98,5 +103,50 @@ public class Util {
 //        }
         context.getResources().updateConfiguration(config, context.getResources().getDisplayMetrics());
     }
+
+    public static ArrayList getDefaultKeywordList(Context context){
+        ArrayList keywords = new ArrayList<>();
+        String[] keyword_array = context.getResources().getStringArray(R.array.keyword_array);
+        String[] keyword_array_english = getStringByLocal(context,R.array.keyword_array,context.getResources().getConfiguration().locale);
+        for (int i = 0; i < keyword_array.length; i++) {
+            Keyword keyword = new Keyword(context,keyword_array[i],keyword_array_english[i]);
+            keywords.add(keyword);
+        }
+        return keywords;
+    }
+
+    @NonNull
+    public static String[] getStringByLocal(Context context, int resId, Locale locale) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+            return getStringByLocalPlus17(context, resId, locale);
+        else
+            return getStringByLocalBefore17(context, resId, locale);
+    }
+
+    @NonNull
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    private static String[] getStringByLocalPlus17(Context context, int resId, Locale locale) {
+        Configuration configuration = new Configuration(context.getResources().getConfiguration());
+        configuration.setLocale(locale);
+        return context.createConfigurationContext(configuration).getResources().getStringArray(resId);
+    }
+
+    private static String[] getStringByLocalBefore17(Context context,int resId, Locale locale) {
+        Resources currentResources = context.getResources();
+        AssetManager assets = currentResources.getAssets();
+        DisplayMetrics metrics = currentResources.getDisplayMetrics();
+        Configuration config = new Configuration(currentResources.getConfiguration());
+        config.locale = locale;
+/*
+ * Note: This (temporarily) changes the devices locale! TODO find a
+ * better way to get the string in the specific locale
+ */
+        Resources defaultLocaleResources = new Resources(assets, metrics, config);
+        String[] stringarray = defaultLocaleResources.getStringArray(resId);
+        // Restore device-specific locale
+        new Resources(assets, metrics, currentResources.getConfiguration());
+        return stringarray;
+    }
+
 
 }
