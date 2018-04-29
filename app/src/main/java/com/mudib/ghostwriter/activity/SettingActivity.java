@@ -11,7 +11,11 @@ import com.daimajia.slider.library.SliderLayout;
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.constant.Constant;
 import com.mudib.ghostwriter.manager.SharedPreferencesManager;
+import com.mudib.ghostwriter.models.Keyword;
 import com.mudib.ghostwriter.utils.Util;
+
+import java.security.Key;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -150,9 +154,25 @@ public class SettingActivity extends BaseActivity implements UniversalPickerDial
                 SharedPreferencesManager.with(this).saveKeywordLangauge(value);
                 Util.setLocale(getApplicationContext(), value);
                 SharedPreferencesManager.with(this).isChangedLocale = true;
+                updateKeywordWithLocaleString();
                 restartActivity();
             }
         }
+    }
+
+    private void updateKeywordWithLocaleString(){
+        ArrayList<Keyword> appKeywords = SharedPreferencesManager.with(this).getAppKeywordList();
+        ArrayList<Keyword> defaultKeywords = Util.getDefaultKeywordList(this);
+        for(int i=0; i<appKeywords.size();i++){
+            Keyword appKeyword = appKeywords.get(i);
+            for(Keyword defaultKeyword:defaultKeywords){
+                if(defaultKeyword.getEnWord().equalsIgnoreCase(appKeyword.getEnWord())){
+                    appKeyword.setWord(defaultKeyword.getWord());
+                }
+            }
+            appKeywords.set(i,appKeyword);
+        }
+        SharedPreferencesManager.with(this).saveAppKeyword(appKeywords);
     }
 
 }

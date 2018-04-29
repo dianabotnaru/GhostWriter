@@ -116,7 +116,8 @@ public class Util {
     public static ArrayList getDefaultKeywordList(Context context){
         ArrayList keywords = new ArrayList<>();
         String[] keyword_array = context.getResources().getStringArray(R.array.keyword_array);
-        String[] keyword_array_english = getStringByLocal(context,R.array.keyword_array,context.getResources().getConfiguration().locale);
+        Locale locale = new Locale("en");
+        String[] keyword_array_english = getStringByLocal(context,R.array.keyword_array,locale);
         for (int i = 0; i < keyword_array.length; i++) {
             Keyword keyword = new Keyword(context,keyword_array[i],keyword_array_english[i]);
             keywords.add(keyword);
