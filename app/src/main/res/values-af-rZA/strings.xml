@@ -14,9 +14,17 @@
     <string name="choose_keyword">Kies sleutelwoord</string>
     <string name="show_keyword_dialog_message">Kies asseblief sleutelwoorde om prente te wys</string>
     <string name="selected_language">Afrikaans</string>
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+
+    <string name="edit_keyword">REDIG SLEUTELWOORD</string>
+    <string name="delete_keyword_warning_title">Verwyder sleutelwoorde</string>
+    <string name="delete_keyword_warning_message">Is jy seker dat geselekteerde sleutelwoorde verwyder word?</string>
+
+    <string name="default_keyword_warning_title">Verstek sleutelwoorde</string>
+    <string name="default_keyword_warning_message">Is u seker dat u sleutelwoorde met die standaard sleutelwoordlys herstel?</string>
+
+    <string name="button_add">Voeg</string>
+    <string name="button_default">verstek</string>
+    <string name="button_delete">verwyder</string>
 
     <string-array name="keyword_array">
         <item>alfa en omega</item>
