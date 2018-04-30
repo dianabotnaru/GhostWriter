@@ -16,9 +16,16 @@
     <string name="show_keyword_dialog_message">por favor elija palabras clave para mostrar imágenes</string>
     <string name="selected_language">Español</string>
 
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">Keyword bearbeiten</string>
+    <string name="delete_keyword_warning_title">Löschen Sie Schlüsselwörter</string>
+    <string name="delete_keyword_warning_message">Sind Sie sicher, ausgewählte Keywords zu löschen?</string>
+
+    <string name="default_keyword_warning_title">Standardschlüsselwörter</string>
+    <string name="default_keyword_warning_message">Sind Sie sicher, dass Sie Keywords mit der Standard-Keyword-Liste zurücksetzen?</string>
+
+    <string name="button_add">Hinzufügen</string>
+    <string name="button_default">Standard</string>
+    <string name="button_delete">Löschen</string>
 
 
     <string-array name="keyword_array">

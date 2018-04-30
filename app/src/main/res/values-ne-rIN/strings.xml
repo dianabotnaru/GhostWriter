@@ -16,9 +16,16 @@
     <string name="show_keyword_dialog_message">कृपया छवि देखाउनका लागि कीवर्ड चयन गर्नुहोस्</string>
     <string name="selected_language">नेपाली</string>
 
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">कुञ्जीशब्द सम्पादन गर्नुहोस्</string>
+    <string name="delete_keyword_warning_title">कीवर्ड मेटाउनुहोस्</string>
+    <string name="delete_keyword_warning_message">के तपाइँ चयन गरिएका कुञ्जीशब्दहरू मेटाउन निश्चित हुनुहुन्छ?</string>
+
+    <string name="default_keyword_warning_title">पूर्वनिर्धारित कीवर्डहरू</string>
+    <string name="default_keyword_warning_message">के तपाई कीवर्डहरू डिफल्ट पूर्वनिर्धारित कीवर्ड सूची रिसेट गर्नुहुन्छ?</string>
+
+    <string name="button_add">थप्नुहोस्</string>
+    <string name="button_default">पूर्वनिर्धारित</string>
+    <string name="button_delete">मेटाउन</string>
 
 
     <string-array name="keyword_array">

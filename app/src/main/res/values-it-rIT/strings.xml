@@ -15,9 +15,16 @@
     <string name="show_keyword_dialog_message">Si prega di scegliere le parole chiave per mostrare le immagini</string>
     <string name="selected_language">italiano</string>
 
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">Modifica parola chiave</string>
+    <string name="delete_keyword_warning_title">Elimina parole chiave</string>
+    <string name="delete_keyword_warning_message">Eliminare le parole chiave selezionate?</string>
+
+    <string name="default_keyword_warning_title">Parole chiave predefinite</string>
+    <string name="default_keyword_warning_message">Sei sicuro di reimpostare le parole chiave con l\'elenco di parole chiave predefinito?</string>
+
+    <string name="button_add">Inserisci</string>
+    <string name="button_default">Predefinito</string>
+    <string name="button_delete">Elimina</string>
 
 
     <string-array name="keyword_array">

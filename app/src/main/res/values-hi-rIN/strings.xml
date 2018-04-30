@@ -17,9 +17,16 @@
     <string name="show_keyword_dialog_message">कृपया चित्र दिखाने के लिए कीवर्ड चुनें</string>
     <string name="selected_language">हिंदी</string>
 
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">कीवर्ड संपादित करें</string>
+    <string name="delete_keyword_warning_title">कीवर्ड हटाएं</string>
+    <string name="delete_keyword_warning_message">क्या आप चयनित कीवर्ड हटाना चाहते हैं?</string>
+
+    <string name="default_keyword_warning_title">डिफ़ॉल्ट कीवर्ड</string>
+    <string name="default_keyword_warning_message">क्या आप डिफ़ॉल्ट कीवर्ड सूची वाले कीवर्ड रीसेट करना चाहते हैं?</string>
+
+    <string name="button_add">जोड़ना</string>
+    <string name="button_default">चूक</string>
+    <string name="button_delete">हटाना</string>
 
 
     <string-array name="keyword_array">

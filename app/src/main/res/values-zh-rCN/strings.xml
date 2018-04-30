@@ -16,9 +16,16 @@
     <string name="show_keyword_dialog_message">请选择关键字来显示图像</string>
     <string name="selected_language">中文</string>
 
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">编辑关键字</string>
+    <string name="delete_keyword_warning_title">删除关键字</string>
+    <string name="delete_keyword_warning_message">你确定要删除选定的关键字吗？</string>
+
+    <string name="default_keyword_warning_title">默认关键字</string>
+    <string name="default_keyword_warning_message">您确定要使用默认关键字列表重置关键字吗？</string>
+
+    <string name="button_add">添加关键字</string>
+    <string name="button_default">默认</string>
+    <string name="button_delete">删除</string>
 
 
     <string-array name="keyword_array">

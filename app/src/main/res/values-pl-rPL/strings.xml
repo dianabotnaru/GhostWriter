@@ -15,9 +15,16 @@
     <string name="show_keyword_dialog_message">wybierz słowa kluczowe, aby wyświetlić obrazy</string>
     <string name="selected_language">Polskie</string>
 
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">Edytuj słowo kluczowe</string>
+    <string name="delete_keyword_warning_title">Usuń słowa kluczowe</string>
+    <string name="delete_keyword_warning_message">Czy na pewno chcesz usunąć wybrane słowa kluczowe?</string>
+
+    <string name="default_keyword_warning_title">Domyślne słowa kluczowe</string>
+    <string name="default_keyword_warning_message">Czy na pewno chcesz zresetować słowa kluczowe za pomocą domyślnej listy słów kluczowych?</string>
+
+    <string name="button_add">Dodaj</string>
+    <string name="button_default">Domyślna</string>
+    <string name="button_delete">Kasować</string>
 
 
     <string-array name="keyword_array">

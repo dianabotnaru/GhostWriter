@@ -16,9 +16,16 @@
     <string name="show_keyword_dialog_message">Veuillez choisir des mots-clés pour afficher les images</string>
     <string name="selected_language">français</string>
 
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">EDITER LE MOT-CLÉ</string>
+    <string name="delete_keyword_warning_title">Supprimer les mots clés</string>
+    <string name="delete_keyword_warning_message">Êtes-vous sûr de supprimer les mots-clés sélectionnés?</string>
+
+    <string name="default_keyword_warning_title">Mots clés par défaut</string>
+    <string name="default_keyword_warning_message">Êtes-vous sûr de réinitialiser les mots-clés avec la liste de mots-clés par défaut?</string>
+
+    <string name="button_add">Ajouter</string>
+    <string name="button_default">Défaut</string>
+    <string name="button_delete">Effacer</string>
 
 
     <string-array name="keyword_array">
