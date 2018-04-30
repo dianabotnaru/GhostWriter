@@ -16,7 +16,7 @@
     <string name="show_keyword_dialog_message">Please choose keywords to show images</string>
     <string name="selected_language">English</string>
 
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">Edit Keywords</string>
     <string name="delete_keyword_warning_title">Delete Keywords</string>
     <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
 

@@ -31,11 +31,11 @@ public class MainActivity extends BaseActivity {
             decorView.setSystemUiVisibility(uiOptions);
             getSupportActionBar().hide();
         }
+        setLocale();
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                setLocale();
                 startActivity(new Intent(MainActivity.this, ImageDisplayActivity.class));
                 finish();
             }
