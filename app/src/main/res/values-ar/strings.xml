@@ -17,9 +17,16 @@
     <string name="show_keyword_dialog_message">يرجى اختيار الكلمات الرئيسية لعرض الصور</string>
     <string name="selected_language">عربى</string>
 
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">تحرير كلمة</string>
+    <string name="delete_keyword_warning_title">حذف الكلمات الرئيسية</string>
+    <string name="delete_keyword_warning_message">هل أنت متأكد من حذف الكلمات الرئيسية المختارة؟</string>
+
+    <string name="default_keyword_warning_title">الكلمات الأساسية الافتراضية</string>
+    <string name="default_keyword_warning_message">هل أنت متأكد من إعادة تعيين الكلمات الرئيسية مع قائمة الكلمات الرئيسية الافتراضية؟</string>
+
+    <string name="button_add">إضافة</string>
+    <string name="button_default">افتراضي</string>
+    <string name="button_delete">حذف</string>
 
 
     <string-array name="keyword_array">

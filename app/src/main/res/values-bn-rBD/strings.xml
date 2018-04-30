@@ -16,9 +16,16 @@
     <string name="show_keyword_dialog_message">চিত্রগুলি দেখানোর জন্য কীওয়ার্ড চয়ন করুন</string>
     <string name="selected_language">বাংলা</string>
 
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">কীওয়ার্ডটি সম্পাদনা করুন</string>
+    <string name="delete_keyword_warning_title">কীওয়ার্ড মুছুন</string>
+    <string name="delete_keyword_warning_message">আপনি নির্বাচিত কীওয়ার্ড মুছে ফেলার ব্যাপারে নিশ্চিত?</string>
+
+    <string name="default_keyword_warning_title">ডিফল্ট কীওয়ার্ড</string>
+    <string name="default_keyword_warning_message">আপনি ডিফল্ট কীওয়ার্ড তালিকার সাথে কীওয়ার্ডগুলি পুনরায় সেট করার বিষয়ে নিশ্চিত?</string>
+
+    <string name="button_add">যোগ</string>
+    <string name="button_default">ডিফল্ট</string>
+    <string name="button_delete">মুছে ফেলা</string>
 
 
     <string-array name="keyword_array">

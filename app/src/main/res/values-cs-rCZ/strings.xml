@@ -15,9 +15,16 @@
     <string name="show_keyword_dialog_message">Zvolte prosím klíčová slova pro zobrazení obrázků</string>
     <string name="selected_language">čeština</string>
 
-    <string name="delete_keyword_warning_title">Delete Keywords</string>
-    <string name="delete_keyword_warning_message">Are you sure to delete selected keywords?</string>
-    <string name="edit_keyword">EDIT KEYWORD</string>
+    <string name="edit_keyword">Upravte klíčové slovo</string>
+    <string name="delete_keyword_warning_title">Odstranit klíčová slova</string>
+    <string name="delete_keyword_warning_message">Opravdu chcete vybraná klíčová slova smazat?</string>
+
+    <string name="default_keyword_warning_title">Výchozí klíčová slova</string>
+    <string name="default_keyword_warning_message">Opravdu chcete obnovit klíčová slova s výchozím seznamem klíčových slov?</string>
+
+    <string name="button_add">Přidat</string>
+    <string name="button_default">Výchozí nastavení</string>
+    <string name="button_delete">Vymazat</string>
 
 
     <string-array name="keyword_array">
