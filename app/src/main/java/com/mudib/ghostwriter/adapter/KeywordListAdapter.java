@@ -85,7 +85,6 @@ public class KeywordListAdapter extends BaseAdapter {
                 }
             }
         });
-
         holder.checkBox.setChecked(keyword.isSelected());
         Resources resources = mContext.getResources();
         if(keyword.getResourceId()!=0) {

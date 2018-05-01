@@ -32,7 +32,7 @@ public class Keyword {
         this.enWord = word;
         this.page = Constant.defaultPage;
         this.perPage=Constant.detfaultPerPage;
-        isSelected = false;
+        this.isSelected = false;
         searchResultFlickrs = new ArrayList<SearchResultFlickr>();
         resourceId = context.getResources().getIdentifier("logo", "drawable",
                 context.getPackageName());
@@ -43,7 +43,7 @@ public class Keyword {
         this.enWord = enWord;
         this.page = Constant.defaultPage;
         this.perPage=Constant.detfaultPerPage;
-        isSelected = false;
+        this.isSelected = false;
         searchResultFlickrs = new ArrayList<SearchResultFlickr>();
         setResourceIdfromName(context);
     }

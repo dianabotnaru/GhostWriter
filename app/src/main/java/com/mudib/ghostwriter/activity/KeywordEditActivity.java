@@ -6,12 +6,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mudib.ghostwriter.R;
 import com.mudib.ghostwriter.adapter.KeywordListAdapter;
 import com.mudib.ghostwriter.dialog.AddKeywordDialog;
 import com.mudib.ghostwriter.dialog.WarningDialogFragment;
 import com.mudib.ghostwriter.manager.SharedPreferencesManager;
+import com.mudib.ghostwriter.models.FireBaseData;
 import com.mudib.ghostwriter.models.Keyword;
+import com.mudib.ghostwriter.utils.DataCovertUtil;
 import com.mudib.ghostwriter.utils.Util;
 
 import java.util.ArrayList;
@@ -21,6 +27,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static com.mudib.ghostwriter.utils.DataCovertUtil.getCurrentTimeStringforID;
 
 /**
  * Created by diana on 26/04/2018.
@@ -36,6 +44,8 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
 
     private KeywordListAdapter keywordListAdapter;
     private List<Keyword> keywords = new ArrayList<>();
+
+    private DatabaseReference mDatabase;
 
     private boolean isDeleteDialog;
     @Override
@@ -148,7 +158,25 @@ public class KeywordEditActivity extends BaseActivity implements WarningDialogFr
 
     @Override
     protected void onDestroy() {
+        for(int i=0;i<keywords.size();i++){
+            Keyword keyword = keywords.get(i);
+            keyword.setSelected(false);
+            keywords.set(i,keyword);
+        }
         SharedPreferencesManager.with(this).saveAppKeyword(keywords);
+        saveKeywordsOnFirebase();
         super.onDestroy();
+    }
+
+    private void saveKeywordsOnFirebase(){
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user!=null){
+            String keywordString = DataCovertUtil.getKeywordStrings(keywords);
+            String localeString = SharedPreferencesManager.with(this).getKeywordLangauge();
+            String currentTime = DataCovertUtil.getCurrentTimeString();
+            FireBaseData fireBaseData = new FireBaseData(localeString,keywordString,currentTime);
+            mDatabase.child("AppKeywords").child(user.getUid()).child(getCurrentTimeStringforID()).setValue(fireBaseData);
+        }
     }
 }
