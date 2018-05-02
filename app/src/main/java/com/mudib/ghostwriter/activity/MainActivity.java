@@ -30,7 +30,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        MobileAds.initialize(this, Constant.ADMOB_APP_ID);
         mAuth = FirebaseAuth.getInstance();
 
         if (Build.VERSION.SDK_INT < 16) {

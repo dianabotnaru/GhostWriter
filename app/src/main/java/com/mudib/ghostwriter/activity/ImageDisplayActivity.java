@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.mudib.ghostwriter.Interface.FlickrImageLoadTaskInterface;
 import com.mudib.ghostwriter.Interface.KeywordPickerDialogInterface;
@@ -87,6 +88,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagedisplay);
+        MobileAds.initialize(this, Constant.ADMOB_APP_ID);
         initDatas();
         initSliderView();
         if(SharedPreferencesManager.with(this).isFirstLaunch){
