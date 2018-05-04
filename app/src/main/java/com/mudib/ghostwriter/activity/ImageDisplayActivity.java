@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
@@ -308,6 +309,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
                 @Override
                 public void onFailedGetFlickrImageList(String message) {
+                    Toast.makeText(ImageDisplayActivity.this, "Failed to fetch image for a keyword. Please check your internet connection.",Toast.LENGTH_SHORT).show();
                     nextFetchFlckImage();
                 }
             });
