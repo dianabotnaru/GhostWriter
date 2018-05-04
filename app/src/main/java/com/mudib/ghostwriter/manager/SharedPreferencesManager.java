@@ -99,12 +99,16 @@ public class SharedPreferencesManager {
     public ArrayList<Keyword> getAppKeywordList() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         String keywordGson = sharedPreferences.getString(APP_KEYWORD_KEYS, "");
-        Gson gson = new Gson();
-        Keyword[] keywords = gson.fromJson(keywordGson, Keyword[].class);
-        if(keywords == null){
+        if(isJSONValid(keywordGson)) {
+            Gson gson = new Gson();
+            Keyword[] keywords = gson.fromJson(keywordGson, Keyword[].class);
+            if(keywords == null){
+                return Util.getDefaultKeywordList(context);
+            }else {
+                return Util.getArrayFromList(keywords);
+            }
+        }else{
             return Util.getDefaultKeywordList(context);
-        }else {
-            return Util.getArrayFromList(keywords);
         }
     }
 
