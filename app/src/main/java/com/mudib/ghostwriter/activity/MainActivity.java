@@ -61,8 +61,7 @@ public class MainActivity extends BaseActivity {
                             if (task.isSuccessful()) {
 
                             } else {
-                                Toast.makeText(MainActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
                             }
                             launchImageDisplayActivity(1000);
                         }

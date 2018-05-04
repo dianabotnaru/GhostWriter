@@ -8,6 +8,10 @@ import com.google.gson.Gson;
 import com.mudib.ghostwriter.models.Keyword;
 import com.mudib.ghostwriter.utils.Util;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,12 +121,16 @@ public class SharedPreferencesManager {
     public ArrayList<Keyword> getSearchKeywordList() {
         SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
         String keywordGson = sharedPreferences.getString(SEARCH_KEYWORD_KEYS, "");
-        Gson gson = new Gson();
-        Keyword[] keywords = gson.fromJson(keywordGson, Keyword[].class);
-        if(keywords == null){
+        if(isJSONValid(keywordGson)){
+            Gson gson = new Gson();
+            Keyword[] keywords = gson.fromJson(keywordGson, Keyword[].class);
+            if(keywords == null){
+                return new ArrayList<>();
+            }else {
+                return Util.getArrayFromList(keywords);
+            }
+        }else{
             return new ArrayList<>();
-        }else {
-            return Util.getArrayFromList(keywords);
         }
     }
 
@@ -134,5 +142,19 @@ public class SharedPreferencesManager {
         preferencesEditor.putString(SEARCH_KEYWORD_KEYS, json);
         preferencesEditor.apply();
     }
+
+    public boolean isJSONValid(String test) {
+        try {
+            new JSONObject(test);
+        } catch (JSONException ex) {
+            try {
+                new JSONArray(test);
+            } catch (JSONException ex1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 }
