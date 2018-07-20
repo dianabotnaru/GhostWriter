@@ -88,17 +88,31 @@
 
 
 
-
-
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_margin="16dp"
-            app:srcCompat="@drawable/icons_reset" />
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/icon_save" />
+
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:srcCompat="@drawable/icons_reset" />
+
+        </LinearLayout>
+
 
         <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/adView"

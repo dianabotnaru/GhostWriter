@@ -70,9 +70,11 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @BindView(R.id.slider_right_layout)
     LinearLayout rightMarginLayout;
 
-
     @BindView(R.id.fab)
     FloatingActionButton floatingActionButton;
+
+    @BindView(R.id.fab_save)
+    FloatingActionButton saveActionButton;
 
     @BindView(R.id.textView_keyword)
     TextView keywordTextView;
@@ -218,6 +220,10 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
         keywordPickerDialog.show(getSupportFragmentManager(), KeywordPickerDialog.TAG);
     }
 
+    @OnClick(R.id.fab_save)
+    public void onSaveFabClick() {
+
+    }
 
     @Override
     protected void onStop() {
