@@ -112,6 +112,10 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_favorite:
+                startActivity(new Intent(this, FavoritesActivity.class));
+                return true;
+
             case R.id.action_settings:
                 startActivity(new Intent(this, SettingActivity.class));
                 return true;

@@ -27,6 +27,7 @@
     <string name="button_default">Default</string>
     <string name="button_delete">Delete</string>
 
+    <string name="favorite">FAVORITE</string>
 
     <string-array name="keyword_array">
         <item>Alpha&amp;Omega</item>

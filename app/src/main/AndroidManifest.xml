@@ -26,6 +26,7 @@
                   android:focusableInTouchMode="true"/>
         <activity android:name=".activity.SettingActivity" android:configChanges="orientation|screenSize|locale" />
         <activity android:name=".activity.KeywordEditActivity" android:configChanges="orientation|screenSize|locale" />
+        <activity android:name=".activity.FavoritesActivity" android:configChanges="orientation|screenSize|locale" />
     </application>
 
 </manifest>
