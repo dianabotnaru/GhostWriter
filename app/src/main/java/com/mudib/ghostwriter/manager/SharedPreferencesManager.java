@@ -35,6 +35,7 @@ public class SharedPreferencesManager {
     public static String KEYWORD_LANGUAGE_KEY = "keyword_language_key";
 
     public static String SEARCH_KEYWORD_KEYS = "search_keyword_key";
+    public static String FAVORITE_URL_KEYS = "favorite_url_key";
 
     public static String APP_KEYWORD_KEYS = "app_keyword_key";
 
@@ -147,6 +148,29 @@ public class SharedPreferencesManager {
         preferencesEditor.apply();
     }
 
+    //favorite image save and get
+    public String[] getFavoriteUrlList() {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        String favoriteList = sharedPreferences.getString(FAVORITE_URL_KEYS, "");
+        String[] favoriteLists = favoriteList.split(",");
+        return favoriteLists;
+
+    }
+
+    public void saveFavoriteUrl(String favorite) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(TIME_PREFERENCE_FILE_KEY, Context.MODE_PRIVATE);
+        String favoriteList = sharedPreferences.getString(FAVORITE_URL_KEYS, ""); ;
+        if(favoriteList.equalsIgnoreCase("") ){
+            favoriteList = favorite;
+        }else{
+            favoriteList = favoriteList + "," + favorite;
+        }
+
+        SharedPreferences.Editor preferencesEditor = sharedPreferences.edit();
+        preferencesEditor.putString(FAVORITE_URL_KEYS, favoriteList);
+        preferencesEditor.apply();
+    }
+
     public boolean isJSONValid(String test) {
         try {
             new JSONObject(test);
@@ -159,6 +183,4 @@ public class SharedPreferencesManager {
         }
         return true;
     }
-
-
 }

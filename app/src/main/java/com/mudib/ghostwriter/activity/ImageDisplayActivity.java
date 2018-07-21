@@ -210,6 +210,7 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
                     .setScaleType(BaseSliderView.ScaleType.CenterCrop)
                     .setOnSliderClickListener(this);
             imageSlider.addSlider(textSliderView);
+
         }
         imageSlider.startAutoCycle();
     }
@@ -222,7 +223,8 @@ public class ImageDisplayActivity extends BaseActivity implements BaseSliderView
 
     @OnClick(R.id.fab_save)
     public void onSaveFabClick() {
-
+        String url = imageSlider.getCurrentSlider().getUrl();
+        SharedPreferencesManager.with(this).saveFavoriteUrl(url);
     }
 
     @Override
